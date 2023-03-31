@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "981913323673",
+    "project_id": "mystrory-3105",
+    "storage_bucket": "mystrory-3105.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981913323673:android:91f02602137fd9998ad008",
+        "android_client_info": {
+          "package_name": "com.example.thuetruyenonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981913323673-6lai9j4m4e8p0f3s6cuav2j4ko6d4shq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBESkTSmakAT3dGVjv7wVOJmDM3mBBL_ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981913323673-6lai9j4m4e8p0f3s6cuav2j4ko6d4shq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
