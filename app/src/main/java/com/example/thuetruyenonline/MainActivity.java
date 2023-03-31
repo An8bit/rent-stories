@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 //                            String tk = docu.get("TaiKhoan").toString();
 //                            String pa =docu.get("matkhau").toString();
                             String anh = docu.get("AnhLoad").toString();
-                            Glide.with(MainActivity.this).load("").into(image);
+                            Glide.with(MainActivity.this).load("aaaaaaaaaaaaaaaaaaaaaaaa").into(image);
                     }
                 }
 
