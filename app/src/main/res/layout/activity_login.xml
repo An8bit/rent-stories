@@ -42,6 +42,7 @@
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:hint="Email">
             </EditText>
             <EditText
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.EditText"
+                android:inputType="textPassword"
                 android:hint="Password">
             </EditText>
         </LinearLayout>
@@ -125,6 +127,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvRegister"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="  Đăng ký"
