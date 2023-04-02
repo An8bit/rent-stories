@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setTitle("Đăng Nhập");
         db=FirebaseFirestore.getInstance();
         email=findViewById(R.id.etEmail);
         pass=findViewById(R.id.etPass);

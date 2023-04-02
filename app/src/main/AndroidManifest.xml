@@ -17,7 +17,7 @@
             android:name=".DetailStory"
             android:exported="false" />
         <activity
-            android:name=".WellcomeActivity"
+            android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

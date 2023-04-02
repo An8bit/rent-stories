@@ -1,16 +1,38 @@
 package com.example.thuetruyenonline;
 
-public class Story {
-    String id;
-    String image;
+import java.io.Serializable;
 
-    public Story(String id, String image, String namestory) {
+public class Story implements Serializable {
+    public Story(String id, String image, String tacgia, String gioithieu, String namestory) {
         this.id = id;
         this.image = image;
+        this.tacgia = tacgia;
+        this.gioithieu = gioithieu;
         this.namestory = namestory;
     }
 
+    String id;
+    String image;
+    String tacgia;
+    String gioithieu;
     String namestory;
+
+    public String getGioithieu() {
+        return gioithieu;
+    }
+
+    public void setGioithieu(String gioithieu) {
+        this.gioithieu = gioithieu;
+    }
+
+    public String getTacgia() {
+
+        return tacgia;
+    }
+
+    public void setTacgia(String tacgia) {
+        this.tacgia = tacgia;
+    }
 
     public String getId() {
         return id;

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rvStory = findViewById(R.id.rvStory);
-
+        getSupportActionBar().setTitle("Trang chủ");
         db=FirebaseFirestore.getInstance();
         stories = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                     String id = queryDocumentSnapshot.getId();
                     String name=queryDocumentSnapshot.get("TenTruyen").toString();
                    String image=queryDocumentSnapshot.get("AnhLoad").toString();
-                    Story story = new Story(id,image,name) ;
+                    Story story = new Story(id,image,"AN","năm 2138 trong tương lai, khi khoa học công nghệ phát triển vượt bậc và ngành game thực tế ảo đang nở rộ hơn bao giờ hết. Yggdrasil, một game online vô cùng phổ biến thời gian đó bỗng dưng bị đóng cửa đột ngột, nhưng nhân vật chính Momonga lại quyết định không thoát ra ngoài và khám phá những điều bí ẩn khi thế giới ảo quanh mình ngày một thay đổi.",name) ;
                     stories.add(story);
                 }
                 storyAdapter.notifyDataSetChanged();
@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
     @Override
     public void onItemClickListener(Story story) {
         Intent intent = new Intent(MainActivity.this,DetailStory.class);
+        intent.putExtra("A",story);
         startActivity(intent);
+
     }
 }

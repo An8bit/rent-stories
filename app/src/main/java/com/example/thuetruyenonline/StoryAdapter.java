@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -82,6 +81,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
 
     interface Listener {
         void onItemClickListener(Story story);
+
     }
 
     class DataStory extends RecyclerView.ViewHolder{
@@ -91,7 +91,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
         public DataStory(@NonNull View itemView) {
             super(itemView);
             tvNameStory=itemView.findViewById(R.id.tvNameStory);
-            ivAnh=itemView.findViewById(R.id.ivAnh);
+            ivAnh=itemView.findViewById(R.id.ivAnhd);
         }
     }
 

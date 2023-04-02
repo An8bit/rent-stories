@@ -47,7 +47,8 @@
 
 
                 <ImageView
-                    android:id="@+id/ivAnh"
+                    android:scaleType="fitXY"
+                    android:id="@+id/ivAnhd"
                     android:layout_width="120dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="8dp"
