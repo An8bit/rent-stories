@@ -18,6 +18,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
    ArrayList<Story> stories;
    StoryAdapter storyAdapter;
    FirebaseFirestore db;
+
+
 
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -50,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                 for (QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
                     String id = queryDocumentSnapshot.getId();
                     String name=queryDocumentSnapshot.get("TenTruyen").toString();
-                    Story story = new Story(id,"",name) ;
+                   String image=queryDocumentSnapshot.get("AnhLoad").toString();
+                    Story story = new Story(id,image,name) ;
                     stories.add(story);
                 }
                 storyAdapter.notifyDataSetChanged();
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         Toast toast= Toast.makeText(MainActivity.this,a,Toast.LENGTH_SHORT);
         toast.show();
     }
+
 
     @Override
     public void onItemClickListener(Story story) {

@@ -1,5 +1,8 @@
 package com.example.thuetruyenonline;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+
 
     ArrayList<Story> stories;
 
@@ -36,8 +48,25 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
     public void onBindViewHolder(@NonNull DataStory holder, int position) {
       Story story = stories.get(position);
       holder.tvNameStory.setText(story.getNamestory());
-      holder.ivAnh.setImageResource(R.drawable.viem);
-      holder.itemView.setOnClickListener(new View.OnClickListener() {
+        StorageReference imageRef = storage.getReferenceFromUrl(story.getImage());
+        imageRef.getBytes(1024 * 1024)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        holder.ivAnh.setImageBitmap(bitmap);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("TAG", "Failed to load image", e);
+                        // Show error message or perform other action
+                    }
+                });
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             listener.onItemClickListener(story);
@@ -65,4 +94,5 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
             ivAnh=itemView.findViewById(R.id.ivAnh);
         }
     }
+
 }

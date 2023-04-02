@@ -10,5 +10,10 @@ public class DetailStory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_story);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 }
