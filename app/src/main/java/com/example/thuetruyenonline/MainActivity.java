@@ -8,11 +8,15 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,11 +28,13 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements StoryAdapter.Listener {
+
+
    RecyclerView rvStory;
    ArrayList<Story> stories;
    StoryAdapter storyAdapter;
    FirebaseFirestore db;
-
+   Bitmap bitmap;
 
 
 
@@ -51,11 +57,16 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         db.collection("Truyen").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
                 for (QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
                     String id = queryDocumentSnapshot.getId();
                     String name=queryDocumentSnapshot.get("TenTruyen").toString();
+                    String tacgia=queryDocumentSnapshot.get("TacGia").toString();
+                    String gioithieu=queryDocumentSnapshot.get("GioiThieu").toString();
+                    String theloai=queryDocumentSnapshot.get("TheLoai").toString();
                    String image=queryDocumentSnapshot.get("AnhLoad").toString();
-                    Story story = new Story(id,image,"AN","năm 2138 trong tương lai, khi khoa học công nghệ phát triển vượt bậc và ngành game thực tế ảo đang nở rộ hơn bao giờ hết. Yggdrasil, một game online vô cùng phổ biến thời gian đó bỗng dưng bị đóng cửa đột ngột, nhưng nhân vật chính Momonga lại quyết định không thoát ra ngoài và khám phá những điều bí ẩn khi thế giới ảo quanh mình ngày một thay đổi.",name) ;
+
+                    Story story = new Story(id,image,tacgia,gioithieu,name,theloai) ;
                     stories.add(story);
                 }
                 storyAdapter.notifyDataSetChanged();

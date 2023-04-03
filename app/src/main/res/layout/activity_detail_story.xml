@@ -1,86 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailStory">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/ivbackgr"
+
+    <RelativeLayout
+        android:id="@+id/top_section"
         android:layout_width="match_parent"
-        android:layout_height="298dp"
-        android:layout_marginTop="4dp"
-        android:background="#F3E2E2"
-        android:scaleType="fitXY"
-        android:src="@drawable/viem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
 
-    <View
-        android:layout_width="415dp"
-        android:layout_height="301dp"
-        android:layout_marginTop="4dp"
-        android:background="#DF0B0808"
-        android:textColor="#FBF6F6"
-        app:layout_constraintBottom_toBottomOf="@+id/ivbackgr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/ivbackgr"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/background_art"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:foreground="@drawable/gradient"
+            android:alpha="0.3"/>
+        <LinearLayout
+            android:id="@+id/manga_art_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/background_art"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="20dp">
 
-    <ImageView
-        android:scaleType="fitXY"
-        android:id="@+id/ivANH"
-        android:layout_width="173dp"
-        android:layout_height="296dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivbackgr"
-        app:layout_constraintStart_toStartOf="@+id/ivbackgr"
-        app:layout_constraintTop_toTopOf="@+id/ivbackgr"
-        tools:srcCompat="@tools:sample/avatars" />
+            <ImageView
+                android:id="@+id/ivmanga_art"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
+            <!--android:contentDescription="@string/image"-->/>
 
-    <TextView
-        android:id="@+id/TVName"
-        android:layout_width="237dp"
-        android:layout_height="82dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="#DA8A3E"
-        android:textSize="21dp"
-        app:layout_constraintEnd_toEndOf="@+id/ivbackgr"
-        app:layout_constraintStart_toEndOf="@+id/ivANH"
-        app:layout_constraintTop_toTopOf="@+id/ivbackgr" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvGioiThieu"
-        android:layout_width="238dp"
-        android:layout_height="181dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/TVName"
-        app:layout_constraintStart_toStartOf="@+id/TVName"
-        app:layout_constraintTop_toBottomOf="@+id/TVName" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/background_art"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/manga_art_layout"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-    <TextView
-        android:id="@+id/tvTacGia"
-        android:layout_width="236dp"
-        android:layout_height="30dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="#FFEEEE"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivbackgr"
-        app:layout_constraintEnd_toEndOf="@+id/ivbackgr"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="@+id/tvGioiThieu"
-        app:layout_constraintTop_toBottomOf="@+id/tvGioiThieu"
-        app:layout_constraintVertical_bias="0.952" />
+            <TextView
+                android:textColor="@color/chocolate"
+                android:id="@+id/tvtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTacGia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5" />
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvig"
+            android:layout_below="@id/tvView"
+            android:background="@drawable/home_line"
+            >
+
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tvView"
+            android:text="GIỚI THIỆU"
+            android:textColor="@color/chocolate"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_below="@+id/background_art"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <TextView
+            android:layout_below="@id/tvig"
+            android:id="@+id/tvGioiThieu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tag_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvGioiThieu"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="6dp"
+            android:nestedScrollingEnabled="false"
+            android:textAlignment="center" />
+
+        <RelativeLayout
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/tag_list"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/tab_indicator" />
+
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tag_list"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/all_chapters"
+                android:text="Đọc thử"
+                android:textColor="@color/chocolate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:padding="10dp"
+                android:focusable="true"
+                android:textAlignment="center"
+                app:drawableTopCompat="@drawable/ic_chapter_stack"
+                app:elevation="5dp" />
+            <TextView
+                android:id="@+id/add_to_lib"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thuê ngay"
+                android:textAlignment="center"
+                android:textColor="@color/chocolate"
+                android:background="?selectableItemBackground"
+                app:drawableTopCompat="@drawable/baseline_shopping_cart_checkout_24"
+                android:clickable="true"
+                app:elevation="5dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

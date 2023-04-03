@@ -48,7 +48,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
       Story story = stories.get(position);
       holder.tvNameStory.setText(story.getNamestory());
         StorageReference imageRef = storage.getReferenceFromUrl(story.getImage());
+        //sử dụng phương thức getBytes() của StorageReference để tải xuống dữ liệu hình ảnh dưới dạng một mảng byte.
         imageRef.getBytes(1024 * 1024)
+                //Khi tải xuống thành công, nó sử dụng BitmapFactory để chuyển đổi mảng byte thành một đối tượng Bitmap. Sau đó, nó hiển thị hình ảnh trong một ImageView bằng cách gọi phương thức setImageBitmap() của ImageView.
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {
@@ -56,6 +58,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
                         holder.ivAnh.setImageBitmap(bitmap);
                     }
                 })
+                //Nếu quá trình tải xuống hình ảnh không thành công, nó sẽ ghi log lỗi và có thể thực hiện các hành động khác như hiển thị thông báo lỗi hoặc thực hiện các hành động khác.
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -92,6 +95,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
             super(itemView);
             tvNameStory=itemView.findViewById(R.id.tvNameStory);
             ivAnh=itemView.findViewById(R.id.ivAnhd);
+
         }
     }
 
