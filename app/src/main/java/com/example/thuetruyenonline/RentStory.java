@@ -11,6 +11,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -33,11 +36,11 @@ import java.util.Random;
 
 public class RentStory extends AppCompatActivity {
 
-    String random;
+    FirebaseFirestore db =FirebaseFirestore.getInstance();
     Button btXong;
-    Spinner spOpt;
+    Spinner spOpt,spOpt1;
     Story story;
-    ImageView ivANH;
+    ImageView ivANH,ivIcon;
     TextView tvName,tvCoin;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,29 +52,15 @@ public class RentStory extends AppCompatActivity {
         btXong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                random = Random();
-                AlertDialog.Builder builder = new AlertDialog.Builder(RentStory.this);
-                builder.setTitle("Thông tin thanh toán");
-                builder.setMessage("Vui lòng copy lại mã để kích hoạt sách");
-                final TextView key = new TextView(RentStory.this);
-                key.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                key.setText(random);
-                LinearLayout layout = new LinearLayout(RentStory.this);
-                layout.setOrientation(LinearLayout.VERTICAL);
-                layout.addView(key);
-                builder.setView(layout);
-                builder.setPositiveButton("copy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                        String textToCopy =random ;
-                        ClipData clipData = ClipData.newPlainText("label", textToCopy);
-                        clipboardManager.setPrimaryClip(clipData);
-                        Toast.makeText(getApplicationContext(), "Đã copy nội dung", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+               //hàm sử lý
+                Intent intent = new Intent(RentStory.this,Cart.class);
+                //thêm vào database
+               String Coin = tvCoin.getText().toString();
+
+
+                startActivity(intent);
+
+
             }
         });
         story=(Story) getIntent().getSerializableExtra("Rent");
@@ -102,7 +91,28 @@ public class RentStory extends AppCompatActivity {
 
             }
         });
+        ivIcon=findViewById(R.id.ivIcon);
+        spOpt1= findViewById(R.id.spOpt1);
+        spOpt1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (spOpt1.getSelectedItem().toString()){
+                    case "Momo":
+                       ivIcon.setImageResource(R.drawable.momo);
+                        break;
+                    case "ZaloPay":
+                       ivIcon.setImageResource(R.drawable.viem);
+                        break;
+                    case "Banking":
+                        ivIcon.setImageResource(R.drawable.tho);
+                        break;
 
+                }}
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         ivANH=findViewById(R.id.ivAnhd);
@@ -131,18 +141,5 @@ public class RentStory extends AppCompatActivity {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
-    String Random(){
-        int length = 10; // Độ dài của chuỗi ngẫu nhiên
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // Các ký tự có thể có trong chuỗi ngẫu nhiên
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(characters.length());
-            char randomChar = characters.charAt(index);
-            sb.append(randomChar);
-        }
 
-        return  sb.toString();
-
-    }
 }

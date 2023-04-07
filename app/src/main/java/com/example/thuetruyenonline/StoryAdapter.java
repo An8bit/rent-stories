@@ -30,10 +30,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
         this.stories = stories;
         this.listener = listener;
     }
-
     Listener listener;
-
-
 
     @NonNull
     @Override

@@ -10,34 +10,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Login extends AppCompatActivity {
-    private static final String TAG = "Login";
+public class Accounts extends AppCompatActivity {
+    private static final String TAG = "Accounts";
     FirebaseFirestore db ;
     EditText email,pass;
     Button Login;
@@ -70,7 +64,7 @@ public class Login extends AppCompatActivity {
                         if(snapshots.isEmpty()){
                            Toast("Tài khoản hoặc mật khẩu không đúng");
                         }else {
-                            Intent intent = new Intent(Login.this,MainActivity.class);
+                            Intent intent = new Intent(Accounts.this,MainActivity.class);
                             startActivity(intent);
                         }
                     }else {
@@ -83,16 +77,16 @@ public class Login extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Accounts.this);
                 builder.setTitle("Đăng ký tài khoản");
                 builder.setMessage("Vui lòng nhập thông tin đăng ký");
-                final EditText usernameInput = new EditText(Login.this);
+                final EditText usernameInput = new EditText(Accounts.this);
                 usernameInput.setHint("Email");
-                final EditText passwordInput = new EditText(Login.this);
+                final EditText passwordInput = new EditText(Accounts.this);
                 passwordInput.setHint("Mật khẩu");
                 passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 //tạo ra cái layout để hiện thị các nút trên
-                LinearLayout layout = new LinearLayout(Login.this);
+                LinearLayout layout = new LinearLayout(Accounts.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
                 layout.addView(usernameInput);
                 layout.addView(passwordInput);
@@ -105,7 +99,6 @@ public class Login extends AppCompatActivity {
                         //lấy biến nhập vào ở đây
                         String emailI = usernameInput.getText().toString();
                         String password = passwordInput.getText().toString();
-                        //
                         Map<String, Object> user = new HashMap<>();
                         user.put("taikhoan", emailI);
                         user.put("matkhau", password);
@@ -115,7 +108,7 @@ public class Login extends AppCompatActivity {
                                 QuerySnapshot snapshots = task.getResult();
                                 //kiểm tra dữ liệu có rỗng hay không
                                 if(!snapshots.isEmpty()){
-                                    Toast.makeText(Login.this,"Tài khoản tồn tại",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Accounts.this,"Tài khoản tồn tại",Toast.LENGTH_LONG).show();
                                 }else {
                                     usersRef.add(user)
                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -164,7 +157,7 @@ public class Login extends AppCompatActivity {
     });
     }
     void Toast(String a){
-        Toast toast= Toast.makeText(Login.this,a,Toast.LENGTH_SHORT);
+        Toast toast= Toast.makeText(Accounts.this,a,Toast.LENGTH_SHORT);
         toast.show();
     }
 }

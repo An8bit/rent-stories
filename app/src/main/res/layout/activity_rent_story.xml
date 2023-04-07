@@ -52,8 +52,8 @@
 
                 <TextView
                     android:id="@+id/tvNameStory"
-                    android:layout_width="124dp"
-                    android:layout_height="42dp"
+                    android:layout_width="151dp"
+                    android:layout_height="71dp"
                     android:autoText="false"
                     android:freezesText="false"
                     android:text="heheheaaaaaaaaaaaaaaah"
@@ -64,6 +64,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivAnhd"
                     app:layout_constraintTop_toTopOf="@+id/ivAnhd" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="TÊN TRUYỆN"
+                    android:textSize="24dp"
+                    android:textColor="@color/chocolate"
+                    app:layout_constraintBottom_toTopOf="@+id/tvNameStory"
+                    app:layout_constraintEnd_toEndOf="@+id/tvNameStory"
+                    app:layout_constraintHorizontal_bias="0.483"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameStory" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -139,7 +152,7 @@
                 android:text="Chọn số ngày thuê"
                 android:textAlignment="center"
                 android:textColor="@color/chocolate"
-                android:textSize="24dp">
+                android:textSize="16dp">
 
             </TextView>
         </LinearLayout>
@@ -209,7 +222,7 @@
                 android:text="Chọn phương thưc thanh toán"
                 android:textAlignment="center"
                 android:textColor="@color/chocolate"
-                android:textSize="24dp"
+                android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -246,25 +259,15 @@
                 android:layout_marginTop="0dp"
                 android:layout_toEndOf="@+id/spOpt1"
                 android:layout_toRightOf="@+id/spOpt1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/ivIcon"
+                    android:layout_width="59dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
 
-                <TextView
-                    android:id="@+id/textView51"
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:text="Thành tiền"
-                    android:textAlignment="center"
-                    android:textSize="12dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
-                    android:id="@+id/tvCoin1"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:text="TextView"
-                    android:textAlignment="center" />
+                     />
             </LinearLayout>
 
         </RelativeLayout>

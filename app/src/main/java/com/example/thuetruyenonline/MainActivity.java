@@ -12,6 +12,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,15 +32,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements StoryAdapter.Listener {
 
-
+ ImageView ivHome,ivProfile,ivCart;
+ Menu menuSearch;
    RecyclerView rvStory;
    ArrayList<Story> stories;
    StoryAdapter storyAdapter;
    FirebaseFirestore db;
-   Bitmap bitmap;
-
-
-
+    Intent intent;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,8 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         getSupportActionBar().setTitle("Trang chủ");
         db=FirebaseFirestore.getInstance();
         stories = new ArrayList<>();
-
-         storyAdapter = new StoryAdapter(stories,MainActivity.this);
-
-
+        storyAdapter = new StoryAdapter(stories,MainActivity.this);
         rvStory.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
-
         rvStory.setAdapter(storyAdapter);
         db.collection("Truyen").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -77,7 +74,30 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
              Toast("loi");
             }
         });
-
+       ivHome=findViewById(R.id.ivHome);
+       ivHome.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+                intent = new Intent(MainActivity.this,MainActivity.class);
+               startActivity(intent);
+           }
+       });
+       ivProfile=findViewById(R.id.ivProfile);
+       ivProfile.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+                intent = new Intent(MainActivity.this,Profile.class);
+               startActivity(intent);
+           }
+       });
+       ivCart=findViewById(R.id.ivCart);
+       ivCart.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+                intent = new Intent(MainActivity.this,Cart.class);
+               startActivity(intent);
+           }
+       });
 
 
     }
