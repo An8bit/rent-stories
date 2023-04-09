@@ -64,9 +64,10 @@ public class Search extends AppCompatActivity implements SearchResultsAdapter.Li
         return true;
     }
     private void search(String newText) {
-       db.collection("Truyen").orderBy("TenTruyen")
-               .startAt(newText)
-               .endAt(newText + "\uf8ff").limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        String searchText = newText.toLowerCase();
+       db.collection("Truyen").orderBy("TenTruyen_lowercase")
+               .startAt(searchText)
+               .endAt(searchText + "\uf8ff").limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
            @Override
            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                if (task.isSuccessful()) {
