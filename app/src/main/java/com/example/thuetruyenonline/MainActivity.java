@@ -13,14 +13,23 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,6 +38,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements StoryAdapter.Listener {
 
@@ -74,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
              Toast("loi");
             }
         });
+
        ivHome=findViewById(R.id.ivHome);
        ivHome.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -82,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                startActivity(intent);
            }
        });
+
        ivProfile=findViewById(R.id.ivProfile);
        ivProfile.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -90,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                startActivity(intent);
            }
        });
+
        ivCart=findViewById(R.id.ivCart);
        ivCart.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -98,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                startActivity(intent);
            }
        });
-
+       menuSearch=findViewById(R.id.menuSearch);
 
     }
     void Toast(String a){
@@ -113,5 +127,20 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         intent.putExtra("A",story);
         startActivity(intent);
 
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.menuSearch) {
+            Intent intent = new Intent(MainActivity.this, Search.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
