@@ -1,4 +1,4 @@
-package com.example.thuetruyenonline;
+package com.example.thuetruyenonline.search;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.thuetruyenonline.DBcontrol;
+import com.example.thuetruyenonline.DetailStory;
+import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.Story;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -25,10 +29,10 @@ import java.util.ArrayList;
 
 public class Search extends AppCompatActivity implements SearchResultsAdapter.Listener {
     RecyclerView mRecyclerView;
-    private static final String TAG = "Accounts";
     FirebaseFirestore db;
-    ArrayList<Story> stories= new ArrayList<>();
+    ArrayList<Story> stories = new ArrayList<>();
     SearchResultsAdapter searchResultsAdapter;
+    DBcontrol dBcontrol = new DBcontrol(Search.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +41,8 @@ public class Search extends AppCompatActivity implements SearchResultsAdapter.Li
         // Khởi tạo RecyclerView
         mRecyclerView = findViewById(R.id.rvStory);
         db = FirebaseFirestore.getInstance();
-        searchResultsAdapter = new SearchResultsAdapter(stories, Search.this);
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
-        mRecyclerView.setAdapter(searchResultsAdapter);
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.search, menu);
@@ -49,61 +51,42 @@ public class Search extends AppCompatActivity implements SearchResultsAdapter.Li
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 stories.clear();
-               search(query);
+                search(query);
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
-//                stories.clear();
-//                search(newText);
                 return false;
             }
         });
         return true;
     }
-    private void search(String newText) {
-        String searchText = newText.toLowerCase();
-       db.collection("Truyen").orderBy("TenTruyen_lowercase")
-               .startAt(searchText)
-               .endAt(searchText + "\uf8ff").limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-           @Override
-           public void onComplete(@NonNull Task<QuerySnapshot> task) {
-               if (task.isSuccessful()) {
-                   for (QueryDocumentSnapshot document : task.getResult()) {
-                       String id = document.getId();
-                       String name=document.get("TenTruyen").toString();
-                       String tacgia=document.get("TacGia").toString();
-                       String gioithieu=document.get("GioiThieu").toString();
-                       String theloai=document.get("TheLoai").toString();
-                       String image=document.get("AnhLoad").toString();
-                       Story story = new Story(id,image,tacgia,gioithieu,name,theloai) ;
-                       stories.add(story);
-                   }
-                   searchResultsAdapter.notifyDataSetChanged();
-               } else {
-                   Log.d(TAG, "Error getting documents: ", task.getException());
 
-               }
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               Toast("loi");
-           }
-       });
+private void search(String newText) {
+   dBcontrol.Search(newText, db, new DBcontrol.OnGetDataListener() {
+       @Override
+       public void onSuccess(ArrayList<Story> storie) {
+           stories=storie;
+           searchResultsAdapter = new SearchResultsAdapter(stories, Search.this);
+           mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+           mRecyclerView.setAdapter(searchResultsAdapter);
+       }
 
+       @Override
+       public void onFailure(String errorMessage) {
+           stories=new ArrayList<>();
 
-} void Toast(String a){
-        Toast toast= Toast.makeText(Search.this,a, Toast.LENGTH_SHORT);
-        toast.show();
-    }
+       }
+   });
+}
 
     @Override
     public void onItemClickListener(Story story) {
-        Intent intent = new Intent(Search.this,DetailStory.class);
+        Intent intent = new Intent(Search.this, DetailStory.class);
         intent.putExtra("A",story);
         startActivity(intent);
+
     }
 }

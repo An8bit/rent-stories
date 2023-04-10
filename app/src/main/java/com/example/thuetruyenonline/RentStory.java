@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,12 +33,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
-public class RentStory extends AppCompatActivity {
+public class RentStory extends AppCompatActivity{
 
     FirebaseFirestore db =FirebaseFirestore.getInstance();
-    Button btXong;
+    Button btXong,btHome;
     Spinner spOpt,spOpt1;
     Story story;
     ImageView ivANH,ivIcon;
@@ -47,23 +51,32 @@ public class RentStory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent_story);
+        story=(Story) getIntent().getSerializableExtra("Rent");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btXong=findViewById(R.id.btXong);
+
         btXong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               //hàm sử lý
+                //đọc tên tên trong bảng rồi add vào
                 Intent intent = new Intent(RentStory.this,Cart.class);
-                //thêm vào database
-               String Coin = tvCoin.getText().toString();
-
-
+                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString());
                 startActivity(intent);
-
+                finish();
 
             }
         });
-        story=(Story) getIntent().getSerializableExtra("Rent");
+        btHome=findViewById(R.id.btHome);
+        btHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RentStory.this, MainActivity.class);
+                //thêm vào database
+                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
         spOpt=findViewById(R.id.spOpt);
         tvCoin=findViewById(R.id.tvCoin);
         //Khi người dùng thay đổi giá trị của Spinner, Listener sẽ được gọi và có thể cập nhật
@@ -113,8 +126,6 @@ public class RentStory extends AppCompatActivity {
 
             }
         });
-
-
         ivANH=findViewById(R.id.ivAnhd);
         tvName=findViewById(R.id.tvNameStory);
         StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(story.getImage());
@@ -124,7 +135,6 @@ public class RentStory extends AppCompatActivity {
                     public void onSuccess(byte[] bytes) {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                         ivANH.setImageBitmap(bitmap);
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -140,6 +150,11 @@ public class RentStory extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+    void AddGioHang(String day,String pay){
+        DBcontrol dBcontrol = new DBcontrol(RentStory.this);
+        dBcontrol.InsertCart(db,story,day,pay);
+
     }
 
 }

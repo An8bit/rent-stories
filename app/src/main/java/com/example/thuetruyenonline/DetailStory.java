@@ -73,6 +73,7 @@ public class DetailStory extends AppCompatActivity {
               Intent intent1 = new Intent(DetailStory.this,RentStory.class);
               intent1.putExtra("Rent",story);
               startActivity(intent1);
+
             }
         });
 

@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.thuetruyenonline.pagehome.MainActivity;
+
 public class Profile extends AppCompatActivity {
 
     @Override
@@ -21,7 +23,7 @@ public class Profile extends AppCompatActivity {
         ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Profile.this,MainActivity.class);
+                Intent intent = new Intent(Profile.this, MainActivity.class);
                 startActivity(intent);
             }
         });

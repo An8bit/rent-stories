@@ -1,4 +1,4 @@
-package com.example.thuetruyenonline;
+package com.example.thuetruyenonline.pagehome;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.Story;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;

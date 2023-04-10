@@ -2,14 +2,13 @@ package com.example.thuetruyenonline;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.thuetruyenonline.pagehome.MainActivity;
 
 import java.util.ArrayList;
 
@@ -30,7 +29,7 @@ public class Cart extends AppCompatActivity {
         ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Cart.this,MainActivity.class);
+                Intent intent = new Intent(Cart.this, MainActivity.class);
                 startActivity(intent);
             }
         });

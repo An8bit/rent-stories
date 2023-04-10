@@ -14,7 +14,7 @@
         android:theme="@style/Theme.ThuetruyenOnline"
         tools:targetApi="31">
         <activity
-            android:name=".Search"
+            android:name=".search.Search"
             android:exported="false" />
         <activity
             android:name=".Profile"
@@ -44,7 +44,7 @@
             android:name=".Accounts"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".pagehome.MainActivity"
             android:exported="false" />
     </application>
 

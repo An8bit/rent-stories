@@ -1,12 +1,14 @@
 package com.example.thuetruyenonline;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -19,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thuetruyenonline.pagehome.Acc;
+import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -29,9 +33,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Accounts extends AppCompatActivity {
     private static final String TAG = "Accounts";
+    Acc acc = new Acc();
     FirebaseFirestore db ;
     EditText email,pass;
     Button Login;
@@ -64,8 +70,11 @@ public class Accounts extends AppCompatActivity {
                         if(snapshots.isEmpty()){
                            Toast("Tài khoản hoặc mật khẩu không đúng");
                         }else {
-                            Intent intent = new Intent(Accounts.this,MainActivity.class);
+                            acc.setEmail(email.getText().toString());
+                            Intent intent = new Intent(Accounts.this, MainActivity.class);
                             startActivity(intent);
+
+                            finish();
                         }
                     }else {
                         Toast("Lỗi");
@@ -114,9 +123,6 @@ public class Accounts extends AppCompatActivity {
                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override
                                                 public void onSuccess(DocumentReference documentReference) {
-
-                                                    //TAG ở đây là một biến log để đưa đi thôi và tạo ra id của document trong bảng TaiKhoan
-                                                    Log.d(TAG, "thêm id " + documentReference.getId());
                                                     email.setText(emailI);
                                                     pass.setText(password);
                                                     Toast("Đăng ký thành công");
