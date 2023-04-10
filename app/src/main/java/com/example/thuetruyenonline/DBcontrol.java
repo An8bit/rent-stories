@@ -22,9 +22,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DBcontrol extends Accounts{
+public class DBcontrol {
 
     Context context;
+    Acc acc;
 
     StoryAdapter storyAdapter;
     public DBcontrol(Context context) {
@@ -92,7 +93,7 @@ public class DBcontrol extends Accounts{
                     }
                 });
     }
-        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue,String ppthanhtoan){
+        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue,String ppthanhtoan,String email){
             CollectionReference Cart= db.collection("GioHang");
             String id = story.getId();
             String name = story.getNamestory();
@@ -103,7 +104,7 @@ public class DBcontrol extends Accounts{
             cart.put("idtruyen",id);
             cart.put("img",image);
             cart.put("namestory",name);
-            cart.put("buyer",acc.getEmail());
+            cart.put("buyer",email);
             Cart.add(cart).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {

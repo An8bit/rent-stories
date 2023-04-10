@@ -37,7 +37,7 @@ import java.util.Set;
 
 public class Accounts extends AppCompatActivity {
     private static final String TAG = "Accounts";
-    Acc acc = new Acc();
+
     FirebaseFirestore db ;
     EditText email,pass;
     Button Login;
@@ -55,7 +55,7 @@ public class Accounts extends AppCompatActivity {
         Login=findViewById(R.id.btLogin);
         //đọc document TaiKhoan gán vào biến usersRef
         CollectionReference usersRef = db.collection("TaiKhoan");
-
+        Acc acc = new Acc();
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +70,10 @@ public class Accounts extends AppCompatActivity {
                         if(snapshots.isEmpty()){
                            Toast("Tài khoản hoặc mật khẩu không đúng");
                         }else {
-                            acc.setEmail(email.getText().toString());
+                            String em =email.getText().toString();
                             Intent intent = new Intent(Accounts.this, MainActivity.class);
+                            intent.putExtra("email", em);
                             startActivity(intent);
-
                             finish();
                         }
                     }else {

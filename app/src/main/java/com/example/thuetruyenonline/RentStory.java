@@ -46,12 +46,14 @@ public class RentStory extends AppCompatActivity{
     Story story;
     ImageView ivANH,ivIcon;
     TextView tvName,tvCoin;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent_story);
         story=(Story) getIntent().getSerializableExtra("Rent");
+        String email=getIntent().getStringExtra("email");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btXong=findViewById(R.id.btXong);
 
@@ -60,7 +62,7 @@ public class RentStory extends AppCompatActivity{
             public void onClick(View view) {
                 //đọc tên tên trong bảng rồi add vào
                 Intent intent = new Intent(RentStory.this,Cart.class);
-                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString());
+                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString(),email);
                 startActivity(intent);
                 finish();
 
@@ -72,7 +74,7 @@ public class RentStory extends AppCompatActivity{
             public void onClick(View view) {
                 Intent intent = new Intent(RentStory.this, MainActivity.class);
                 //thêm vào database
-                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString());
+                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString(),email);
                 startActivity(intent);
                 finish();
             }
@@ -151,9 +153,9 @@ public class RentStory extends AppCompatActivity{
         onBackPressed();
         return super.onSupportNavigateUp();
     }
-    void AddGioHang(String day,String pay){
+    void AddGioHang(String day,String pay,String email){
         DBcontrol dBcontrol = new DBcontrol(RentStory.this);
-        dBcontrol.InsertCart(db,story,day,pay);
+        dBcontrol.InsertCart(db,story,day,pay,email);
 
     }
 

@@ -25,7 +25,7 @@ public class DetailStory extends AppCompatActivity {
     TextView tvGioiThieu,tvName,tvTacGia,tvTaglist,tvaddcart;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     AppCompatRatingBar Rate;
-
+    String email;
 
     Story story;
     @SuppressLint("MissingInflatedId")
@@ -36,6 +36,7 @@ public class DetailStory extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         story=(Story) intent.getSerializableExtra("A");
+        email=intent.getStringExtra("email");
         getSupportActionBar().setTitle(story.getNamestory());
         ivANH=findViewById(R.id.ivmanga_art);
         ivBACKGR=findViewById(R.id.background_art);
@@ -72,6 +73,7 @@ public class DetailStory extends AppCompatActivity {
             public void onClick(View view) {
               Intent intent1 = new Intent(DetailStory.this,RentStory.class);
               intent1.putExtra("Rent",story);
+              intent1.putExtra("email",email);
               startActivity(intent1);
 
             }
