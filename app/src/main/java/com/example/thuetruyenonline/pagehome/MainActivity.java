@@ -1,5 +1,9 @@
 package com.example.thuetruyenonline.pagehome;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,11 +24,13 @@ import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.DetailStory;
 import com.example.thuetruyenonline.Profile;
 import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.Sort;
 import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.search.Search;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
    ArrayList<Story> stories;
    StoryAdapter storyAdapter;
    FirebaseFirestore db;
+   FloatingActionButton btsort;
     Intent intent;
     String email;
     DBcontrol dBcontrol = new DBcontrol(MainActivity.this);
@@ -70,6 +77,22 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         Nagative();
 
     }
+    //nhan sort
+
+    ActivityResultLauncher<Intent> mLaunch  = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+       if(result.getResultCode()==RESULT_OK){
+           Story story =(Story) result.getData().getSerializableExtra("HanhDong");
+           stories.clear();
+           stories.add(story);
+       }
+        }
+    });
+
+
+
+
     void Nagative(){
         ivHome=findViewById(R.id.ivHome);
         ivHome.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                 finish();
             }
         });
+
 
         ivProfile=findViewById(R.id.ivProfile);
         ivProfile.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +125,20 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
             }
         });
         menuSearch=findViewById(R.id.menuSearch);
+
+        //sort
+        btsort=findViewById(R.id.btsort);
+        btsort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, Sort.class);
+                intent.putExtra("flag",1);
+                mLaunch.launch(intent);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 

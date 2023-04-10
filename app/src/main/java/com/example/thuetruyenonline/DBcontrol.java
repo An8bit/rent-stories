@@ -117,6 +117,36 @@ public class DBcontrol {
                 }
             });
         }
+    public void Sort(String newText,FirebaseFirestore db,OnGetDataListener listener) {
+        String searchText = newText.toLowerCase();
+        ArrayList<Story> stories = new ArrayList<>();
+        db.collection("Truyen").whereEqualTo("TheLoai",searchText).limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+                                String name=document.get("TenTruyen").toString();
+                                String tacgia=document.get("TacGia").toString();
+                                String gioithieu=document.get("GioiThieu").toString();
+                                String theloai=document.get("TheLoai").toString();
+                                String image=document.get("AnhLoad").toString();
+                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai) ;
+                                stories.add(story);
+                            }
+                            listener.onSuccess(stories);
+
+                        } else {
+                            listener.onFailure("");
+                            Toast("loi");
+
+                        }
+                    }
+                });
+    }
+
+
+
     void Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);
         toast.show();

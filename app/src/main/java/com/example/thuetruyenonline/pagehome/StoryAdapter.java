@@ -81,7 +81,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
         return stories.size();
     }
 
-    interface Listener {
+    public interface Listener {
         void onItemClickListener(Story story);
 
     }
