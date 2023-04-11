@@ -2,6 +2,7 @@ package com.example.thuetruyenonline;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -165,7 +168,7 @@ public class DBcontrol {
                         String nameStory= queryDocumentSnapshot.get("namestory").toString();
                         String ptttoan= queryDocumentSnapshot.get("ppthanhtoan").toString();
                         String songaythe= queryDocumentSnapshot.get("songaythue").toString();
-                        ControlCart controlCart = new ControlCart(buyer,idTruyen,img,nameStory,ptttoan,songaythe);
+                        ControlCart controlCart = new ControlCart(id,buyer,idTruyen,img,nameStory,ptttoan,songaythe);
                         controlCarts.add(controlCart);
                     }
                     listener.onSucess(controlCarts);
@@ -178,6 +181,22 @@ public class DBcontrol {
             }
         });
     }
+//    public  void deletecart(FirebaseFirestore db){
+//        DatabaseReference docRef = FirebaseFirestore.getInstance().getReference().child("my_collection").child("doc_id");
+//
+//// Xóa document
+//        docRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//                Log.d("TAG", "Xóa document thành công");
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.w("TAG", "Lỗi xóa document", e);
+//            }
+//        });
+//    }
     public String getProviderData(){
         String providerId = null;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

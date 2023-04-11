@@ -67,7 +67,12 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                     }
                 });
         holder.tvngaythue.setText(controlCart.getSongaythue());
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
 
     }
 
