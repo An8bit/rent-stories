@@ -77,7 +77,6 @@ private void search(String newText) {
        @Override
        public void onFailure(String errorMessage) {
            stories=new ArrayList<>();
-
        }
    });
 }
@@ -87,6 +86,5 @@ private void search(String newText) {
         Intent intent = new Intent(Search.this, DetailStory.class);
         intent.putExtra("A",story);
         startActivity(intent);
-
     }
 }

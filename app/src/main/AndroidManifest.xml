@@ -21,6 +21,7 @@
             android:name=".search.Search"
             android:exported="false" />
         <activity
+            android:label="Tài Khoản"
             android:name=".Profile"
             android:exported="false" />
         <activity
