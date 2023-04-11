@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.thuetruyenonline.Cart.RentStory;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -71,7 +72,7 @@ public class DetailStory extends AppCompatActivity {
         tvaddcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              Intent intent1 = new Intent(DetailStory.this,RentStory.class);
+              Intent intent1 = new Intent(DetailStory.this, RentStory.class);
               intent1.putExtra("Rent",story);
               intent1.putExtra("email",email);
               startActivity(intent1);

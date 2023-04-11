@@ -5,8 +5,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.thuetruyenonline.pagehome.Acc;
-import com.example.thuetruyenonline.pagehome.MainActivity;
+import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.pagehome.StoryAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,8 +24,6 @@ import java.util.Map;
 public class DBcontrol {
 
     Context context;
-    Acc acc;
-
     StoryAdapter storyAdapter;
     public DBcontrol(Context context) {
        this.context=context;
@@ -34,6 +31,10 @@ public class DBcontrol {
     //sử dụng  listener để đợi việc lấy dữ liệu hoàn tất trước khi trả về kết quả
     public interface OnGetDataListener {
         void onSuccess(ArrayList<Story> stories);
+        void onFailure(String errorMessage);
+    }
+    public interface onGetCartListener{
+        void onSucess(ArrayList<ControlCart> controlCarts);
         void onFailure(String errorMessage);
     }
 
@@ -146,9 +147,33 @@ public class DBcontrol {
                     }
                 });
     }
+    public void getCart(String name, FirebaseFirestore db, onGetCartListener listener){
+        ArrayList <ControlCart> controlCarts = new ArrayList<>();
+        db.collection("GioHang").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                        String id = queryDocumentSnapshot.getId();
+                        String buyer= queryDocumentSnapshot.get("buyer").toString();
+                        String idTruyen= queryDocumentSnapshot.get("idtruyen").toString();
+                        String img= queryDocumentSnapshot.get("img").toString();
+                        String nameStory= queryDocumentSnapshot.get("namestory").toString();
+                        String ptttoan= queryDocumentSnapshot.get("ppthanhtoan").toString();
+                        String songaythe= queryDocumentSnapshot.get("songaythue").toString();
+                        ControlCart controlCart = new ControlCart(buyer,idTruyen,img,nameStory,ptttoan,songaythe);
+                        controlCarts.add(controlCart);
+                    }
+                    listener.onSucess(controlCarts);
 
+                } else {
+                    listener.onFailure("");
+                    Toast("loi");
 
-
+                }
+            }
+        });
+    }
     void Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);
         toast.show();

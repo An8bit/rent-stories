@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 
 public class Profile extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class Profile extends AppCompatActivity {
         ivCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Profile.this,Cart.class);
+                Intent intent = new Intent(Profile.this, Cart.class);
                 startActivity(intent);
             }
         });

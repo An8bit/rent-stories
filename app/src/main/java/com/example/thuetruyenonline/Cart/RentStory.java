@@ -1,16 +1,9 @@
-package com.example.thuetruyenonline;
-
-import static com.example.thuetruyenonline.R.id.btXong;
+package com.example.thuetruyenonline.Cart;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,23 +13,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.thuetruyenonline.DBcontrol;
+import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 public class RentStory extends AppCompatActivity{
 
@@ -61,7 +49,7 @@ public class RentStory extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //đọc tên tên trong bảng rồi add vào
-                Intent intent = new Intent(RentStory.this,Cart.class);
+                Intent intent = new Intent(RentStory.this, Cart.class);
                 AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString(),email);
                 startActivity(intent);
                 finish();

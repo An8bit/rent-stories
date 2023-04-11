@@ -1,4 +1,4 @@
-package com.example.thuetruyenonline;
+package com.example.thuetruyenonline.Cart;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.thuetruyenonline.Profile;
+import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ public class Cart extends AppCompatActivity {
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Cart.this,Profile.class);
+                Intent intent = new Intent(Cart.this, Profile.class);
                 startActivity(intent);
             }
         });

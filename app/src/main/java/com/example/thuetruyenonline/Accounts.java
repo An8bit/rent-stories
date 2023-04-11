@@ -1,14 +1,12 @@
 package com.example.thuetruyenonline;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -21,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.thuetruyenonline.pagehome.Acc;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,7 +30,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Accounts extends AppCompatActivity {
     private static final String TAG = "Accounts";
@@ -55,7 +51,7 @@ public class Accounts extends AppCompatActivity {
         Login=findViewById(R.id.btLogin);
         //đọc document TaiKhoan gán vào biến usersRef
         CollectionReference usersRef = db.collection("TaiKhoan");
-        Acc acc = new Acc();
+
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override

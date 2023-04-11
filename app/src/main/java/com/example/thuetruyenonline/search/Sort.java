@@ -1,7 +1,6 @@
-package com.example.thuetruyenonline;
+package com.example.thuetruyenonline.search;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +8,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.pagehome.MainActivity;
-import com.example.thuetruyenonline.pagehome.StoryAdapter;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
 
 public class Sort extends AppCompatActivity  {
     ImageButton ibclose;

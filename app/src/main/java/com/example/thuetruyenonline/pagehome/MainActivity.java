@@ -17,23 +17,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.thuetruyenonline.Cart;
+import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.DetailStory;
 import com.example.thuetruyenonline.Profile;
 import com.example.thuetruyenonline.R;
-import com.example.thuetruyenonline.Sort;
+import com.example.thuetruyenonline.search.Sort;
 import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.search.Search;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
