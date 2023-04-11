@@ -65,26 +65,15 @@
                 app:layout_constraintStart_toEndOf="@+id/imgEdit"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
-                android:id="@+id/spNgayThue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="28dp"
-                android:entries="@array/data"
+            <TextView
+                android:id="@+id/tvngaythue"
+                android:layout_width="67dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/imgEdit"
-                app:layout_constraintTop_toBottomOf="@+id/tvTenTruyen"
-                tools:ignore="MissingConstraints" />
-
-            <Spinner
-                android:id="@+id/spThanhToan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="28dp"
-                android:entries="@array/data1"
-                app:layout_constraintStart_toEndOf="@+id/imgEdit"
-                app:layout_constraintTop_toBottomOf="@+id/spNgayThue" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTenTruyen" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

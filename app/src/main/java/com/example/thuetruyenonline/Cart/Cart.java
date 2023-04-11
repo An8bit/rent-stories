@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
    ArrayList<ControlCart>controlCarts;
-    RecyclerView rvCart;
+   RecyclerView rvCart;
     FirebaseFirestore db;
     ShoppingAdapter shoppingAdapter;
     DBcontrol dBcontrol = new DBcontrol(Cart.this);
@@ -31,7 +32,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Menu();
-        rvCart.findViewById(R.id.rvCart);
+        rvCart=findViewById(R.id.rvCart);
         db=FirebaseFirestore.getInstance();
         dBcontrol.getCart(dBcontrol.getProviderData(), db, new DBcontrol.onGetCartListener() {
             @Override

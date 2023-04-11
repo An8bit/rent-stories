@@ -151,8 +151,7 @@ public class RentStory extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 onOptionsItemSelected(menuItem);
-                Intent intent = new Intent(RentStory.this,Cart.class);
-                startActivity(intent);
+
             }
         });
 

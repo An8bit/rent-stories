@@ -66,12 +66,9 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         // Show error message or perform other action
                     }
                 });
-        holder.spNgayThue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        holder.tvngaythue.setText(controlCart.getSongaythue());
 
-            }
-        });
+
     }
 
     @Override
@@ -84,16 +81,15 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
     class Pay extends RecyclerView.ViewHolder{
 
-        TextView tvTenTruyen;
+        TextView tvTenTruyen,tvngaythue;
         ImageView imgEdit, imgDelete;
-        Spinner spNgayThue,spThanhToan;
+
         public Pay(@NonNull View itemView) {
             super(itemView);
             tvTenTruyen=itemView.findViewById(R.id.tvTenTruyen);
             imgEdit=itemView.findViewById(R.id.imgEdit);
             imgDelete=itemView.findViewById(R.id.imgDelete);
-            spNgayThue=itemView.findViewById(R.id.spNgayThue);
-            spThanhToan=itemView.findViewById(R.id.spThanhToan);
+           tvngaythue=itemView.findViewById(R.id.tvngaythue);
         }
     }
 }
