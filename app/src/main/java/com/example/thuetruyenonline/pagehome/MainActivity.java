@@ -74,25 +74,44 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
 
             }
         });
+        btsort=findViewById(R.id.btsort);
+        btsort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Sort.class);
+                mLaunch.launch(intent);
+
+            }
+        });
         Nagative();
 
     }
-    //nhan sort
 
     ActivityResultLauncher<Intent> mLaunch  = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-       if(result.getResultCode()==RESULT_OK){
-           Story story =(Story) result.getData().getSerializableExtra("HanhDong");
-           stories.clear();
-           stories.add(story);
-       }
+            if(result.getResultCode()==RESULT_OK){
+                Intent intent = new Intent();
+                String data =result.getData().getStringExtra("theloai");
+                dBcontrol.Sort(data, db, new DBcontrol.OnGetDataListener() {
+                    @Override
+                    public void onSuccess(ArrayList<Story> storie1) {
+                        stories=storie1;
+                        storyAdapter = new StoryAdapter(stories,MainActivity.this);
+                        rvStory.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+                        rvStory.setAdapter(storyAdapter);
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+
+                    }
+                });
+
+
+            }
         }
     });
-
-
-
-
     void Nagative(){
         ivHome=findViewById(R.id.ivHome);
         ivHome.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                 finish();
             }
         });
+        //nhan sort
+
+
 
 
         ivProfile=findViewById(R.id.ivProfile);
@@ -127,21 +149,8 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         menuSearch=findViewById(R.id.menuSearch);
 
         //sort
-        btsort=findViewById(R.id.btsort);
-        btsort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, Sort.class);
-                intent.putExtra("flag",1);
-                mLaunch.launch(intent);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
-
-
     @Override
     public void onItemClickListener(Story story) {
         Intent intent = new Intent(MainActivity.this, DetailStory.class);

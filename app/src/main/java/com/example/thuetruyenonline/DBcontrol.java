@@ -120,7 +120,9 @@ public class DBcontrol {
     public void Sort(String newText,FirebaseFirestore db,OnGetDataListener listener) {
         String searchText = newText.toLowerCase();
         ArrayList<Story> stories = new ArrayList<>();
-        db.collection("Truyen").whereEqualTo("TheLoai",searchText).limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Truyen").orderBy("TheLoai")
+                .startAt(searchText)
+                .endAt(searchText + "\uf8ff").limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
