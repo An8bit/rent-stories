@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
    FirebaseFirestore db;
    FloatingActionButton btsort;
     Intent intent;
-    String email;
     DBcontrol dBcontrol = new DBcontrol(MainActivity.this);
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
-         email = intent.getStringExtra("email");
         rvStory = findViewById(R.id.rvStory);
         db=FirebaseFirestore.getInstance();
         dBcontrol.GetData("Truyen", db, new DBcontrol.OnGetDataListener() {
@@ -149,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
     public void onItemClickListener(Story story) {
         Intent intent = new Intent(MainActivity.this, DetailStory.class);
         intent.putExtra("A",story);
-        intent.putExtra("email", email);
         startActivity(intent);
 
     }

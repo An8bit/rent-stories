@@ -1,6 +1,7 @@
 package com.example.thuetruyenonline;
 
 import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -94,7 +98,7 @@ public class DBcontrol {
                     }
                 });
     }
-        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue,String ppthanhtoan,String email){
+        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue,String ppthanhtoan){
             CollectionReference Cart= db.collection("GioHang");
             String id = story.getId();
             String name = story.getNamestory();
@@ -105,7 +109,7 @@ public class DBcontrol {
             cart.put("idtruyen",id);
             cart.put("img",image);
             cart.put("namestory",name);
-            cart.put("buyer",email);
+            cart.put("buyer",getProviderData());
             Cart.add(cart).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
@@ -173,6 +177,18 @@ public class DBcontrol {
                 }
             }
         });
+    }
+    public String getProviderData(){
+        String providerId = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                providerId = profile.getUid();
+            }
+        } else {
+            return null;
+        }
+        return providerId;
     }
     void Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);

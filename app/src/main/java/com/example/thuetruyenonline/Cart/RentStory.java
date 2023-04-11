@@ -142,17 +142,17 @@ public class RentStory extends AppCompatActivity{
 
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.cart, menu);
-        final MenuItem menuItem = menu.findItem(R.id.menu_Cart);
-
+        MenuItem menuItem = menu.findItem(R.id.menu_Cart);
         View actionView = menuItem.getActionView();
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
-
         setupBadge();
 
         actionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onOptionsItemSelected(menuItem);
+                Intent intent = new Intent(RentStory.this,Cart.class);
+                startActivity(intent);
             }
         });
 
@@ -177,7 +177,7 @@ public class RentStory extends AppCompatActivity{
     }
     void AddGioHang(String day,String pay,String email){
         DBcontrol dBcontrol = new DBcontrol(RentStory.this);
-        dBcontrol.InsertCart(db,story,day,pay,email);
+        dBcontrol.InsertCart(db,story,day,pay);
 
     }
     private void setupBadge() {
