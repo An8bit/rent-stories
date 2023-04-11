@@ -1,23 +1,42 @@
-package com.example.thuetruyenonline;
+package com.example.thuetruyenonline.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.thuetruyenonline.Cart.Cart;
+import com.example.thuetruyenonline.DBcontrol;
+import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class Profile extends AppCompatActivity {
-
+    RecyclerView mRecyclerView;
+    TextView tvEmail,tvName;
+    FirebaseFirestore db;
+    ArrayList<Story> stories = new ArrayList<>();
+    DBcontrol dBcontrol = new DBcontrol(Profile.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        mRecyclerView = findViewById(R.id.rvprofile);
+        db = FirebaseFirestore.getInstance();
         Menu();
+        tvEmail=findViewById(R.id.tvEmail);
+        tvName=findViewById(R.id.tvName);
+        tvEmail.setText(dBcontrol.getProviderData());
+        tvName.setText(dBcontrol.getProviderData().substring(0,dBcontrol.getProviderData().indexOf("@")));
     }
+
     void Menu(){
         ImageView ivHome,ivProfile,ivCart;
         ivHome=findViewById(R.id.ivHome);

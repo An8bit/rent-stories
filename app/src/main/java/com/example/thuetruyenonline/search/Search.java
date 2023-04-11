@@ -31,8 +31,9 @@ public class Search extends AppCompatActivity implements SearchResultsAdapter.Li
     RecyclerView mRecyclerView;
     FirebaseFirestore db;
     ArrayList<Story> stories = new ArrayList<>();
-    SearchResultsAdapter searchResultsAdapter;
     DBcontrol dBcontrol = new DBcontrol(Search.this);
+    SearchResultsAdapter searchResultsAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,9 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.thuetruyenonline.DBcontrol;
-import com.example.thuetruyenonline.Profile;
+import com.example.thuetruyenonline.profile.Profile;
 import com.example.thuetruyenonline.R;
-import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +31,9 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         setContentView(R.layout.activity_cart);
         Menu();
         rvCart.findViewById(R.id.rvCart);
+
+
+
         db=FirebaseFirestore.getInstance();
         dBcontrol.getCart(dBcontrol.getProviderData(), db, new DBcontrol.onGetCartListener() {
             @Override
