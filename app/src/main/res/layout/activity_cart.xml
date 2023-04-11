@@ -26,16 +26,16 @@
         app:layout_constraintBottom_toTopOf="@id/linearLayout1"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="5dp" />
+
     <Button
-        android:layout_marginBottom="10dp"
         android:id="@+id/btnThuetruyen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+        android:layout_marginBottom="16dp"
         android:text="Thuê Truyện"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
-    </Button>
+        app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></Button>
 
     <LinearLayout
         android:id="@id/linearLayout1"
@@ -95,7 +95,7 @@
             android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/baseline_people_alt_24" />
+            app:srcCompat="@drawable/baseline_account_circle_24" />
 
         <ImageView
             android:id="@+id/ivCart"

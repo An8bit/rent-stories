@@ -42,10 +42,10 @@
         android:gravity="center"
         />
     <TextView
-        android:id="@+id/tvKH"
+        android:id="@+id/tvDiGioi"
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:text="Khoa Học Viễn Tưởng"
+        android:text="Dị Giới"
         android:gravity="center"
         />
     <TextView
@@ -60,6 +60,13 @@
         android:layout_width="match_parent"
         android:layout_height="51dp"
         android:text="Huyền Huyễn"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/tvDoiThuong"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Đời Thường"
         android:gravity="center"
         />
 </LinearLayout>

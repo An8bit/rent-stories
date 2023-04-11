@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode()==RESULT_OK){
-                Intent intent = new Intent();
+               // Intent intent = new Intent();
                 String data =result.getData().getStringExtra("theloai");
                 dBcontrol.Sort(data, db, new DBcontrol.OnGetDataListener() {
                     @Override
