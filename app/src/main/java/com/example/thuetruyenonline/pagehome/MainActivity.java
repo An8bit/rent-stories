@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode()==RESULT_OK){
                // Intent intent = new Intent();
-                String data =result.getData().getStringExtra("theloai");
+                String data = result.getData().getStringExtra("theloai");
                 dBcontrol.Sort(data, db, new DBcontrol.OnGetDataListener() {
                     @Override
                     public void onSuccess(ArrayList<Story> storie1) {
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
         startActivity(intent);
 
     }
+    //nút search
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater = getMenuInflater();

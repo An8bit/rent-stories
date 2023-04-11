@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Accounts"
+    tools:context=".testloggin"
     android:orientation="vertical">
 
 
@@ -36,71 +36,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/chocolate"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nhập gmail của bạn"
-                    android:textSize="16sp"
-                    android:textColor="@color/chocolate">
-
-                </TextView>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/chocolate"></LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/chocolate"></LinearLayout>
             <EditText
-                android:textSize="28sp"
+                android:textSize="24dp"
                 style="@style/Widget.AppCompat.EditText"
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:background="@null"
-                android:hint="user@gmail.com"
-                >
+                android:hint="Email">
             </EditText>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/chocolate"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nhập password"
-                    android:textSize="16sp"
-                    android:textColor="@color/chocolate">
-                    "
-                </TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/chocolate"></LinearLayout>
             <EditText
-                android:background="@null"
-                android:textSize="28sp"
+                android:textSize="24dp"
                 android:id="@+id/etPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.EditText"
                 android:inputType="textPassword"
-                android:hint="pass"
-                >
+                android:hint="Password">
             </EditText>
         </LinearLayout>
 
@@ -152,7 +104,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_gravity="center">
+                android:layout_gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"

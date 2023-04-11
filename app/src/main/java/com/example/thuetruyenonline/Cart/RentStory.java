@@ -9,6 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -28,6 +31,8 @@ import com.google.firebase.storage.StorageReference;
 
 public class RentStory extends AppCompatActivity{
 
+    TextView textCartItemCount;
+    int mCartItemCount = 10;
     FirebaseFirestore db =FirebaseFirestore.getInstance();
     Button btXong,btHome;
     Spinner spOpt,spOpt1;
@@ -49,11 +54,7 @@ public class RentStory extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //đọc tên tên trong bảng rồi add vào
-                Intent intent = new Intent(RentStory.this, Cart.class);
                 AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString(),email);
-                startActivity(intent);
-                finish();
-
             }
         });
         btHome=findViewById(R.id.btHome);
@@ -130,12 +131,45 @@ public class RentStory extends AppCompatActivity{
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("TAG", "Failed to load image", e);
-                        // Show error message or perform other action
+
                     }
                 });
         tvName.setText(story.getNamestory());
 
+    }
+    //
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.cart, menu);
+        final MenuItem menuItem = menu.findItem(R.id.menu_Cart);
+
+        View actionView = menuItem.getActionView();
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        setupBadge();
+
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_Cart: {
+                // Do something
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -145,6 +179,21 @@ public class RentStory extends AppCompatActivity{
         DBcontrol dBcontrol = new DBcontrol(RentStory.this);
         dBcontrol.InsertCart(db,story,day,pay,email);
 
+    }
+    private void setupBadge() {
+
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
 }

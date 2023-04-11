@@ -149,7 +149,7 @@ public class DBcontrol {
     }
     public void getCart(String name, FirebaseFirestore db, onGetCartListener listener){
         ArrayList <ControlCart> controlCarts = new ArrayList<>();
-        db.collection("GioHang").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("GioHang").whereEqualTo("buyer",name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){

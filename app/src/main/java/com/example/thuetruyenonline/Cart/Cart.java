@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.Profile;
 import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -19,11 +21,15 @@ public class Cart extends AppCompatActivity {
 
     ArrayList<Story> stories;
     RecyclerView rvStory;
+    FirebaseFirestore db;
+    DBcontrol dBcontrol = new DBcontrol(Cart.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Menu();
+        db=FirebaseFirestore.getInstance();
+
 
 
     }

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -36,7 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Accounts extends AppCompatActivity {
+public class testloggin extends AppCompatActivity {
     FirebaseFirestore db ;
     EditText email,pass;
     private FirebaseAuth mAuth;
@@ -46,7 +45,7 @@ public class Accounts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_testloggin);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         email = findViewById(R.id.etEmail);
@@ -56,11 +55,11 @@ public class Accounts extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString()).addOnCompleteListener(Accounts.this, new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString()).addOnCompleteListener(testloggin.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(Accounts.this,MainActivity.class);
+                            Intent intent = new Intent(testloggin.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
@@ -75,16 +74,16 @@ public class Accounts extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Accounts.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(testloggin.this);
                 builder.setTitle("Đăng ký tài khoản");
                 builder.setMessage("Vui lòng nhập thông tin đăng ký");
-                final EditText usernameInput = new EditText(Accounts.this);
+                final EditText usernameInput = new EditText(testloggin.this);
                 usernameInput.setHint("Email");
-                final EditText passwordInput = new EditText(Accounts.this);
+                final EditText passwordInput = new EditText(testloggin.this);
                 passwordInput.setHint("Mật khẩu");
                 passwordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 //tạo ra cái layout để hiện thị các nút trên
-                LinearLayout layout = new LinearLayout(Accounts.this);
+                LinearLayout layout = new LinearLayout(testloggin.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
                 layout.addView(usernameInput);
                 layout.addView(passwordInput);
@@ -97,7 +96,7 @@ public class Accounts extends AppCompatActivity {
                         //lấy biến nhập vào ở đây
                         String emailI = usernameInput.getText().toString();
                         String password = passwordInput.getText().toString();
-                        mAuth.createUserWithEmailAndPassword(emailI, password).addOnCompleteListener(Accounts.this, new OnCompleteListener<AuthResult>() {
+                        mAuth.createUserWithEmailAndPassword(emailI, password).addOnCompleteListener(testloggin.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -144,7 +143,7 @@ public class Accounts extends AppCompatActivity {
         }
     }
     void Toast(String a){
-        Toast toast= Toast.makeText(Accounts.this,a,Toast.LENGTH_SHORT);
+        Toast toast= Toast.makeText(testloggin.this,a,Toast.LENGTH_SHORT);
         toast.show();
     }
 }

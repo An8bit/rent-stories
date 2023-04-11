@@ -14,9 +14,12 @@
         android:theme="@style/Theme.ThuetruyenOnline"
         tools:targetApi="31">
         <activity
-            android:label="Thể Loại"
-            android:name=".search.Sort"
+            android:name=".testloggin"
             android:exported="false" />
+        <activity
+            android:name=".search.Sort"
+            android:exported="false"
+            android:label="Thể Loại" />
         <activity
             android:name=".search.Search"
             android:exported="false" />
