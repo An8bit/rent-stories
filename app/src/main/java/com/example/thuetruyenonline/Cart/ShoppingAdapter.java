@@ -41,9 +41,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
         this.controlCarts = controlCarts;
         this.listener = listener;
     }
-
     Listener listener;
-
     @NonNull
     @Override
     public Pay onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -83,6 +81,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             }
         });
 
+
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -90,6 +89,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                     case "Chỉnh sửa ngày":
                         holder.tvGiaTien.setText(controlCart.getGiatien());
                         holder.tvngaythue.setText(controlCart.getSongaythue());
+                        listener.onEditCart(controlCart);
                         break;
                     case "3 ngày":
                         holder.tvngaythue.setText("3 ngày");
@@ -97,6 +97,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         Update(controlCart,"3 ngày");
+                        listener.onEditCart(controlCart);
                         break;
                     case "1 tuần":
                         holder.tvngaythue.setText("1 tuần");
@@ -104,6 +105,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         Update(controlCart,"1 tuần");
+                        listener.onEditCart(controlCart);
                         break;
                     case "1 tháng":
                         holder.tvngaythue.setText("1 tháng");
@@ -111,6 +113,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         Update(controlCart,"1 tháng");
+                        listener.onEditCart(controlCart);
                         break;
                 }
             }

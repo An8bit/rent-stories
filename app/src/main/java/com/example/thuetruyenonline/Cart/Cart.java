@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
    ArrayList<ControlCart>controlCarts;
+   ArrayList<ControlCart>controlCartsf= new ArrayList<>();
    RecyclerView rvCart;
     TextView tvTongTien;
     FirebaseFirestore db;
@@ -49,11 +50,12 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
             @Override
             public void onSucess(ArrayList<ControlCart> controlCarts1) {
                 controlCarts=controlCarts1;
+                controlCartsf=controlCarts1;
                 shoppingAdapter=new ShoppingAdapter(controlCarts,Cart.this);
                 rvCart.setAdapter(shoppingAdapter);
                 rvCart.setLayoutManager(new LinearLayoutManager(Cart.this, LinearLayoutManager.VERTICAL, false));
                 rvCart.addItemDecoration(new DividerItemDecoration(Cart.this, LinearLayoutManager.VERTICAL));
-                tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts1)));
+
             }
 
             @Override
@@ -117,6 +119,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
     public void onDeleteCart(ControlCart controlCart) {
         dBcontrol.Deleteitemcart(db,controlCart.getId());
         controlCarts.remove(controlCart);
+        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
         shoppingAdapter.notifyDataSetChanged();
     }
     public double getTotalPrice(ArrayList<ControlCart> controlCarts) {
@@ -129,8 +132,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
     @Override
     public void onEditCart(ControlCart controlCart) {
-
-
-
+        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
+        shoppingAdapter.notifyDataSetChanged();
     }
 }

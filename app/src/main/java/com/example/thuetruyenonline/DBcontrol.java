@@ -194,8 +194,6 @@ public class DBcontrol {
             }
         });
     }
-
-
         public  void Deleteitemcart(FirebaseFirestore db,String iddoc){
             db.collection("GioHang").document(iddoc)
                     .delete()
@@ -213,9 +211,6 @@ public class DBcontrol {
                     });
 
         }
-
-
-
     public String getProviderData(){
         String providerId = null;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -227,6 +222,11 @@ public class DBcontrol {
             return null;
         }
         return providerId;
+    }
+   public void UpdateCart(ControlCart controlCart,String so_ng,FirebaseFirestore db,String GiaTien){
+        DocumentReference docRef = db.collection("GioHang").document(controlCart.getId());
+        docRef.update("giatien",String.valueOf(GiaTien));
+        docRef.update("songaythue",String.valueOf(so_ng));
     }
     void Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);
