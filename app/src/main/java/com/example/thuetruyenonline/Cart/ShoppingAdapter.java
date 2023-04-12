@@ -104,6 +104,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
     public interface Listener {
         void onDeleteCart(ControlCart controlCart);
+        void onEditCart(ControlCart controlCart);
     }
 
     class Pay extends RecyclerView.ViewHolder{
