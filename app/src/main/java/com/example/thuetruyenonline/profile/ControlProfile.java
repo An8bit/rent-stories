@@ -1,6 +1,8 @@
 package com.example.thuetruyenonline.profile;
 
-public class ControlProfile {
+import java.io.Serializable;
+
+public class  ControlProfile implements Serializable {
     String buyer;
     String namestory;
     String idtruyen;

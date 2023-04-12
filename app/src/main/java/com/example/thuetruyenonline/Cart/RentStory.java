@@ -34,7 +34,7 @@ public class RentStory extends AppCompatActivity{
     int mCartItemCount = 10;
     FirebaseFirestore db =FirebaseFirestore.getInstance();
     Button btXong,btHome;
-    Spinner spOpt,spOpt1;
+    Spinner spOpt;
     Story story;
     ImageView ivANH;
     TextView tvName,tvCoin;

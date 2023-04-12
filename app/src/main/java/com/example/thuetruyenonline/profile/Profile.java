@@ -10,15 +10,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.thuetruyenonline.Cart.Cart;
+import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Profile extends AppCompatActivity {
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
+
+public class Profile extends AppCompatActivity implements ProfileAdapter.Litenner {
+
 
     RecyclerView mRecyclerView;
+    ArrayList<ControlProfile> controlProfiles;
     TextView tvEmail,tvName;
+    ControlCart controlCart;
     FirebaseFirestore db;
     DBcontrol dBcontrol = new DBcontrol(Profile.this);
     @Override
@@ -27,11 +35,13 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         mRecyclerView = findViewById(R.id.rvprofile);
         db = FirebaseFirestore.getInstance();
+        Intent intent=new Intent();
+        controlCart=(ControlCart) intent.getSerializableExtra("ThanhToan");
         Menu();
         tvEmail=findViewById(R.id.tvEmail);
         tvName=findViewById(R.id.tvName);
-        tvEmail.setText(dBcontrol.getProviderData());
-        tvName.setText(dBcontrol.getProviderData().substring(0,dBcontrol.getProviderData().indexOf("@")));
+        dBcontrol.InsertProfile(db,controlCart,"jiwerjiwer");
+
     }
 
     void Menu(){

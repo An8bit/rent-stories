@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:background="@null"
-                android:hint="user@gmail.com"
+                android:text="huulinh@gmail.com"
                 >
             </EditText>
             <LinearLayout
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.EditText"
                 android:inputType="textPassword"
-                android:hint="pass"
+                android:text="123qwe"
                 >
             </EditText>
         </LinearLayout>

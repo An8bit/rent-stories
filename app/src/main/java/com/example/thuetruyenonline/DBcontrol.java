@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.example.thuetruyenonline.pagehome.StoryAdapter;
+import com.example.thuetruyenonline.profile.Profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -125,18 +126,30 @@ public class DBcontrol {
                 }
             });
         }
-        public void InsertProfile(FirebaseFirestore db,Story story,String ngaythue){
-            CollectionReference Profile= db.collection("GioHang");
-            String id = story.getId();
-            String name = story.getNamestory();
-            String image=story.getImage();
+        public void InsertProfile(FirebaseFirestore db,ControlCart controlCart,String thanhtien){
+            CollectionReference Profile= db.collection("DonHang");
+            String namestrory = controlCart.getNameStory();
+            String image=controlCart.getImg();
+            String songaythue=controlCart.getSongaythue();
+            String idtruyen=controlCart.getIdTruyen();
+            String nguoimua=controlCart.getBuyer();
             Map<String, Object> Profiles = new HashMap<>();
-            Profiles.put("songaythue",ngaythue);
-            Profiles.put("idtruyen",id);
-            Profiles.put("img",image);
-            Profiles.put("namestory",name);
-            Profiles.put("buyer",getProviderData());
+            Profiles.put("buyer",nguoimua);
+            Profiles.put("idtruyen",idtruyen);
+            Profiles.put("songaythue",songaythue);
+            Profiles.put("image",image);
+            Profiles.put("namestrory",namestrory);
+            Profile.add(Profiles).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
 
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
         }
     public void Sort(String newText,FirebaseFirestore db,OnGetDataListener listener) {
         String searchText = newText.toLowerCase();

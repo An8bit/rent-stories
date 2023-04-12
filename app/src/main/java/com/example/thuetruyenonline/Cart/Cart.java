@@ -30,6 +30,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
    ArrayList<ControlCart>controlCartsf= new ArrayList<>();
    RecyclerView rvCart;
     TextView tvTongTien;
+    Button btThuetruyen;
     FirebaseFirestore db;
 
     ShoppingAdapter shoppingAdapter;
@@ -43,6 +44,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         setContentView(R.layout.activity_cart);
         Menu();
         rvCart=findViewById(R.id.rvCart);
+        btThuetruyen=findViewById(R.id.btnThuetruyen);
         db=FirebaseFirestore.getInstance();
         tvTongTien=findViewById(R.id.tvTongTien);
 
@@ -86,6 +88,15 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
             }
         });
+        btThuetruyen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Cart.this,Profile.class);
+                intent.putExtra("ThanhToan",controlCarts);
+                startActivity(intent);
+            }
+        });
+
     }
     void Menu(){
         ImageView ivHome,ivProfile,ivCart;
@@ -133,6 +144,11 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
     @Override
     public void onEditCart(ControlCart controlCart) {
         tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
+        shoppingAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void on(ControlCart controlCart) {
         shoppingAdapter.notifyDataSetChanged();
     }
 }
