@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -73,8 +74,25 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                  listener.onDeleteCart(controlCart);
             }
         });
+        holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (holder.spinner.getSelectedItem().toString()){
+                    case "3 ngày":
+                        holder.tvngaythue.setText("3 ngày");
+                        break;
+                    case "1 tuần":
+                        holder.tvngaythue.setText("1 tuần");
+                        break;
+                }
+            }
 
-    }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        }
 
     @Override
     public int getItemCount() {
@@ -89,13 +107,16 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
         TextView tvTenTruyen,tvngaythue;
         ImageView imgEdit, imgDelete;
-
+        Spinner spinner;
+        CheckBox checkBox;
         public Pay(@NonNull View itemView) {
             super(itemView);
             tvTenTruyen=itemView.findViewById(R.id.tvTenTruyen);
             imgEdit=itemView.findViewById(R.id.imgEdit);
             imgDelete=itemView.findViewById(R.id.imgDelete);
            tvngaythue=itemView.findViewById(R.id.tvngaythue);
+           //checkBox=itemView.findViewById(R.id.cbCheckItem);
+           spinner=itemView.findViewById(R.id.spngaythue);
         }
     }
 }

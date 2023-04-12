@@ -2,13 +2,10 @@ package com.example.thuetruyenonline.search;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +14,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.DetailStory;
 import com.example.thuetruyenonline.R;
-import com.example.thuetruyenonline.Story;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import com.example.thuetruyenonline.pagehome.Story;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 

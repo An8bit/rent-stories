@@ -1,12 +1,12 @@
 package com.example.thuetruyenonline;
 
 import android.content.Context;
-import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.thuetruyenonline.Cart.ControlCart;
+import com.example.thuetruyenonline.pagehome.Story;
 import com.example.thuetruyenonline.pagehome.StoryAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

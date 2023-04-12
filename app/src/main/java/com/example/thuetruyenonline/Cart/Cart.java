@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -29,6 +31,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
     Spinner spTT;
     ImageView iviconTT;
     DBcontrol dBcontrol = new DBcontrol(Cart.this);
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +72,13 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+
+
 
     }
     void Menu(){
@@ -107,7 +111,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
     @Override
     public void onDeleteCart(ControlCart controlCart) {
-        dBcontrol.deletecart(db,controlCart.getId());
+        dBcontrol.Deleteitemcart(db,controlCart.getId());
         controlCarts.remove(controlCart);
         shoppingAdapter.notifyDataSetChanged();
     }

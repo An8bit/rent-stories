@@ -1,13 +1,12 @@
 package com.example.thuetruyenonline;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.thuetruyenonline.Cart.ControlCart;
+import com.example.thuetruyenonline.pagehome.Story;
 import com.example.thuetruyenonline.pagehome.StoryAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -16,8 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -180,7 +177,7 @@ public class DBcontrol {
         });
     }
 
-        public  void deletecart(FirebaseFirestore db,String iddoc){
+        public  void Deleteitemcart(FirebaseFirestore db,String iddoc){
             db.collection("GioHang").document(iddoc)
                     .delete()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -197,6 +194,8 @@ public class DBcontrol {
                     });
 
         }
+
+
 
     public String getProviderData(){
         String providerId = null;

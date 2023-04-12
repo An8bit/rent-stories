@@ -12,11 +12,8 @@ import android.widget.TextView;
 import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
-import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
 
 public class Profile extends AppCompatActivity {
     RecyclerView mRecyclerView;

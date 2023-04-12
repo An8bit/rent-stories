@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +20,7 @@ import android.widget.TextView;
 
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
-import com.example.thuetruyenonline.Story;
+import com.example.thuetruyenonline.pagehome.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
