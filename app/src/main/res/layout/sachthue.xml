@@ -27,26 +27,26 @@
 
     <TextView
         android:id="@+id/tvTenTruyen1111"
-        android:layout_width="95dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="179dp"
+        android:layout_height="21dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:text="Tên Truyện"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/imgAnhTruyen"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/tvNgaySd"
         android:layout_width="95dp"
         android:layout_height="22dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Thời Gian"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
-        app:layout_constraintStart_toEndOf="@+id/imgAnhTruyen"
-        app:layout_constraintTop_toBottomOf="@+id/tvTenTruyen"
+        android:text="Thời Gian"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="UnknownIdInLayout" />
 
     <ImageView
@@ -61,10 +61,12 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="74dp"
+        android:layout_height="45dp"
         android:layout_marginTop="16dp"
-        android:text="Button"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Đọc"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintEnd_toStartOf="@+id/imgdelete"
         app:layout_constraintTop_toTopOf="parent" />

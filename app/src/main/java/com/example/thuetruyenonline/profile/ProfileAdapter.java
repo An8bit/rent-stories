@@ -88,5 +88,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
             tvNgaySd=itemView.findViewById(R.id.tvNgaySd);
             btdoc=itemView.findViewById(R.id.button);
     }
+
 }
 }

@@ -190,7 +190,6 @@ public class DBcontrol {
                         } else {
                             listener.onFailure("");
                             Toast("loi");
-
                         }
                     }
                 });

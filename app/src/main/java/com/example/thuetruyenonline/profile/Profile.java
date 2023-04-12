@@ -27,6 +27,7 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
     ProfileAdapter profileAdapter;
     ArrayList<ControlProfile> controlProfiles;
     FirebaseFirestore db;
+
     DBcontrol dBcontrol = new DBcontrol(Profile.this);
     TextView tvName,tvEmail;
 
@@ -39,15 +40,14 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
             mRecyclerView=findViewById(R.id.rvProfile);
             tvEmail=findViewById(R.id.tvEmail);
             tvEmail.setText(dBcontrol.getProviderData());
+
             Menu();
             dBcontrol.GetProfile(db, new DBcontrol.onGetProfileListener() {
                 @Override
                 public void onSuccess(ArrayList<ControlProfile> controlProfiles1) {
                     controlProfiles=controlProfiles1;
-                    for (ControlProfile c: controlProfiles1
-                         ) {System.out.println(c);
-
-                    }
+                    tvName=findViewById(R.id.tvName);
+                    tvName.setText(dBcontrol.getProviderData().substring(0,dBcontrol.getProviderData().indexOf("@")));
                     profileAdapter = new ProfileAdapter(controlProfiles,Profile.this);
                     mRecyclerView.setAdapter(profileAdapter);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(Profile.this, LinearLayoutManager.VERTICAL, false));
