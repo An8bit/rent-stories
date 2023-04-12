@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.profile.Profile;
@@ -26,6 +27,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
    ArrayList<ControlCart>controlCarts;
    RecyclerView rvCart;
+    TextView tvTongTien;
     FirebaseFirestore db;
     ShoppingAdapter shoppingAdapter;
     Spinner spTT;
@@ -39,6 +41,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         Menu();
         rvCart=findViewById(R.id.rvCart);
         db=FirebaseFirestore.getInstance();
+        tvTongTien=findViewById(R.id.tvTongTien);
         dBcontrol.getCart(dBcontrol.getProviderData(), db, new DBcontrol.onGetCartListener() {
             @Override
             public void onSucess(ArrayList<ControlCart> controlCarts1) {
@@ -77,9 +80,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
             }
         });
-
-
-
+        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts.size())));
     }
     void Menu(){
         ImageView ivHome,ivProfile,ivCart;
@@ -114,6 +115,13 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         dBcontrol.Deleteitemcart(db,controlCart.getId());
         controlCarts.remove(controlCart);
         shoppingAdapter.notifyDataSetChanged();
+    }
+    public double getTotalPrice(int a) {
+        double total = 0;
+        for (int i = 0; i < controlCarts.size(); i++) {
+            total += controlCarts.get(i).getTotalPrice(a);
+        }
+        return total;
     }
 
     @Override

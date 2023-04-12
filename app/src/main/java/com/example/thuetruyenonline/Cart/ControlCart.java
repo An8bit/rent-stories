@@ -81,4 +81,6 @@ public class ControlCart implements Serializable {
     String nameStory;
     String songaythue;
 
+    public double getTotalPrice(int a) {return (Integer.parseInt(giatien)) * a;
+    }
 }

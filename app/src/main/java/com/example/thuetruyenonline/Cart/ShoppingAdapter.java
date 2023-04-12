@@ -75,7 +75,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                  listener.onDeleteCart(controlCart);
             }
         });
-        holder.tvGiaTien.setText(controlCart.getGiatien());
+
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -87,16 +87,19 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                     case "3 ngày":
                         holder.tvngaythue.setText("3 ngày");
                         GiaTien=3000;
+                        controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         break;
                     case "1 tuần":
                         holder.tvngaythue.setText("1 tuần");
                         GiaTien=7000;
+                        controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         break;
                     case "1 tháng":
                         holder.tvngaythue.setText("1 tháng");
                         GiaTien=30000;
+                        controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         break;
                 }
@@ -107,6 +110,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
             }
         });
+
+
         }
 
     @Override
@@ -137,5 +142,4 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
            tvGiaTien=itemView.findViewById(R.id.tvGiaTien);
         }
     }
-
 }
