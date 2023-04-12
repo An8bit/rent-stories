@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.example.thuetruyenonline.DBcontrol;
-import com.example.thuetruyenonline.Profile;
+import com.example.thuetruyenonline.profile.Profile;
 import com.example.thuetruyenonline.R;
-import com.example.thuetruyenonline.Story;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -26,6 +26,8 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
    RecyclerView rvCart;
     FirebaseFirestore db;
     ShoppingAdapter shoppingAdapter;
+    Spinner spTT;
+    ImageView iviconTT;
     DBcontrol dBcontrol = new DBcontrol(Cart.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,33 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
             @Override
             public void onFailure(String errorMessage) {
-
             }
         });
 
+        iviconTT=findViewById(R.id.iviconTT);
+        spTT=findViewById(R.id.spTT);
+        spTT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (spTT.getSelectedItem().toString()){
+                    case "Momo":
+                        iviconTT.setImageResource(R.drawable.momo);
+                        break;
+                    case "ZaloPay":
+                        iviconTT.setImageResource(R.drawable.zalo);
+                        break;
+                    case "Banking":
+                        iviconTT.setImageResource(R.drawable.banking);
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
     void Menu(){

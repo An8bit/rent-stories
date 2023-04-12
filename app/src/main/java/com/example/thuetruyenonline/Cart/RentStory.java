@@ -95,8 +95,7 @@ public class RentStory extends AppCompatActivity{
 
             }
         });
-        ivIcon=findViewById(R.id.ivIcon);
-        spOpt1= findViewById(R.id.spOpt1);
+
         spOpt1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.DetailStory;
-import com.example.thuetruyenonline.Profile;
+import com.example.thuetruyenonline.profile.Profile;
 import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.search.Sort;
 import com.example.thuetruyenonline.Story;

@@ -208,70 +208,6 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="414dp"
-            android:layout_height="33dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chọn phương thưc thanh toán"
-                android:textAlignment="center"
-                android:textColor="@color/chocolate"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
-
-            </TextView>
-        </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
-            android:layout_width="411dp"
-            android:layout_height="59dp"
-            android:background="#EEEEEE"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
-
-            <Spinner
-                android:id="@+id/spOpt1"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="2dp"
-                android:entries="@array/data1"
-                android:textAlignment="center"
-                android:textStyle="bold">
-
-            </Spinner>
-
-            <LinearLayout
-                android:layout_width="328dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginLeft="-1dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@+id/spOpt1"
-                android:layout_toRightOf="@+id/spOpt1"
-                android:orientation="vertical"
-                android:gravity="center">
-                <ImageView
-                    android:id="@+id/ivIcon"
-                    android:layout_width="59dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-
-                     />
-            </LinearLayout>
-
-        </RelativeLayout>
-
         <Button
             android:id="@+id/btXong"
             android:layout_width="184dp"
@@ -281,8 +217,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout1"
-            app:layout_constraintVertical_bias="0.471" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
         <Button
             android:id="@+id/btHome"
@@ -293,8 +228,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout1"
-            app:layout_constraintVertical_bias="0.471" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
