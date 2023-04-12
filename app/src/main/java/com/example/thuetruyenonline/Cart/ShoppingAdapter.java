@@ -1,5 +1,6 @@
 package com.example.thuetruyenonline.Cart;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -16,9 +17,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -27,7 +31,8 @@ import java.util.ArrayList;
 public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
     ArrayList<ControlCart> controlCarts;
-
+    Context context;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     int GiaTien;
     Button tbThue;
@@ -91,18 +96,21 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         GiaTien=3000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
+                        Update(controlCart,"3 ngày");
                         break;
                     case "1 tuần":
                         holder.tvngaythue.setText("1 tuần");
                         GiaTien=7000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
+                        Update(controlCart,"1 tuần");
                         break;
                     case "1 tháng":
                         holder.tvngaythue.setText("1 tháng");
                         GiaTien=30000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
+                        Update(controlCart,"1 tháng");
                         break;
                 }
             }
@@ -112,8 +120,6 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
             }
         });
-
-
         }
 
     @Override
@@ -144,4 +150,10 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
            tvGiaTien=itemView.findViewById(R.id.tvGiaTien);
         }
     }
+    void Update(ControlCart controlCart,String so_ng){
+        DocumentReference docRef = db.collection("GioHang").document(controlCart.getId());
+        docRef.update("giatien",String.valueOf(GiaTien));
+        docRef.update("songaythue",String.valueOf(so_ng));
+    }
+
 }

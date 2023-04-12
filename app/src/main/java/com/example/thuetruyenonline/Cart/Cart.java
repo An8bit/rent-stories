@@ -44,14 +44,16 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         rvCart=findViewById(R.id.rvCart);
         db=FirebaseFirestore.getInstance();
         tvTongTien=findViewById(R.id.tvTongTien);
+
         dBcontrol.getCart(dBcontrol.getProviderData(), db, new DBcontrol.onGetCartListener() {
             @Override
             public void onSucess(ArrayList<ControlCart> controlCarts1) {
                 controlCarts=controlCarts1;
-               shoppingAdapter=new ShoppingAdapter(controlCarts,Cart.this);
+                shoppingAdapter=new ShoppingAdapter(controlCarts,Cart.this);
                 rvCart.setAdapter(shoppingAdapter);
                 rvCart.setLayoutManager(new LinearLayoutManager(Cart.this, LinearLayoutManager.VERTICAL, false));
                 rvCart.addItemDecoration(new DividerItemDecoration(Cart.this, LinearLayoutManager.VERTICAL));
+                tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts1)));
             }
 
             @Override
@@ -117,16 +119,18 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         controlCarts.remove(controlCart);
         shoppingAdapter.notifyDataSetChanged();
     }
-    public double getTotalPrice(int a) {
+    public double getTotalPrice(ArrayList<ControlCart> controlCarts) {
         double total = 0;
-        for (int i = 0; i < controlCarts.size(); i++) {
-            total += controlCarts.get(i).getTotalPrice(a);
-        }
+          for (int i = 0;i<controlCarts.size();i++) {
+              total += controlCarts.get(i).getTotalPrice();
+          }
         return total;
     }
 
     @Override
     public void onEditCart(ControlCart controlCart) {
+
+
 
     }
 }
