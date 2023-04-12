@@ -30,6 +30,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
 
     @Override
     public void onBindViewHolder(@NonNull ProfileAdapter.sachthue holder, int position) {
+        return;
 
     }
 

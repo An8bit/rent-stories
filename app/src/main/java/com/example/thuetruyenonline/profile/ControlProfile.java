@@ -14,6 +14,7 @@ public class ControlProfile {
     }
 
     String img;
+    //
 
     public String getBuyer() {
         return buyer;
