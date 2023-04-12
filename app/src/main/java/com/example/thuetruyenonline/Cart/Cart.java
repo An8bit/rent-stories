@@ -82,7 +82,6 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
             }
         });
-        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts.size())));
     }
     void Menu(){
         ImageView ivHome,ivProfile,ivCart;
