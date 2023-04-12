@@ -58,13 +58,24 @@ public class ControlCart implements Serializable {
     String idTruyen;
     String img;
 
-    public ControlCart(String id,String buyer, String idTruyen, String img, String nameStory, String songaythue) {
+    public ControlCart(String id,String buyer, String idTruyen, String img, String nameStory, String songaythue,String giatien) {
         this.id=id;
         this.buyer = buyer;
         this.idTruyen = idTruyen;
         this.img = img;
         this.nameStory = nameStory;
         this.songaythue = songaythue;
+        this.giatien=giatien;
+    }
+
+    String giatien;
+
+    public String getGiatien() {
+        return giatien;
+    }
+
+    public void setGiatien(String giatien) {
+        this.giatien = giatien;
     }
 
     String nameStory;

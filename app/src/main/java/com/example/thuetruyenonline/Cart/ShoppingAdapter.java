@@ -75,6 +75,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                  listener.onDeleteCart(controlCart);
             }
         });
+        holder.tvGiaTien.setText(controlCart.getGiatien());
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

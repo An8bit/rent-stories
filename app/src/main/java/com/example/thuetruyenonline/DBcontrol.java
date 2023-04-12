@@ -58,8 +58,7 @@ public class DBcontrol {
                         String gioithieu = queryDocumentSnapshot.get("GioiThieu").toString();
                         String theloai = queryDocumentSnapshot.get("TheLoai").toString();
                         String image = queryDocumentSnapshot.get("AnhLoad").toString();
-                        String giatien =queryDocumentSnapshot.get("")
-                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai,giatien);
+                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai);
                         stories.add(story);
                     }
                     listener.onSuccess(stories);
@@ -165,7 +164,8 @@ public class DBcontrol {
                         String img= queryDocumentSnapshot.get("img").toString();
                         String nameStory= queryDocumentSnapshot.get("namestory").toString();
                         String songaythe= queryDocumentSnapshot.get("songaythue").toString();
-                        ControlCart controlCart = new ControlCart(id,buyer,idTruyen,img,nameStory,songaythe);
+                        String giatien=queryDocumentSnapshot.get("giatien").toString();
+                        ControlCart controlCart = new ControlCart(id,buyer,idTruyen,img,nameStory,songaythe,giatien);
                         controlCarts.add(controlCart);
                     }
                     listener.onSucess(controlCarts);
