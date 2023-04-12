@@ -83,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvprofile"
+        android:id="@+id/rvProfile"
         android:layout_width="411dp"
         android:layout_height="456dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"

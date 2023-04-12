@@ -33,6 +33,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
     }
     Listener listener;
 
+
+
     @NonNull
     @Override
     public DataStory onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -84,6 +86,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
         void onItemClickListener(Story story);
 
     }
+
+    public interface Litenner {
+    }
+
 
     class DataStory extends RecyclerView.ViewHolder{
 

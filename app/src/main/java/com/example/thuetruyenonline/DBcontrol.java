@@ -7,10 +7,8 @@ import androidx.annotation.NonNull;
 
 import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.pagehome.Story;
-import com.example.thuetruyenonline.pagehome.StoryAdapter;
-import com.example.thuetruyenonline.profile.Profile;
+import com.example.thuetruyenonline.profile.ControlProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,7 +16,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -28,8 +28,8 @@ import java.util.Map;
 
 public class DBcontrol {
 
+
     Context context;
-    StoryAdapter storyAdapter;
     public DBcontrol(Context context) {
        this.context=context;
     }
@@ -43,7 +43,8 @@ public class DBcontrol {
         void onFailure(String errorMessage);
     }
     public  interface onGetProfileListener{
-
+      void onSuccess(ArrayList<ControlProfile> controlProfiles);
+        void onFailure(String errorMessage);
     }
 
     //hàm sữ lý đọc dữ liệu trên database trả về một ArrayList<Story> Việc lấy dữ liệu từ Cloud
@@ -103,7 +104,6 @@ public class DBcontrol {
                 });
     }
         public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue,String giatien){
-            CollectionReference Cart= db.collection("GioHang");
             String id = story.getId();
             String name = story.getNamestory();
             String image=story.getImage();
@@ -114,42 +114,49 @@ public class DBcontrol {
             cart.put("namestory",name);
             cart.put("buyer",getProviderData());
             cart.put("giatien",giatien);
-            Cart.add(cart).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            db.collection("GioHang").add(cart).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     Toast("thêm vào giỏ thành công");
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast("lỗi");
-                }
             });
+
         }
-        public void InsertProfile(FirebaseFirestore db,ControlCart controlCart,String thanhtien){
-            CollectionReference Profile= db.collection("DonHang");
-            String namestrory = controlCart.getNameStory();
-            String image=controlCart.getImg();
-            String songaythue=controlCart.getSongaythue();
-            String idtruyen=controlCart.getIdTruyen();
-            String nguoimua=controlCart.getBuyer();
-            Map<String, Object> Profiles = new HashMap<>();
-            Profiles.put("buyer",nguoimua);
-            Profiles.put("idtruyen",idtruyen);
-            Profiles.put("songaythue",songaythue);
-            Profiles.put("image",image);
-            Profiles.put("namestrory",namestrory);
-            Profile.add(Profiles).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        public void InsertProfile(FirebaseFirestore db,ArrayList<ControlCart>controlCarts,String thanhtien){
+          String autoIDid=AutoID(db,"DonHang");
+          Map<String,Object> id=new HashMap<>();
+          id.put("thanhtien",thanhtien);
+            db.collection("DonHang").document(autoIDid).set(id);
+            for (ControlCart v:controlCarts
+                 ) {
+                String namestrory = v.getNameStory();
+                String image=v.getImg();
+                String songaythue=v.getSongaythue();
+                String idtruyen=v.getIdTruyen();
+                Map<String, Object> Profiles = new HashMap<>();
+                Profiles.put("idtruyen",idtruyen);
+                Profiles.put("songaythue",songaythue);
+                Profiles.put("image",image);
+                Profiles.put("namestory",namestrory);
+                db.collection("DonHang").document(autoIDid).collection("book").document().set(Profiles);
+            }
+            Toast("thanh toán thành công");
+            db.collection("DonHang").document(autoIDid).collection("book").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
-                public void onSuccess(DocumentReference documentReference) {
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    Map<String,Object> done =new HashMap<>();
+                    String email=getProviderData();
+                    done.put("email",email);
+                    db.collection("TaiKhoan").document(email).set(done);
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                        String idtruyen = queryDocumentSnapshot.get("idtruyen").toString();
+                        Map<String,Object> done1=new HashMap<>();
+                        done1.put("idtruyen",idtruyen);
+                        db.collection("TaiKhoan").document(getProviderData()).collection("damua").add(done1);
+                    }
                 }
             });
+            
         }
     public void Sort(String newText,FirebaseFirestore db,OnGetDataListener listener) {
         String searchText = newText.toLowerCase();
@@ -207,22 +214,53 @@ public class DBcontrol {
             }
         });
     }
+
         public  void Deleteitemcart(FirebaseFirestore db,String iddoc){
             db.collection("GioHang").document(iddoc)
-                    .delete()
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
+                    .delete();
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+        }
+        public void DeleteCart(FirebaseFirestore db,String buyer){
+            CollectionReference collectionRef = db.collection("GioHang");
 
-                        }
-                    });
+            Query query = collectionRef.whereEqualTo("buyer",buyer);
 
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        document.getReference().delete();
+                    }
+
+                } else {
+                    Toast("lỗi");
+
+                }
+            });
+
+        }
+        public void GetProfile(FirebaseFirestore db,onGetProfileListener listener){
+        ArrayList<ControlProfile> controlProfiles = new ArrayList<>();
+           db.collection("TaiKhoan").document(getProviderData()).collection("damua").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+               @Override
+               public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                   for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
+                       String id = queryDocumentSnapshot.get("idtruyen").toString();
+
+                       db.collection("Truyen").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                           @Override
+                           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                  String id = task.getResult().getString("idtruyen");
+                                  String name=task.getResult().getString("TenTruyen");
+                                  ControlProfile controlProfile = new ControlProfile(name,id,null,null);
+                                  controlProfiles.add(controlProfile);
+                               }
+
+                       });
+                   }
+                   listener.onSuccess(controlProfiles);
+
+               }
+           });
         }
     public String getProviderData(){
         String providerId = null;
@@ -244,5 +282,12 @@ public class DBcontrol {
     void Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);
         toast.show();
+    }
+    String AutoID(FirebaseFirestore db,String colection){
+         db = FirebaseFirestore.getInstance();
+        CollectionReference collectionRef = db.collection(colection);
+        DocumentReference newDocRef = collectionRef.document();
+
+        return newDocRef.getId();
     }
 }

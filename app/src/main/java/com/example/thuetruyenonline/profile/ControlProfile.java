@@ -7,8 +7,7 @@ public class  ControlProfile implements Serializable {
     String namestory;
     String idtruyen;
 
-    public ControlProfile(String buyer, String namestory, String idtruyen, String img, String songaythue) {
-        this.buyer = buyer;
+    public ControlProfile( String namestory, String idtruyen, String img, String songaythue) {
         this.namestory = namestory;
         this.idtruyen = idtruyen;
         this.img = img;

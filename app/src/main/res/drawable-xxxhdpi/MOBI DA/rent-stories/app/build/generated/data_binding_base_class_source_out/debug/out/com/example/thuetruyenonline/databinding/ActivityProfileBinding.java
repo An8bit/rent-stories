@@ -122,7 +122,7 @@ public final class ActivityProfileBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.rvprofile;
+      id = R.id.rvProfile;
       RecyclerView rvprofile = ViewBindings.findChildViewById(rootView, id);
       if (rvprofile == null) {
         break missingId;

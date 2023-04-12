@@ -14,15 +14,14 @@
         android:theme="@style/Theme.ThuetruyenOnline"
         tools:targetApi="31">
         <activity
+            android:name=".profile.Profile"
+            android:exported="false" />
+        <activity
             android:name=".search.Sort"
             android:exported="false"
             android:label="Thể Loại" />
         <activity
             android:name=".search.Search"
-            android:exported="false" />
-        <activity
-            android:label="Tài Khoản"
-            android:name=".profile.Profile"
             android:exported="false" />
         <activity
             android:name=".Cart.Cart"

@@ -45,8 +45,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
     @NonNull
     @Override
     public Pay onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View  view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.pay, parent,false);
+        View  view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pay, parent,false);
         return new Pay(view);
     }
 

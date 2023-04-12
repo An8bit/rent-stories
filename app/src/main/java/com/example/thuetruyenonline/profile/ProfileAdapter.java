@@ -22,29 +22,28 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue > {
-    public ProfileAdapter(ArrayList<ControlProfile> controlProfiles, Litenner litenner) {
-        this.controlProfiles = controlProfiles;
-        this.litenner = litenner;
-    }
-
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue> {
+   Litenner listener;
     ArrayList<ControlProfile> controlProfiles;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    Litenner litenner;
+
+    public ProfileAdapter( ArrayList<ControlProfile> controlProfiles,Litenner listener) {
+        this.listener=listener;
+        this.controlProfiles = controlProfiles;
+    }
 
 
     @NonNull
     @Override
-    public ProfileAdapter.sachthue onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.sachthue,parent,false);
-        return  new ProfileAdapter.sachthue(view);
+    public sachthue onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View  view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sachthue, parent,false);
+        return new sachthue(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProfileAdapter.sachthue holder, int position) {
-        ControlProfile controlProfile=controlProfiles.get(position);
-        holder.tvTenTruyen.setText(controlProfile.getNamestory());
-        StorageReference imageRef = storage.getReferenceFromUrl(controlProfile.getImg());
+    public void onBindViewHolder(@NonNull sachthue holder, int position) {
+        ControlProfile controlProfile = controlProfiles.get(position);
+       holder.tvTenTruyen.setText("");
+       holder.tvNgaySd.setText("3");
     }
 
     @Override
@@ -54,19 +53,18 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
 
     public interface Litenner {
     }
+    class  sachthue extends RecyclerView.ViewHolder{
 
-    public class sachthue extends RecyclerView.ViewHolder {
-        ImageView imgAnhTruyen,imgdelete;
+            ImageView imgAnhTruyen,imgdelete;
         TextView tvTenTruyen,tvNgaySd;
         Button btdoc;
-
-        public sachthue(View itemView){
-            super(itemView);
-            imgAnhTruyen=itemView.findViewById(R.id.imgAnhTruyen);
+    public sachthue(@NonNull View itemView) {
+        super(itemView);
+                    imgAnhTruyen=itemView.findViewById(R.id.imgAnhTruyen);
             imgdelete=itemView.findViewById(R.id.imgdelete);
-            tvTenTruyen=itemView.findViewById(R.id.tvTenTruyen);
+            tvTenTruyen=itemView.findViewById(R.id.tvTenTruyen1111);
             tvNgaySd=itemView.findViewById(R.id.tvNgaySd);
-            btdoc=itemView.findViewById(R.id.btdoc);
-        }
+            btdoc=itemView.findViewById(R.id.button);
     }
+}
 }

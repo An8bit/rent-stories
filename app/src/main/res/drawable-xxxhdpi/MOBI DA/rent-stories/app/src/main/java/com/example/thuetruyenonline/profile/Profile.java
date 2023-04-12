@@ -24,7 +24,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        mRecyclerView = findViewById(R.id.rvprofile);
+        mRecyclerView = findViewById(R.id.rvProfile);
         db = FirebaseFirestore.getInstance();
         Menu();
         tvEmail=findViewById(R.id.tvEmail);

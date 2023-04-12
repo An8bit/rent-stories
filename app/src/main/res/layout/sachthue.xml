@@ -26,13 +26,14 @@
         android:src="@drawable/tho" />
 
     <TextView
-        android:id="@+id/tvTenTruyen"
+        android:id="@+id/tvTenTruyen1111"
         android:layout_width="95dp"
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Tên Truyện"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toEndOf="@+id/imgAnhTruyen"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +46,8 @@
         android:text="Thời Gian"
         android:gravity="center"
         app:layout_constraintStart_toEndOf="@+id/imgAnhTruyen"
-        app:layout_constraintTop_toBottomOf="@+id/tvTenTruyen" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTenTruyen"
+        tools:ignore="UnknownIdInLayout" />
 
     <ImageView
         android:id="@+id/imgdelete"
@@ -58,12 +60,11 @@
         app:srcCompat="@drawable/baseline_delete_24" />
 
     <Button
-        android:id="@+id/btdoc"
-        android:layout_width="102dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="15dp"
-        android:text="Đọc Truyện"
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintEnd_toStartOf="@+id/imgdelete"
         app:layout_constraintTop_toTopOf="parent" />
