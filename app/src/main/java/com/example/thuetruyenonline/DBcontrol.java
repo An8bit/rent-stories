@@ -41,6 +41,9 @@ public class DBcontrol {
         void onSucess(ArrayList<ControlCart> controlCarts);
         void onFailure(String errorMessage);
     }
+    public  interface onGetProfileListener{
+
+    }
 
     //hàm sữ lý đọc dữ liệu trên database trả về một ArrayList<Story> Việc lấy dữ liệu từ Cloud
     // Firestore là một hoạt động bất đồng bộ nên không thể trả về kết quả trực tiếp từ hàm  nên tạo
@@ -191,6 +194,7 @@ public class DBcontrol {
             }
         });
     }
+
 
         public  void Deleteitemcart(FirebaseFirestore db,String iddoc){
             db.collection("GioHang").document(iddoc)
