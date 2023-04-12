@@ -115,4 +115,9 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         controlCarts.remove(controlCart);
         shoppingAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onEditCart(ControlCart controlCart) {
+
+    }
 }

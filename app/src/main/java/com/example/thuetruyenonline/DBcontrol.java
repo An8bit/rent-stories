@@ -58,7 +58,8 @@ public class DBcontrol {
                         String gioithieu = queryDocumentSnapshot.get("GioiThieu").toString();
                         String theloai = queryDocumentSnapshot.get("TheLoai").toString();
                         String image = queryDocumentSnapshot.get("AnhLoad").toString();
-                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai);
+                        String giatien =queryDocumentSnapshot.get("")
+                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai,giatien);
                         stories.add(story);
                     }
                     listener.onSuccess(stories);
@@ -98,7 +99,7 @@ public class DBcontrol {
                     }
                 });
     }
-        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue){
+        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue,String giatien){
             CollectionReference Cart= db.collection("GioHang");
             String id = story.getId();
             String name = story.getNamestory();
@@ -109,6 +110,7 @@ public class DBcontrol {
             cart.put("img",image);
             cart.put("namestory",name);
             cart.put("buyer",getProviderData());
+            cart.put("giatien",giatien);
             Cart.add(cart).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {

@@ -5,15 +5,25 @@ import android.graphics.Bitmap;
 import java.io.Serializable;
 
 public class Story implements Serializable {
-    public Story(String id, String image, String tacgia, String gioithieu, String namestory,String theloai) {
+    public Story(String id, String image, String tacgia, String gioithieu, String namestory,String theloai,String giatien) {
         this.id = id;
         this.image = image;
         this.tacgia = tacgia;
         this.gioithieu = gioithieu;
         this.namestory = namestory;
         this.theloai=theloai;
+        this.giatien=giatien;
     }
 
+    public String getGiatien() {
+        return giatien;
+    }
+
+    public void setGiatien(String giatien) {
+        this.giatien = giatien;
+    }
+
+    String giatien;
     String id;
      String image;
 

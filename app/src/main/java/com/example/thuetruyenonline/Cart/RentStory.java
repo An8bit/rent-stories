@@ -36,8 +36,9 @@ public class RentStory extends AppCompatActivity{
     Button btXong,btHome;
     Spinner spOpt,spOpt1;
     Story story;
-    ImageView ivANH,ivIcon;
+    ImageView ivANH;
     TextView tvName,tvCoin;
+    int giatien;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,15 +46,13 @@ public class RentStory extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent_story);
         story=(Story) getIntent().getSerializableExtra("Rent");
-        String email=getIntent().getStringExtra("email");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btXong=findViewById(R.id.btXong);
-
         btXong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //đọc tên tên trong bảng rồi add vào
-                AddGioHang(spOpt.getSelectedItem().toString());
+                AddGioHang(spOpt.getSelectedItem().toString(),String.valueOf(giatien));
             }
         });
         btHome=findViewById(R.id.btHome);
@@ -71,19 +70,19 @@ public class RentStory extends AppCompatActivity{
         spOpt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                int a;
+
                 switch (spOpt.getSelectedItem().toString()){
                     case "3 ngày":
-                        a=3000;
-                        tvCoin.setText(String.valueOf(a)+" Đ");
+                        giatien=3000;
+                        tvCoin.setText(String.valueOf(giatien)+" Đ");
                         break;
                     case "1 tuần":
-                        a=7000;
-                        tvCoin.setText(String.valueOf(a)+ " Đ");
+                        giatien=7000;
+                        tvCoin.setText(String.valueOf(giatien)+ " Đ");
                         break;
                     case "1 tháng":
-                        a=30000;
-                        tvCoin.setText(String.valueOf(a)+ "Đ");
+                        giatien=30000;
+                        tvCoin.setText(String.valueOf(giatien)+ "Đ");
                         break;
             }}
 
@@ -150,9 +149,9 @@ public class RentStory extends AppCompatActivity{
         onBackPressed();
         return super.onSupportNavigateUp();
     }
-    void AddGioHang(String day){
+    void AddGioHang(String day,String giatien){
         DBcontrol dBcontrol = new DBcontrol(RentStory.this);
-        dBcontrol.InsertCart(db,story,day);
+        dBcontrol.InsertCart(db,story,day,giatien);
 
     }
     private void setupBadge() {

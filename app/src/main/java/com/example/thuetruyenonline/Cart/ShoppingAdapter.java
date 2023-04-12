@@ -28,6 +28,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
     ArrayList<ControlCart> controlCarts;
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    int GiaTien;
 
     public ShoppingAdapter(ArrayList<ControlCart> controlCarts, Listener listener) {
         this.controlCarts = controlCarts;
@@ -78,14 +79,22 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (holder.spinner.getSelectedItem().toString()){
+                    case "Chỉnh sửa ngày":
+                        break;
                     case "3 ngày":
                         holder.tvngaythue.setText("3 ngày");
+                        GiaTien=3000;
+                        holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         break;
                     case "1 tuần":
                         holder.tvngaythue.setText("1 tuần");
+                        GiaTien=7000;
+                        holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         break;
                     case "1 tháng":
                         holder.tvngaythue.setText("1 tháng");
+                        GiaTien=30000;
+                        holder.tvGiaTien.setText(String.valueOf(GiaTien));
                         break;
                 }
             }
@@ -109,18 +118,21 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
     class Pay extends RecyclerView.ViewHolder{
 
-        TextView tvTenTruyen,tvngaythue;
+        TextView tvTenTruyen,tvngaythue,tvGiaTien;
         ImageView imgEdit, imgDelete;
         Spinner spinner;
         CheckBox checkBox;
+
         public Pay(@NonNull View itemView) {
             super(itemView);
             tvTenTruyen=itemView.findViewById(R.id.tvTenTruyen);
             imgEdit=itemView.findViewById(R.id.imgEdit);
             imgDelete=itemView.findViewById(R.id.imgDelete);
            tvngaythue=itemView.findViewById(R.id.tvngaythue);
-           checkBox=itemView.findViewById(R.id.cbCheckItem);
+           //checkBox=itemView.findViewById(R.id.cbCheckItem);
            spinner=itemView.findViewById(R.id.spngaythue);
+           tvGiaTien=itemView.findViewById(R.id.tvGiaTien);
         }
     }
+
 }
