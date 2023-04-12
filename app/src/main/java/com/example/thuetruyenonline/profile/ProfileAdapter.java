@@ -13,15 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.Cart.ShoppingAdapter;
 import com.example.thuetruyenonline.R;
+import com.google.firebase.firestore.util.Listener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue > {
+    public ProfileAdapter(ArrayList<ControlProfile> controlProfiles, Listener listener) {
+        this.controlProfiles = controlProfiles;
+        this.listener = listener;
+    }
+
     ArrayList<ControlProfile> controlProfiles;
+    Listener listener;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    @NonNull
-    @Override
+    Button btdoc;
+
+
     public ProfileAdapter.sachthue onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View  view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.pay, parent,false);
@@ -30,8 +38,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
 
     @Override
     public void onBindViewHolder(@NonNull ProfileAdapter.sachthue holder, int position) {
-        return;
-
+        ControlProfile controlProfile;
     }
 
     @Override
@@ -53,4 +60,5 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
             btdoc=itemView.findViewById(R.id.btdoc);
         }
     }
+
 }
