@@ -68,7 +68,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         // Show error message or perform other action
                     }
                 });
-        holder.tvngaythue.setText(controlCart.getSongaythue());
+
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +81,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (holder.spinner.getSelectedItem().toString()){
                     case "Chỉnh sửa ngày":
+                        holder.tvGiaTien.setText(controlCart.getGiatien());
+                        holder.tvngaythue.setText(controlCart.getSongaythue());
                         break;
                     case "3 ngày":
                         holder.tvngaythue.setText("3 ngày");
