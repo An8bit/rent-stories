@@ -79,4 +79,11 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
             }
         });
     }
+
+    @Override
+    public void onDeleteCart(ControlCart controlCart) {
+        dBcontrol.deletecart(db,controlCart.getId());
+        controlCarts.remove(controlCart);
+        shoppingAdapter.notifyDataSetChanged();
+    }
 }

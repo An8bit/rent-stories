@@ -181,22 +181,25 @@ public class DBcontrol {
             }
         });
     }
-//    public  void deletecart(FirebaseFirestore db){
-//        DatabaseReference docRef = FirebaseFirestore.getInstance().getReference().child("my_collection").child("doc_id");
-//
-//// Xóa document
-//        docRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                Log.d("TAG", "Xóa document thành công");
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Log.w("TAG", "Lỗi xóa document", e);
-//            }
-//        });
-//    }
+
+        public  void deletecart(FirebaseFirestore db,String iddoc){
+            db.collection("GioHang").document(iddoc)
+                    .delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+        }
+
     public String getProviderData(){
         String providerId = null;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

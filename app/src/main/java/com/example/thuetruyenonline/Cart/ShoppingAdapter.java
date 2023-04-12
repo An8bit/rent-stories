@@ -70,7 +70,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                 listener.onDeleteCart(controlCart);
             }
         });
 
@@ -82,6 +82,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
     }
 
     public interface Listener {
+        void onDeleteCart(ControlCart controlCart);
     }
 
     class Pay extends RecyclerView.ViewHolder{
