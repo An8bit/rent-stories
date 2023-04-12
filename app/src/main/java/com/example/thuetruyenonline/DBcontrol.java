@@ -22,6 +22,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -150,8 +152,14 @@ public class DBcontrol {
                     db.collection("TaiKhoan").document(email).set(done);
                     for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
                         String idtruyen = queryDocumentSnapshot.get("idtruyen").toString();
+                        String name = queryDocumentSnapshot.get("namestory").toString();
+                        String song = queryDocumentSnapshot.get("songaythue").toString();
+                        String img = queryDocumentSnapshot.get("image").toString();
                         Map<String,Object> done1=new HashMap<>();
                         done1.put("idtruyen",idtruyen);
+                        done1.put("songaythue",song);
+                        done1.put("namestory",name);
+                        done1.put("img",img);
                         db.collection("TaiKhoan").document(getProviderData()).collection("damua").add(done1);
                     }
                 }
@@ -245,17 +253,12 @@ public class DBcontrol {
                public void onComplete(@NonNull Task<QuerySnapshot> task) {
                    for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
                        String id = queryDocumentSnapshot.get("idtruyen").toString();
+                       String name = queryDocumentSnapshot.get("namestory").toString();
+                       String img = queryDocumentSnapshot.get("img").toString();
+                       String song = queryDocumentSnapshot.get("songaythue").toString();
+                       ControlProfile controlProfile = new ControlProfile(name,id,img,song);
+                       controlProfiles.add(controlProfile);
 
-                       db.collection("Truyen").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                           @Override
-                           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                  String id = task.getResult().getString("idtruyen");
-                                  String name=task.getResult().getString("TenTruyen");
-                                  ControlProfile controlProfile = new ControlProfile(name,id,null,null);
-                                  controlProfiles.add(controlProfile);
-                               }
-
-                       });
                    }
                    listener.onSuccess(controlProfiles);
 

@@ -44,7 +44,7 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
                 @Override
                 public void onSuccess(ArrayList<ControlProfile> controlProfiles1) {
                     controlProfiles=controlProfiles1;
-                    for (ControlProfile c:controlProfiles1
+                    for (ControlProfile c: controlProfiles1
                          ) {System.out.println(c);
 
                     }

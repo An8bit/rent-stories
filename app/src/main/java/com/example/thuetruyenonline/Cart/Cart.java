@@ -144,6 +144,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
     @Override
     public void onEditCart(ControlCart controlCart) {
         tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
+        controlCart.setGiatien(String.valueOf(shoppingAdapter.GiaTien));
         shoppingAdapter.notifyDataSetChanged();
     }
 
