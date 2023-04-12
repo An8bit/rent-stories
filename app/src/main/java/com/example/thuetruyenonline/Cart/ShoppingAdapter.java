@@ -84,6 +84,9 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                     case "1 tuần":
                         holder.tvngaythue.setText("1 tuần");
                         break;
+                    case "1 tháng":
+                        holder.tvngaythue.setText("1 tháng");
+                        break;
                 }
             }
 
@@ -115,7 +118,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             imgEdit=itemView.findViewById(R.id.imgEdit);
             imgDelete=itemView.findViewById(R.id.imgDelete);
            tvngaythue=itemView.findViewById(R.id.tvngaythue);
-           //checkBox=itemView.findViewById(R.id.cbCheckItem);
+           checkBox=itemView.findViewById(R.id.cbCheckItem);
            spinner=itemView.findViewById(R.id.spngaythue);
         }
     }
