@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:id="@+id/top_section"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/background_art"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:foreground="@drawable/gradient"
+            android:alpha="0.3"/>
+        <LinearLayout
+            android:id="@+id/manga_art_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/background_art"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="20dp">
+
+            <ImageView
+                android:id="@+id/ivmanga_art"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
+            <!--android:contentDescription="@string/image"-->/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/background_art"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@id/manga_art_layout"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:textColor="@color/chocolate"
+                android:id="@+id/tvtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTacGia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5" />
+
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvig"
+            android:layout_below="@id/tvView"
+            android:background="@drawable/home_line"
+            >
+
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tvView"
+            android:text="GIỚI THIỆU"
+            android:textColor="@color/chocolate"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_below="@+id/background_art"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <TextView
+            android:layout_below="@id/tvig"
+            android:id="@+id/tvGioiThieu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tag_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvGioiThieu"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="6dp"
+            android:nestedScrollingEnabled="false"
+            android:textAlignment="center" />
+
+        <RelativeLayout
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/tag_list"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/tab_indicator" />
+
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tag_list"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/all_chapters"
+                android:text="Đọc thử"
+                android:textColor="@color/chocolate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="5dp"
+                android:padding="10dp"
+                android:focusable="true"
+                android:textAlignment="center"
+                app:drawableTopCompat="@drawable/ic_chapter_stack"
+                app:elevation="5dp" />
+            <TextView
+                android:id="@+id/add_to_lib"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thuê ngay"
+                android:textAlignment="center"
+                android:textColor="@color/chocolate"
+                android:background="?selectableItemBackground"
+                app:drawableTopCompat="@drawable/baseline_shopping_cart_checkout_24"
+                android:clickable="true"
+                app:elevation="5dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

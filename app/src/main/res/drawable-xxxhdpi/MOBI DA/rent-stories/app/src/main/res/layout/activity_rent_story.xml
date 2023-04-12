@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cart.RentStory">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="402dp"
+                android:layout_height="238dp"
+                android:background="#EEEEEE">
+
+
+                <ImageView
+                    android:id="@+id/ivAnhd"
+                    android:layout_width="187dp"
+                    android:layout_height="224dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:srcCompat="@drawable/tho" />
+
+                <TextView
+                    android:id="@+id/tvNameStory"
+                    android:layout_width="151dp"
+                    android:layout_height="71dp"
+                    android:autoText="false"
+                    android:freezesText="false"
+                    android:text="heheheaaaaaaaaaaaaaaah"
+                    android:textAlignment="center"
+                    android:textColor="#953E23"
+                    android:textColorHighlight="#130505"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivAnhd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivAnhd"
+                    app:layout_constraintTop_toTopOf="@+id/ivAnhd" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="TÊN TRUYỆN"
+                    android:textSize="24dp"
+                    android:textColor="@color/chocolate"
+                    app:layout_constraintBottom_toTopOf="@+id/tvNameStory"
+                    app:layout_constraintEnd_toEndOf="@+id/tvNameStory"
+                    app:layout_constraintHorizontal_bias="0.483"
+                    app:layout_constraintStart_toStartOf="@+id/tvNameStory" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="410dp"
+            android:layout_height="38dp"
+            android:background="#FFFFCC"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="4.5"
+                    android:textAlignment="center">
+
+                </TextView>
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:isIndicator="true"
+                    android:numStars="5" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="đã bán: 999"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="lược xem:999"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="414dp"
+            android:layout_height="33dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chọn số ngày thuê"
+                android:textAlignment="center"
+                android:textColor="@color/chocolate"
+                android:textSize="16dp">
+
+            </TextView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="411dp"
+            android:layout_height="59dp"
+            android:background="#EEEEEE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <Spinner
+                android:id="@+id/spOpt"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="2dp"
+                android:entries="@array/data"
+                android:textAlignment="center"
+                android:textStyle="bold">
+
+            </Spinner>
+
+            <LinearLayout
+                android:layout_width="291dp"
+                android:layout_height="54dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_toRightOf="@+id/spOpt"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:text="Thành tiền"
+                    android:textAlignment="center"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:id="@+id/tvCoin"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="414dp"
+            android:layout_height="33dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chọn phương thưc thanh toán"
+                android:textAlignment="center"
+                android:textColor="@color/chocolate"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+            </TextView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="411dp"
+            android:layout_height="59dp"
+            android:background="#EEEEEE"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+            <Spinner
+                android:id="@+id/spOpt1"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="2dp"
+                android:entries="@array/data1"
+                android:textAlignment="center"
+                android:textStyle="bold">
+
+            </Spinner>
+
+            <LinearLayout
+                android:layout_width="328dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@+id/spOpt1"
+                android:layout_toRightOf="@+id/spOpt1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/ivIcon"
+                    android:layout_width="59dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+
+                     />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btXong"
+            android:layout_width="184dp"
+            android:layout_height="74dp"
+            android:text="Thêm Vào Giỏ Hàng"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout1"
+            app:layout_constraintVertical_bias="0.471" />
+
+        <Button
+            android:id="@+id/btHome"
+            android:layout_width="174dp"
+            android:layout_height="71dp"
+            android:text="Xem thêm truyện"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout1"
+            app:layout_constraintVertical_bias="0.471" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

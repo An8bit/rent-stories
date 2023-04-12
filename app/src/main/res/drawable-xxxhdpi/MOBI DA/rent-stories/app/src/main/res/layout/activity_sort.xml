@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bottomInfo"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC843F"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibclose"
+            android:layout_width="58dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_close_24" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvhanhdong"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Hành Động"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/tvtienhiep"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Tiên Hiệp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/tvDiGioi"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Dị Giới"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/tvTrinhT"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Trinh Thám"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/tvHuyen"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Huyền Huyễn"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/tvDoiThuong"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="Đời Thường"
+        android:gravity="center"
+        />
+</LinearLayout>
