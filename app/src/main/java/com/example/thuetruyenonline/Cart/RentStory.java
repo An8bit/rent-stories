@@ -54,7 +54,7 @@ public class RentStory extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //đọc tên tên trong bảng rồi add vào
-                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString(),email);
+                AddGioHang(spOpt.getSelectedItem().toString());
             }
         });
         btHome=findViewById(R.id.btHome);
@@ -62,8 +62,6 @@ public class RentStory extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RentStory.this, MainActivity.class);
-                //thêm vào database
-                AddGioHang(spOpt.getSelectedItem().toString(),spOpt1.getSelectedItem().toString(),email);
                 startActivity(intent);
                 finish();
             }
@@ -90,27 +88,6 @@ public class RentStory extends AppCompatActivity{
                         break;
             }}
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        spOpt1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (spOpt1.getSelectedItem().toString()){
-                    case "Momo":
-                       ivIcon.setImageResource(R.drawable.momo);
-                        break;
-                    case "ZaloPay":
-                       ivIcon.setImageResource(R.drawable.viem);
-                        break;
-                    case "Banking":
-                        ivIcon.setImageResource(R.drawable.tho);
-                        break;
-
-                }}
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -174,9 +151,9 @@ public class RentStory extends AppCompatActivity{
         onBackPressed();
         return super.onSupportNavigateUp();
     }
-    void AddGioHang(String day,String pay,String email){
+    void AddGioHang(String day){
         DBcontrol dBcontrol = new DBcontrol(RentStory.this);
-        dBcontrol.InsertCart(db,story,day,pay);
+        dBcontrol.InsertCart(db,story,day);
 
     }
     private void setupBadge() {

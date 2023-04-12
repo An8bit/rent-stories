@@ -101,14 +101,13 @@ public class DBcontrol {
                     }
                 });
     }
-        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue,String ppthanhtoan){
+        public  void InsertCart(FirebaseFirestore db,Story story,String ngaythue){
             CollectionReference Cart= db.collection("GioHang");
             String id = story.getId();
             String name = story.getNamestory();
             String image=story.getImage();
             Map<String, Object> cart = new HashMap<>();
             cart.put("songaythue",ngaythue);
-            cart.put("ppthanhtoan",ppthanhtoan);
             cart.put("idtruyen",id);
             cart.put("img",image);
             cart.put("namestory",name);
@@ -166,9 +165,8 @@ public class DBcontrol {
                         String idTruyen= queryDocumentSnapshot.get("idtruyen").toString();
                         String img= queryDocumentSnapshot.get("img").toString();
                         String nameStory= queryDocumentSnapshot.get("namestory").toString();
-                        String ptttoan= queryDocumentSnapshot.get("ppthanhtoan").toString();
                         String songaythe= queryDocumentSnapshot.get("songaythue").toString();
-                        ControlCart controlCart = new ControlCart(id,buyer,idTruyen,img,nameStory,ptttoan,songaythe);
+                        ControlCart controlCart = new ControlCart(id,buyer,idTruyen,img,nameStory,songaythe);
                         controlCarts.add(controlCart);
                     }
                     listener.onSucess(controlCarts);

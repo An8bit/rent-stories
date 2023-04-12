@@ -45,13 +45,6 @@ public class ControlCart implements Serializable {
         this.nameStory = nameStory;
     }
 
-    public String getPtttoan() {
-        return ptttoan;
-    }
-
-    public void setPtttoan(String ptttoan) {
-        this.ptttoan = ptttoan;
-    }
 
     public String getSongaythue() {
         return songaythue;
@@ -65,18 +58,16 @@ public class ControlCart implements Serializable {
     String idTruyen;
     String img;
 
-    public ControlCart(String id,String buyer, String idTruyen, String img, String nameStory, String ptttoan, String songaythue) {
+    public ControlCart(String id,String buyer, String idTruyen, String img, String nameStory, String songaythue) {
         this.id=id;
         this.buyer = buyer;
         this.idTruyen = idTruyen;
         this.img = img;
         this.nameStory = nameStory;
-        this.ptttoan = ptttoan;
         this.songaythue = songaythue;
     }
 
     String nameStory;
-    String ptttoan;
     String songaythue;
 
 }
