@@ -122,6 +122,19 @@ public class DBcontrol {
                 }
             });
         }
+        public void InsertProfile(FirebaseFirestore db,Story story,String ngaythue){
+            CollectionReference Profile= db.collection("GioHang");
+            String id = story.getId();
+            String name = story.getNamestory();
+            String image=story.getImage();
+            Map<String, Object> Profiles = new HashMap<>();
+            Profiles.put("songaythue",ngaythue);
+            Profiles.put("idtruyen",id);
+            Profiles.put("img",image);
+            Profiles.put("namestory",name);
+            Profiles.put("buyer",getProviderData());
+
+        }
     public void Sort(String newText,FirebaseFirestore db,OnGetDataListener listener) {
         String searchText = newText.toLowerCase();
         ArrayList<Story> stories = new ArrayList<>();

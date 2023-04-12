@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,6 +28,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
    ArrayList<ControlCart>controlCarts;
    RecyclerView rvCart;
     FirebaseFirestore db;
+
     ShoppingAdapter shoppingAdapter;
     Spinner spTT;
     ImageView iviconTT;
@@ -77,9 +79,6 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
             }
         });
-
-
-
     }
     void Menu(){
         ImageView ivHome,ivProfile,ivCart;
