@@ -1,6 +1,5 @@
 package com.example.thuetruyenonline.Cart;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -17,17 +16,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -53,6 +46,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
         View  view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pay, parent,false);
         return new Pay(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull Pay holder, int position) {
@@ -128,6 +122,11 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
             }
         });
+        if (holder.tvngaythue.getText()=="0 ngày"&&holder.tvGiaTien.getText()=="o đồng") {
+            listener.onDataChecked(false);
+        }else {
+            listener.onDataChecked(true);
+        }
         }
 
     @Override
@@ -138,7 +137,9 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
     public interface Listener {
         void onDeleteCart(ControlCart controlCart);
         void onEditCart(ControlCart controlCart);
-        void on(ControlCart controlCart);
+        void onDataChecked(boolean hasData);
+
+
     }
 
     class Pay extends RecyclerView.ViewHolder{
@@ -157,6 +158,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
            //checkBox=itemView.findViewById(R.id.cbCheckItem);
            spinner=itemView.findViewById(R.id.spngaythue);
            tvGiaTien=itemView.findViewById(R.id.tvGiaTien);
+
         }
     }
     void Update(ControlCart controlCart,String so_ng){

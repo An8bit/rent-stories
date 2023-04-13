@@ -14,12 +14,12 @@
         android:theme="@style/Theme.ThuetruyenOnline"
         tools:targetApi="31">
         <activity
-            android:name=".ShowStory.ReadActivity"
+            android:name=".QRcore"
             android:exported="false" />
         <activity
             android:name=".profile.Profile"
             android:exported="false"
-            android:label="Tài khoản" />
+            android:label="Tài khoản"/>
         <activity
             android:name=".search.Sort"
             android:exported="false"
@@ -27,19 +27,19 @@
         <activity
             android:name=".search.Search"
             android:exported="false"
-            android:label="Tìm kiếm truyện" />
+            android:label="Tìm kiếm truyện"/>
         <activity
             android:name=".Cart.Cart"
             android:exported="false"
-            android:label="Giỏ hàng" />
+            android:label="Giỏ hàng"/>
         <activity
             android:name=".Cart.RentStory"
             android:exported="false"
-            android:label="Thuê truyện" />
+            android:label="Thuê truyện"/>
         <activity
             android:name=".DetailStory"
             android:exported="false"
-            android:label="Chi tiết" />
+            android:label="Chi tiết"/>
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
@@ -55,11 +55,11 @@
         <activity
             android:name=".Accounts"
             android:exported="false"
-            android:label="Đang nhập" />
+            android:label="Đăng nhập" />
         <activity
             android:name=".pagehome.MainActivity"
             android:exported="false"
-            android:label="Danh sách truyện" />
+            android:label="Danh sách truyện"/>
     </application>
 
 </manifest>
