@@ -25,4 +25,9 @@
         <item>1 tuần</item>
         <item>1 tháng</item>
     </string-array>
+    <string-array name="data3">
+        <item>Chương 1</item>
+        <item>Chương 2</item>
+        <item>Chương 3</item>
+    </string-array>
 </resources>
