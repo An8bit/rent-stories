@@ -65,7 +65,7 @@ public class RentStory extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //đọc tên tên trong bảng rồi add vào
-                AddGioHang(spOpt.getSelectedItem().toString(),String.valueOf(giatien));
+                AddGioHang("3 ngày","0");
             }
         });
 
