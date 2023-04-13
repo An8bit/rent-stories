@@ -10,6 +10,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +30,8 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailStory extends AppCompatActivity {
     ImageView ivANH,ivBACKGR;
+    TextView textCartItemCount;
+    int mCartItemCount = 10;
     TextView tvGioiThieu,tvName,tvTacGia,tvTaglist,tvaddcart,tvXemThem;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -98,6 +103,42 @@ public class DetailStory extends AppCompatActivity {
         dBcontrol.InsertCart(db,story,day,giatien);
 
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.cart, menu);
+        MenuItem menuItem = menu.findItem(R.id.menu_Cart);
+        View actionView = menuItem.getActionView();
+        setupBadge();
+
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+                Intent intent = new Intent (DetailStory.this,Cart.class);
+                startActivity(intent);
+            }
+        });
+
+        return true;
+    }
+
+    private void setupBadge() {
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+
+                textCartItemCount.setText(String.valueOf(Math.min(10, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
