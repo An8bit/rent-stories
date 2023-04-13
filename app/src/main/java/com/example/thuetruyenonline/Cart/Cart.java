@@ -91,6 +91,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         btThuetruyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shoppingAdapter.notifyDataSetChanged();
 
                 if(controlCarts.size()<=0){
                     return;
@@ -109,6 +110,10 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
                         }}
         });
 
+    }
+    @Override
+    public void onDataChecked(boolean hasData) {
+        hasData1=hasData;
     }
     void Menu(){
         ImageView ivHome,ivProfile,ivCart;
@@ -160,10 +165,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         shoppingAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onDataChecked(boolean hasData) {
-        hasData1=hasData;
-    }
+
 
     void  Toast(String a){
         Toast toast= Toast.makeText(Cart.this,a,Toast.LENGTH_SHORT);

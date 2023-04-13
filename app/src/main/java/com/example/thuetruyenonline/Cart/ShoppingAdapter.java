@@ -85,7 +85,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (holder.spinner.getSelectedItem().toString()){
                     case "Chỉnh sửa ngày":
-
+                            holder.tvngaythue.setText(controlCart.getSongaythue());
+                            holder.tvGiaTien.setText(controlCart.getSongaythue());
                         break;
                     case "3 ngày":
                         holder.tvngaythue.setText("3 ngày");
@@ -122,7 +123,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
             }
         });
-        if (holder.tvngaythue.getText()=="0 ngày"&&holder.tvGiaTien.getText()=="o đồng") {
+        if (holder.tvngaythue.getText()=="null"&&holder.tvGiaTien.getText()=="null") {
             listener.onDataChecked(false);
         }else {
             listener.onDataChecked(true);
