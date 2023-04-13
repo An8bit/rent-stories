@@ -17,6 +17,9 @@
             android:name=".QRcore"
             android:exported="false" />
         <activity
+            android:name=".ShowStory.ReadActivity"
+            android:exported="false" />
+        <activity
             android:name=".profile.Profile"
             android:exported="false"
             android:label="Tài khoản"/>
