@@ -23,8 +23,8 @@ public class ReadActivity extends AppCompatActivity {
     TextView tvNoidung;
     FirebaseFirestore db =FirebaseFirestore.getInstance();
     DBcontrol dBcontrol = new DBcontrol(ReadActivity.this);
-   ArrayList<DataStory> dataStories;
-   DataStory dataStory;
+   ArrayList<DataStory> dataStories = new ArrayList<>();
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -36,7 +36,6 @@ public class ReadActivity extends AppCompatActivity {
       dBcontrol.getChapter(db, new DBcontrol.OnGetChapterListener() {
           @Override
           public void onSuccess(ArrayList<String> arrayList) {
-              ArrayList<DataStory> dataStories =  new ArrayList<>();
               for (String s :arrayList ){
                   db.collection("DataStory").whereEqualTo("idtruyen",s).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                       @Override
@@ -44,16 +43,19 @@ public class ReadActivity extends AppCompatActivity {
                           for (QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()){
                               String noidung = queryDocumentSnapshot.get("noidung").toString();
                               String id = queryDocumentSnapshot.get("idtruyen").toString();
-                               dataStory = new DataStory(id,noidung);
-                               tvNoidung.setText(dataStory.getNoidung());
+                              DataStory  dataStory = new DataStory(id,noidung);
                               dataStories.add(dataStory);
+
+                          }
+                          for (DataStory x:dataStories
+                          ) {
+                              System.out.println(x.getNoidung());
+                              tvNoidung.setText(x.getNoidung());
                           }
                       }
                   });
 
-          }
-
-
+              }
           }
 
           @Override
