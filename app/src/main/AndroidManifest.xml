@@ -15,23 +15,28 @@
         tools:targetApi="31">
         <activity
             android:name=".profile.Profile"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Tài khoản"/>
         <activity
             android:name=".search.Sort"
             android:exported="false"
             android:label="Thể Loại" />
         <activity
             android:name=".search.Search"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Tìm kiếm truyện"/>
         <activity
             android:name=".Cart.Cart"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Giỏ hàng"/>
         <activity
             android:name=".Cart.RentStory"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Thuê truyện"/>
         <activity
             android:name=".DetailStory"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Chi tiết"/>
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
@@ -46,10 +51,12 @@
         <!-- android:label="@string/title_activity_login" /> -->
         <activity
             android:name=".Accounts"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Đang nhập"/>
         <activity
             android:name=".pagehome.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Danh sách truyện"/>
     </application>
 
 </manifest>

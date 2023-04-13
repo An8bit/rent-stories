@@ -245,6 +245,7 @@ public class DBcontrol {
             });
 
         }
+
         public void GetProfile(FirebaseFirestore db,onGetProfileListener listener){
         ArrayList<ControlProfile> controlProfiles = new ArrayList<>();
            db.collection("TaiKhoan").document(getProviderData()).collection("damua").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

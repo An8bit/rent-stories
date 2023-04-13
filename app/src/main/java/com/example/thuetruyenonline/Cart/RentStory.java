@@ -2,7 +2,6 @@ package com.example.thuetruyenonline.Cart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,7 +16,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.pagehome.Story;
@@ -27,6 +25,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 public class RentStory extends AppCompatActivity{
 
@@ -39,6 +39,8 @@ public class RentStory extends AppCompatActivity{
     ImageView ivANH;
     TextView tvName,tvCoin;
     int giatien;
+    DBcontrol dBcontrol = new DBcontrol(RentStory.this);
+    ArrayList<ControlCart> controlCarts = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -48,6 +50,17 @@ public class RentStory extends AppCompatActivity{
         story=(Story) getIntent().getSerializableExtra("Rent");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btXong=findViewById(R.id.btXong);
+        dBcontrol.getCart(dBcontrol.getProviderData(), db, new DBcontrol.onGetCartListener() {
+            @Override
+            public void onSucess(ArrayList<ControlCart> controlCarts1) {
+                controlCarts=controlCarts1;
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+            }
+        });
+        setupBadge();
         btXong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +68,9 @@ public class RentStory extends AppCompatActivity{
                 AddGioHang(spOpt.getSelectedItem().toString(),String.valueOf(giatien));
             }
         });
+
+        //test
+
         btHome=findViewById(R.id.btHome);
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +134,6 @@ public class RentStory extends AppCompatActivity{
         menuInflater.inflate(R.menu.cart, menu);
         MenuItem menuItem = menu.findItem(R.id.menu_Cart);
         View actionView = menuItem.getActionView();
-        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
         setupBadge();
 
         actionView.setOnClickListener(new View.OnClickListener() {
@@ -136,13 +151,12 @@ public class RentStory extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-
-            case R.id.menu_Cart: {
-                // Do something
-                return true;
-            }
-        }
+//        switch (item.getItemId()) {
+//
+//            case R.id.menu_Cart: {
+//                return true;
+//            }
+//        }
         return super.onOptionsItemSelected(item);
     }
     public boolean onSupportNavigateUp() {
@@ -162,7 +176,8 @@ public class RentStory extends AppCompatActivity{
                     textCartItemCount.setVisibility(View.GONE);
                 }
             } else {
-                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+
+                textCartItemCount.setText(String.valueOf(Math.min(controlCarts.size(), 99)));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);
                 }

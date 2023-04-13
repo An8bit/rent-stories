@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
         rvStory = findViewById(R.id.rvStory);
         db=FirebaseFirestore.getInstance();
         dBcontrol.GetData("Truyen", db, new DBcontrol.OnGetDataListener() {
@@ -113,11 +112,6 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
                 finish();
             }
         });
-        //nhan sort
-
-
-
-
         ivProfile=findViewById(R.id.ivProfile);
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override

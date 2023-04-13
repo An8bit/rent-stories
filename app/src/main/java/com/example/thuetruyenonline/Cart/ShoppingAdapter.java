@@ -19,10 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -31,7 +36,7 @@ import java.util.ArrayList;
 public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
     ArrayList<ControlCart> controlCarts;
-    Context context;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     int GiaTien;
@@ -125,7 +130,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
         }
 
     @Override
-    public int getItemCount() {
+    public  int getItemCount() {
         return controlCarts.size();
     }
 
@@ -157,6 +162,17 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
         DocumentReference docRef = db.collection("GioHang").document(controlCart.getId());
         docRef.update("giatien",String.valueOf(GiaTien));
         docRef.update("songaythue",String.valueOf(so_ng));
+    }
+    void Setgiatien(ControlCart controlCart){
+        db.collection("GioHang").whereEqualTo("buyer",controlCart.getBuyer()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+
+                }
+            }
+        });
+
     }
 
 }

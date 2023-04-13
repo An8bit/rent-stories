@@ -54,7 +54,6 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
                 rvCart.setAdapter(shoppingAdapter);
                 rvCart.setLayoutManager(new LinearLayoutManager(Cart.this, LinearLayoutManager.VERTICAL, false));
                 rvCart.addItemDecoration(new DividerItemDecoration(Cart.this, LinearLayoutManager.VERTICAL));
-
             }
 
             @Override
@@ -146,6 +145,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
         controlCart.setGiatien(String.valueOf(shoppingAdapter.GiaTien));
         shoppingAdapter.notifyDataSetChanged();
+
     }
 
     @Override
