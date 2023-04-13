@@ -18,6 +18,7 @@ import com.example.thuetruyenonline.Cart.RentStory;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -26,6 +27,7 @@ public class DetailStory extends AppCompatActivity {
     ImageView ivANH,ivBACKGR;
     TextView tvGioiThieu,tvName,tvTacGia,tvTaglist,tvaddcart;
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     AppCompatRatingBar Rate;
     String email;
 
@@ -73,6 +75,7 @@ public class DetailStory extends AppCompatActivity {
         tvaddcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AddGioHang(null,null);
               Intent intent1 = new Intent(DetailStory.this, RentStory.class);
               intent1.putExtra("Rent",story);
               intent1.putExtra("email",email);
@@ -82,6 +85,11 @@ public class DetailStory extends AppCompatActivity {
         });
 
 
+
+    }
+    void AddGioHang(String day,String giatien){
+        DBcontrol dBcontrol = new DBcontrol(DetailStory.this);
+        dBcontrol.InsertCart(db,story,day,giatien);
 
     }
     public boolean onSupportNavigateUp() {
