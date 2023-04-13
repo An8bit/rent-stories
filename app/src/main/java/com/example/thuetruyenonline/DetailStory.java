@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.Cart.RentStory;
+import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,7 +27,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class DetailStory extends AppCompatActivity {
     ImageView ivANH,ivBACKGR;
-    TextView tvGioiThieu,tvName,tvTacGia,tvTaglist,tvaddcart;
+    TextView tvGioiThieu,tvName,tvTacGia,tvTaglist,tvaddcart,tvXemThem;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     AppCompatRatingBar Rate;
@@ -47,6 +48,7 @@ public class DetailStory extends AppCompatActivity {
         ivBACKGR=findViewById(R.id.background_art);
         tvTacGia=findViewById(R.id.tvTacGia);
         tvName=findViewById(R.id.tvtitle);
+        tvXemThem=findViewById(R.id.tvXemThem);
         tvGioiThieu=findViewById(R.id.tvGioiThieu);
         StorageReference imageRef = storage.getReferenceFromUrl(story.getImage());
         imageRef.getBytes(1024 * 1024)
@@ -65,6 +67,13 @@ public class DetailStory extends AppCompatActivity {
                         // Show error message or perform other action
                     }
                 });
+        tvXemThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailStory.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         tvName.setText(story.getNamestory());
         tvGioiThieu.setText(story.getGioithieu());
         tvTacGia.setText("Tác giả: "+story.getTacgia());
