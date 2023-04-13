@@ -76,13 +76,9 @@ public class DetailStory extends AppCompatActivity {
         tvaddcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddGioHang("3 ngày","0");
-              Intent intent1 = new Intent(DetailStory.this, Cart.class);
-              intent1.putExtra("Rent",story);
-              intent1.putExtra("email",email);
-              startActivity(intent1);
-
+                AddGioHang("null","0");
             }
+
         });
 
 

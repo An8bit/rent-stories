@@ -145,7 +145,6 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
         controlCart.setGiatien(String.valueOf(shoppingAdapter.GiaTien));
         shoppingAdapter.notifyDataSetChanged();
-
     }
 
     @Override

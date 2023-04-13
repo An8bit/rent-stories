@@ -91,16 +91,15 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (holder.spinner.getSelectedItem().toString()){
                     case "Chỉnh sửa ngày":
-                        holder.tvGiaTien.setText(controlCart.getGiatien());
-                        holder.tvngaythue.setText(controlCart.getSongaythue());
-                        listener.onEditCart(controlCart);
+
                         break;
                     case "3 ngày":
                         holder.tvngaythue.setText("3 ngày");
                         GiaTien=3000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
-                        Update(controlCart,"3 ngày");
+                       Update(controlCart,"3 ngày");
+                        controlCart.setSongaythue("3 ngày");
                         listener.onEditCart(controlCart);
                         break;
                     case "1 tuần":
@@ -108,7 +107,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         GiaTien=7000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
-                        Update(controlCart,"1 tuần");
+                       Update(controlCart,"1 tuần");
+                        controlCart.setSongaythue("1 tuần");
                         listener.onEditCart(controlCart);
                         break;
                     case "1 tháng":
@@ -116,6 +116,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         GiaTien=30000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
+                        controlCart.setSongaythue("1 tháng");
                         Update(controlCart,"1 tháng");
                         listener.onEditCart(controlCart);
                         break;
@@ -163,16 +164,6 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
         docRef.update("giatien",String.valueOf(GiaTien));
         docRef.update("songaythue",String.valueOf(so_ng));
     }
-    void Setgiatien(ControlCart controlCart){
-        db.collection("GioHang").whereEqualTo("buyer",controlCart.getBuyer()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
-
-                }
-            }
-        });
 
     }
 
-}

@@ -51,7 +51,7 @@ public class RentStory extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btXong=findViewById(R.id.btXong);
         dBcontrol.getCart(dBcontrol.getProviderData(), db, new DBcontrol.onGetCartListener() {
-            @Override
+                        @Override
             public void onSucess(ArrayList<ControlCart> controlCarts1) {
                 controlCarts=controlCarts1;
             }
@@ -184,5 +184,4 @@ public class RentStory extends AppCompatActivity{
             }
         }
     }
-
 }

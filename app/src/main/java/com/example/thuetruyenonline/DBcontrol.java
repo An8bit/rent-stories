@@ -124,48 +124,7 @@ public class DBcontrol {
             });
 
         }
-        public void InsertProfile(FirebaseFirestore db,ArrayList<ControlCart>controlCarts,String thanhtien){
-          String autoIDid=AutoID(db,"DonHang");
-          Map<String,Object> id=new HashMap<>();
-          id.put("thanhtien",thanhtien);
-            db.collection("DonHang").document(autoIDid).set(id);
-            for (ControlCart v:controlCarts
-                 ) {
-                String namestrory = v.getNameStory();
-                String image=v.getImg();
-                String songaythue=v.getSongaythue();
-                String idtruyen=v.getIdTruyen();
-                Map<String, Object> Profiles = new HashMap<>();
-                Profiles.put("idtruyen",idtruyen);
-                Profiles.put("songaythue",songaythue);
-                Profiles.put("image",image);
-                Profiles.put("namestory",namestrory);
-                db.collection("DonHang").document(autoIDid).collection("book").document().set(Profiles);
-            }
-            Toast("thanh toán thành công");
-            db.collection("DonHang").document(autoIDid).collection("book").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    Map<String,Object> done =new HashMap<>();
-                    String email=getProviderData();
-                    done.put("email",email);
-                    db.collection("TaiKhoan").document(email).set(done);
-                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
-                        String idtruyen = queryDocumentSnapshot.get("idtruyen").toString();
-                        String name = queryDocumentSnapshot.get("namestory").toString();
-                        String song = queryDocumentSnapshot.get("songaythue").toString();
-                        String img = queryDocumentSnapshot.get("image").toString();
-                        Map<String,Object> done1=new HashMap<>();
-                        done1.put("idtruyen",idtruyen);
-                        done1.put("songaythue",song);
-                        done1.put("namestory",name);
-                        done1.put("img",img);
-                        db.collection("TaiKhoan").document(getProviderData()).collection("damua").add(done1);
-                    }
-                }
-            });
-            
-        }
+
     public void Sort(String newText,FirebaseFirestore db,OnGetDataListener listener) {
         String searchText = newText.toLowerCase();
         ArrayList<Story> stories = new ArrayList<>();
@@ -194,6 +153,35 @@ public class DBcontrol {
                     }
                 });
     }
+    public void LoadProfle(FirebaseFirestore db,String autoIDid){
+        db.collection("DonHang").document(autoIDid).collection("book").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Map<String,Object> done =new HashMap<>();
+                String email=getProviderData();
+                done.put("email",email);
+                db.collection("DonHang").document(email).set(done);
+                for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                    String idtruyen = queryDocumentSnapshot.get("idtruyen").toString();
+                    String name = queryDocumentSnapshot.get("namestory").toString();
+                    String song = queryDocumentSnapshot.get("songaythue").toString();
+                    String img = queryDocumentSnapshot.get("image").toString();
+                    Map<String,Object> done1=new HashMap<>();
+                    done1.put("idtruyen",idtruyen);
+                    done1.put("songaythue",song);
+                    done1.put("namestory",name);
+                    done1.put("img",img);
+                    db.collection("TaiKhoan").document(getProviderData()).collection("damua").add(done1).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+
+                        }
+                    });
+                }
+            }
+        }
+        )
+    ;}
     public void getCart(String name, FirebaseFirestore db, onGetCartListener listener){
         ArrayList <ControlCart> controlCarts = new ArrayList<>();
         db.collection("GioHang").whereEqualTo("buyer",name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -237,10 +225,6 @@ public class DBcontrol {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         document.getReference().delete();
                     }
-
-                } else {
-                    Toast("lỗi");
-
                 }
             });
 
@@ -251,20 +235,54 @@ public class DBcontrol {
            db.collection("TaiKhoan").document(getProviderData()).collection("damua").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                @Override
                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                   for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
-                       String id = queryDocumentSnapshot.get("idtruyen").toString();
-                       String name = queryDocumentSnapshot.get("namestory").toString();
-                       String img = queryDocumentSnapshot.get("img").toString();
-                       String song = queryDocumentSnapshot.get("songaythue").toString();
-                       ControlProfile controlProfile = new ControlProfile(name,id,img,song);
-                       controlProfiles.add(controlProfile);
+                   if (task.isSuccessful()){
+                       for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
+                           String id = queryDocumentSnapshot.get("idtruyen").toString();
+                           String name = queryDocumentSnapshot.get("namestory").toString();
+                           String img = queryDocumentSnapshot.get("img").toString();
+                           String song = queryDocumentSnapshot.get("songaythue").toString();
+                           ControlProfile controlProfile = new ControlProfile(name,id,img,song);
+                           controlProfiles.add(controlProfile);
+
+                       }
+                       listener.onSuccess(controlProfiles);
 
                    }
-                   listener.onSuccess(controlProfiles);
-
-               }
+                   }
            });
         }
+    public void InsertProfile(FirebaseFirestore db,ArrayList<ControlCart>controlCarts,String thanhtien){
+        String autoIDid=AutoID(db,"DonHang");
+        Map<String,Object> id=new HashMap<>();
+        id.put("thanhtien",thanhtien);
+        db.collection("DonHang").document(autoIDid).set(id).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+        String ngaythue;
+
+        for (ControlCart v:controlCarts) {
+            String namestrory = v.getNameStory();
+            String image=v.getImg();
+            String songaythue=v.getSongaythue();
+            String idtruyen=v.getIdTruyen();
+            Map<String, Object> Profiles = new HashMap<>();
+            Profiles.put("idtruyen",idtruyen);
+            Profiles.put("songaythue",songaythue);
+            Profiles.put("image",image);
+            Profiles.put("namestory",namestrory);
+            db.collection("DonHang").document(autoIDid).collection("book").document().set(Profiles).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast("thanh toán thành công");
+                }
+            });
+            LoadProfle(db,autoIDid);
+        }
+
+    }
     public String getProviderData(){
         String providerId = null;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -277,11 +295,7 @@ public class DBcontrol {
         }
         return providerId;
     }
-   public void UpdateCart(ControlCart controlCart,String so_ng,FirebaseFirestore db,String GiaTien){
-        DocumentReference docRef = db.collection("GioHang").document(controlCart.getId());
-        docRef.update("giatien",String.valueOf(GiaTien));
-        docRef.update("songaythue",String.valueOf(so_ng));
-    }
+
     void Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);
         toast.show();
