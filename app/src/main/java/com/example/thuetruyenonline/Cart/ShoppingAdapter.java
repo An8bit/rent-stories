@@ -122,7 +122,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
             }
         });
-        if (holder.tvngaythue.getText()!="0"&&holder.tvGiaTien.getText()!="o") {
+        if (holder.tvngaythue.getText()=="0 ngày"&&holder.tvGiaTien.getText()=="o đồng") {
             listener.onDataChecked(false);
         }else {
             listener.onDataChecked(true);
