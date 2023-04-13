@@ -33,7 +33,7 @@
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:text="Tên Truyện"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/btdoc"
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
@@ -60,7 +60,7 @@
         app:srcCompat="@drawable/baseline_delete_24" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btdoc"
         android:layout_width="74dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"

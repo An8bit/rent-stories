@@ -130,7 +130,6 @@ public class DetailStory extends AppCompatActivity {
                     textCartItemCount.setVisibility(View.GONE);
                 }
             } else {
-
                 textCartItemCount.setText(String.valueOf(Math.min(10, 99)));
                 if (textCartItemCount.getVisibility() != View.VISIBLE) {
                     textCartItemCount.setVisibility(View.VISIBLE);

@@ -1,5 +1,7 @@
 package com.example.thuetruyenonline.profile;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -13,12 +15,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.thuetruyenonline.Cart.ControlCart;
-import com.example.thuetruyenonline.Cart.ShoppingAdapter;
 import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.ShowStory.ReadActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.util.Listener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -28,6 +28,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
    Litenner listener;
     ArrayList<ControlProfile> controlProfiles;
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    Context context;
 
     public ProfileAdapter( ArrayList<ControlProfile> controlProfiles,Litenner listener) {
         this.listener=listener;
@@ -66,6 +67,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
                         // Show error message or perform other action
                     }
                 });
+
+        holder.btdoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               listener.onGetStory();
+            }
+        });
     }
 
     @Override
@@ -74,6 +83,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
     }
 
     public interface Litenner {
+        void onGetStory();
     }
     class  sachthue extends RecyclerView.ViewHolder{
 
@@ -86,7 +96,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
             imgdelete=itemView.findViewById(R.id.imgdelete);
             tvTenTruyen=itemView.findViewById(R.id.tvTenTruyen1111);
             tvNgaySd=itemView.findViewById(R.id.tvNgaySd);
-            btdoc=itemView.findViewById(R.id.button);
+            btdoc=itemView.findViewById(R.id.btdoc);
     }
 
 }

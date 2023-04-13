@@ -9,12 +9,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
+import com.example.thuetruyenonline.ShowStory.ReadActivity;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,8 +32,10 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
 
     DBcontrol dBcontrol = new DBcontrol(Profile.this);
     TextView tvName,tvEmail;
+    Button btdoc;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +57,8 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(Profile.this, LinearLayoutManager.VERTICAL, false));
                     mRecyclerView.addItemDecoration(new DividerItemDecoration(Profile.this, LinearLayoutManager.VERTICAL));
                 }
-
                 @Override
                 public void onFailure(String errorMessage) {
-
                 }
             });
         }
@@ -90,5 +92,12 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
                     finish();
                 }
             });
+
         }
+
+    @Override
+    public void onGetStory() {
+        Intent intent=new Intent(Profile.this,ReadActivity.class);
+        startActivity(intent);
     }
+}

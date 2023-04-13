@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class RentStory extends AppCompatActivity{
 
     TextView textCartItemCount;
-    int mCartItemCount = 10;
+    int mCartItemCount = 0;
     FirebaseFirestore db =FirebaseFirestore.getInstance();
     Button btXong,btHome;
     Spinner spOpt;
