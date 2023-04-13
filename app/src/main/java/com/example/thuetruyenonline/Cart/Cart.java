@@ -91,8 +91,6 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         btThuetruyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shoppingAdapter.notifyDataSetChanged();
-
                 if(controlCarts.size()<=0){
                     return;
                 }

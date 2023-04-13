@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.thuetruyenonline.Cart.ControlCart;
+import com.example.thuetruyenonline.ShowStory.DataStory;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.example.thuetruyenonline.profile.ControlProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +48,14 @@ public class DBcontrol {
     }
     public  interface onGetProfileListener{
       void onSuccess(ArrayList<ControlProfile> controlProfiles);
+        void onFailure(String errorMessage);
+    }
+    public interface onGetChapter{
+        void onSuccess(ArrayList<DataStory> dataStories);
+        void onFailure(String errorMessage);
+    }
+    public interface OnGetChapterListener{
+        void onSuccess(ArrayList<String> S);
         void onFailure(String errorMessage);
     }
 
@@ -288,7 +297,26 @@ public class DBcontrol {
             LoadProfle(db,autoIDid);
         }
 
+
     }
+    public void getChapter(FirebaseFirestore db, OnGetChapterListener listener){
+        ArrayList<String> arrayList = new ArrayList<>();
+        db.collection("TaiKhoan").document(getProviderData()).collection("damua").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                        arrayList.add(queryDocumentSnapshot.get("idtruyen").toString());
+                    }
+                    listener.onSuccess(arrayList);
+                } else {
+                    listener.onFailure("");
+                }
+            }
+        });
+    }
+
+
     public String getProviderData(){
         String providerId = null;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -313,4 +341,5 @@ public class DBcontrol {
 
         return newDocRef.getId();
     }
+
 }
