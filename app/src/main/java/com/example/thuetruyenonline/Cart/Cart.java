@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,8 +14,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.thuetruyenonline.DBcontrol;
+import com.example.thuetruyenonline.QRcore;
 import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.profile.Profile;
@@ -26,7 +27,8 @@ import java.util.ArrayList;
 
 public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
-   ArrayList<ControlCart>controlCarts;
+   ArrayList<ControlCart>controlCarts = new ArrayList<>();
+     boolean hasData1;
    RecyclerView rvCart;
     TextView tvTongTien;
     Button btThuetruyen;
@@ -50,6 +52,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
             @Override
             public void onSucess(ArrayList<ControlCart> controlCarts1) {
                 controlCarts=controlCarts1;
+                System.out.println(controlCarts1.size());
                 shoppingAdapter=new ShoppingAdapter(controlCarts,Cart.this);
                 rvCart.setAdapter(shoppingAdapter);
                 rvCart.setLayoutManager(new LinearLayoutManager(Cart.this, LinearLayoutManager.VERTICAL, false));
@@ -84,16 +87,26 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
             }
         });
+
         btThuetruyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dBcontrol.InsertProfile(db,controlCarts,tvTongTien.getText().toString());
-              controlCarts.clear();
-              shoppingAdapter.notifyDataSetChanged();
-              dBcontrol.DeleteCart(db, dBcontrol.getProviderData());
-              Intent intent = new Intent(Cart.this, Profile.class);
-              startActivity(intent);
-            }
+
+                if(controlCarts.size()<=0){
+                    return;
+                }
+                if (hasData1){
+                    dBcontrol.InsertProfile(db,controlCarts,tvTongTien.getText().toString());
+                    controlCarts.clear();
+                    shoppingAdapter.notifyDataSetChanged();
+                    dBcontrol.DeleteCart(db, dBcontrol.getProviderData());
+                    Intent intent = new Intent(Cart.this, QRcore.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    return;
+                        }}
         });
 
     }
@@ -148,7 +161,12 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
     }
 
     @Override
-    public void on(ControlCart controlCart) {
-        shoppingAdapter.notifyDataSetChanged();
+    public void onDataChecked(boolean hasData) {
+        hasData1=hasData;
+    }
+
+    void  Toast(String a){
+        Toast toast= Toast.makeText(Cart.this,a,Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.ThuetruyenOnline"
         tools:targetApi="31">
         <activity
-            android:name=".ReadActivity"
+            android:name=".QRcore"
             android:exported="false" />
         <activity
             android:name=".profile.Profile"
@@ -55,7 +55,7 @@
         <activity
             android:name=".Accounts"
             android:exported="false"
-            android:label="Đang nhập"/>
+            android:label="Đăng nhập" />
         <activity
             android:name=".pagehome.MainActivity"
             android:exported="false"

@@ -9,6 +9,7 @@ import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.example.thuetruyenonline.profile.ControlProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -278,6 +279,11 @@ public class DBcontrol {
                 public void onSuccess(Void unused) {
                     Toast("thanh toán thành công");
                 }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast("giỏ hàng trống hoặc lỗi");
+                }
             });
             LoadProfle(db,autoIDid);
         }
@@ -296,7 +302,7 @@ public class DBcontrol {
         return providerId;
     }
 
-    void Toast(String a){
+    void  Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);
         toast.show();
     }
