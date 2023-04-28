@@ -1,5 +1,6 @@
 package com.example.thuetruyenonline.pagehome;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,9 +25,8 @@ import java.util.ArrayList;
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
-
-
     ArrayList<Story> stories;
+
 
     public StoryAdapter(ArrayList<Story> stories, Listener listener) {
         this.stories = stories;
@@ -50,7 +51,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
         StorageReference imageRef = storage.getReferenceFromUrl(story.getImage());
         //sử dụng phương thức getBytes() của StorageReference để tải xuống dữ liệu hình ảnh dưới dạng một mảng byte.
         imageRef.getBytes(1024 * 1024)
-                //Khi tải xuống thành công, nó sử dụng BitmapFactory để chuyển đổi mảng byte thành một đối tượng Bitmap. Sau đó, nó hiển thị hình ảnh trong một ImageView bằng cách gọi phương thức setImageBitmap() của ImageView.
+                //Khi tải xuống thành công, nó sử dụng BitmapFactory để chuyển đổi mảng byte thành một đối tượng Bitmap.
+                // Sau đó, nó hiển thị hình ảnh trong một ImageView bằng cách gọi phương thức setImageBitmap() của ImageView.
                 .addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bytes) {
@@ -58,7 +60,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
                         holder.ivAnh.setImageBitmap(bitmap);
                     }
                 })
-                //Nếu quá trình tải xuống hình ảnh không thành công, nó sẽ ghi log lỗi và có thể thực hiện các hành động khác như hiển thị thông báo lỗi hoặc thực hiện các hành động khác.
+                //Nếu quá trình tải xuống hình ảnh không thành công, nó sẽ ghi log lỗi và có thể thực hiện các
+                // hành động khác như hiển thị thông báo lỗi hoặc thực hiện các hành động khác.
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -87,8 +90,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.DataStory> {
 
     }
 
-    public interface Litenner {
-    }
+
 
 
     class DataStory extends RecyclerView.ViewHolder{

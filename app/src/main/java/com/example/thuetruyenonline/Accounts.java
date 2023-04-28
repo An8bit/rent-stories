@@ -4,13 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,21 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.thuetruyenonline.pagehome.MainActivity;
+import com.example.thuetruyenonline.Cart.MainActivity2;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Accounts extends AppCompatActivity {
     FirebaseFirestore db ;
@@ -60,7 +49,7 @@ public class Accounts extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(Accounts.this,MainActivity.class);
+                            Intent intent = new Intent(Accounts.this, MainActivity2.class);
                             startActivity(intent);
                             finish();
                         } else {

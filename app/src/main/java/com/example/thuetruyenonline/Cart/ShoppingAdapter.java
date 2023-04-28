@@ -32,7 +32,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    int GiaTien;
+   public int GiaTien;
     Button tbThue;
 
     public ShoppingAdapter(ArrayList<ControlCart> controlCarts, Listener listener) {

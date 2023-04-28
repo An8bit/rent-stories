@@ -58,7 +58,17 @@ public class ControlCart implements Serializable {
     String idTruyen;
     String img;
 
-    public ControlCart(String id,String buyer, String idTruyen, String img, String nameStory, String songaythue,String giatien) {
+    public String getNoidung() {
+        return noidung;
+    }
+
+    public void setNoidung(String noidung) {
+        this.noidung = noidung;
+    }
+
+    String noidung;
+
+    public ControlCart(String id,String buyer, String idTruyen, String img, String nameStory, String songaythue,String giatien,String noidung) {
         this.id=id;
         this.buyer = buyer;
         this.idTruyen = idTruyen;
@@ -66,6 +76,7 @@ public class ControlCart implements Serializable {
         this.nameStory = nameStory;
         this.songaythue = songaythue;
         this.giatien=giatien;
+        this.noidung=noidung;
     }
 
     String giatien;

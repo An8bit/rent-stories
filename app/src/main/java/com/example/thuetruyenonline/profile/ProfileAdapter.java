@@ -71,8 +71,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
         holder.btdoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               listener.onGetStory();
+               listener.onGetStory(controlProfile);
             }
         });
     }
@@ -83,7 +82,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
     }
 
     public interface Litenner {
-        void onGetStory();
+        void onGetStory(ControlProfile controlProfile);
     }
     class  sachthue extends RecyclerView.ViewHolder{
 
@@ -92,7 +91,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
         Button btdoc;
     public sachthue(@NonNull View itemView) {
         super(itemView);
-                    imgAnhTruyen=itemView.findViewById(R.id.imgAnhTruyen);
+            imgAnhTruyen=itemView.findViewById(R.id.imgAnhTruyen);
             imgdelete=itemView.findViewById(R.id.imgdelete);
             tvTenTruyen=itemView.findViewById(R.id.tvTenTruyen1111);
             tvNgaySd=itemView.findViewById(R.id.tvNgaySd);

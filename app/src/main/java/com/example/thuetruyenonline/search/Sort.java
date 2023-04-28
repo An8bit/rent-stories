@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.thuetruyenonline.Cart.MainActivity2;
 import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,7 +32,7 @@ public class Sort extends AppCompatActivity  {
         ibclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Sort.this, MainActivity.class);
+                Intent intent = new Intent(Sort.this, MainActivity2.class);
                 startActivity(intent);
                 finish();
             }

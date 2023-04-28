@@ -5,43 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".profile.Profile">
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="410dp"
-        android:layout_height="32dp"
-        android:background="#CC843F"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/ivHome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/baseline_home_24" />
-
-        <ImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/baseline_account_circle_24" />
-
-        <ImageView
-            android:id="@+id/ivCart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/baseline_shopping_bag_24" />
-    </LinearLayout>
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="410dp"
@@ -84,13 +47,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProfile"
-        android:layout_width="409dp"
-        android:layout_height="459dp"
+        android:layout_width="401dp"
+        android:layout_height="473dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />

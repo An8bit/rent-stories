@@ -1,5 +1,6 @@
 package com.example.thuetruyenonline.Cart;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -21,14 +23,16 @@ import com.example.thuetruyenonline.QRcore;
 import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.profile.Profile;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 
 public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
-
    ArrayList<ControlCart>controlCarts = new ArrayList<>();
-     boolean hasData1;
+   boolean hasData1;
    RecyclerView rvCart;
     TextView tvTongTien;
     Button btThuetruyen;
@@ -36,23 +40,45 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
     ShoppingAdapter shoppingAdapter;
     Spinner spTT;
     ImageView iviconTT;
+    BottomNavigationView bottomNavigationView;
     DBcontrol dBcontrol = new DBcontrol(Cart.this);
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        Menu();
         rvCart=findViewById(R.id.rvCart);
         btThuetruyen=findViewById(R.id.btnThuetruyen);
         db=FirebaseFirestore.getInstance();
         tvTongTien=findViewById(R.id.tvTongTien);
-
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        Intent home = new Intent(Cart.this, MainActivity.class);
+                        startActivity(home);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
+                        return true;
+                    case R.id.profile:
+                        Intent profile = new Intent(Cart.this, Profile.class);
+                        startActivity(profile);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
+                        return true;
+                    case R.id.cart:
+                        return true;
+                }
+                return false;
+            }
+        });
         dBcontrol.getCart(dBcontrol.getProviderData(), db, new DBcontrol.onGetCartListener() {
             @Override
             public void onSucess(ArrayList<ControlCart> controlCarts1) {
                 controlCarts=controlCarts1;
-                System.out.println(controlCarts1.size());
+//                System.out.println(controlCarts1.size());
                 shoppingAdapter=new ShoppingAdapter(controlCarts,Cart.this);
                 rvCart.setAdapter(shoppingAdapter);
                 rvCart.setLayoutManager(new LinearLayoutManager(Cart.this, LinearLayoutManager.VERTICAL, false));
@@ -113,33 +139,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
     public void onDataChecked(boolean hasData) {
         hasData1=hasData;
     }
-    void Menu(){
-        ImageView ivHome,ivProfile,ivCart;
-        ivHome=findViewById(R.id.ivHome);
-        ivHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Cart.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-        ivProfile=findViewById(R.id.ivProfile);
-        ivProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Cart.this, Profile.class);
-                startActivity(intent);
-            }
-        });
-        ivCart=findViewById(R.id.ivCart);
-        ivCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Cart.this,Cart.class);
-                startActivity(intent);
-            }
-        });
-    }
+
 
     @Override
     public void onDeleteCart(ControlCart controlCart) {
@@ -148,6 +148,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
         tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
         shoppingAdapter.notifyDataSetChanged();
     }
+    //hàm tính tiền
     public double getTotalPrice(ArrayList<ControlCart> controlCarts) {
         double total = 0;
           for (int i = 0;i<controlCarts.size();i++) {

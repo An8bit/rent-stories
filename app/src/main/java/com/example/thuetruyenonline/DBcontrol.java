@@ -75,7 +75,8 @@ public class DBcontrol {
                         String gioithieu = queryDocumentSnapshot.get("GioiThieu").toString();
                         String theloai = queryDocumentSnapshot.get("TheLoai").toString();
                         String image = queryDocumentSnapshot.get("AnhLoad").toString();
-                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai);
+                        String noidung=queryDocumentSnapshot.get("noidung").toString();
+                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai,noidung);
                         stories.add(story);
                     }
                     listener.onSuccess(stories);
@@ -102,7 +103,8 @@ public class DBcontrol {
                                 String gioithieu=document.get("GioiThieu").toString();
                                 String theloai=document.get("TheLoai").toString();
                                 String image=document.get("AnhLoad").toString();
-                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai) ;
+                                String noidung=document.get("noidung").toString();
+                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai,noidung) ;
                                 stories.add(story);
                             }
                             listener.onSuccess(stories);
@@ -119,6 +121,7 @@ public class DBcontrol {
             String id = story.getId();
             String name = story.getNamestory();
             String image=story.getImage();
+            String noidung=story.getNoidung();
             Map<String, Object> cart = new HashMap<>();
             cart.put("songaythue",ngaythue);
             cart.put("idtruyen",id);
@@ -126,6 +129,7 @@ public class DBcontrol {
             cart.put("namestory",name);
             cart.put("buyer",getProviderData());
             cart.put("giatien",giatien);
+            cart.put("noidung",noidung);
             db.collection("GioHang").add(cart).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
@@ -151,7 +155,8 @@ public class DBcontrol {
                                 String gioithieu=document.get("GioiThieu").toString();
                                 String theloai=document.get("TheLoai").toString();
                                 String image=document.get("AnhLoad").toString();
-                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai) ;
+                                String noidung=document.get("noidung").toString();
+                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai,noidung) ;
                                 stories.add(story);
                             }
                             listener.onSuccess(stories);
@@ -170,17 +175,19 @@ public class DBcontrol {
                 Map<String,Object> done =new HashMap<>();
                 String email=getProviderData();
                 done.put("email",email);
-                db.collection("DonHang").document(email).set(done);
+                db.collection("DonHang").document(autoIDid).set(done);
                 for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
                     String idtruyen = queryDocumentSnapshot.get("idtruyen").toString();
                     String name = queryDocumentSnapshot.get("namestory").toString();
                     String song = queryDocumentSnapshot.get("songaythue").toString();
                     String img = queryDocumentSnapshot.get("image").toString();
+                    String noidung =queryDocumentSnapshot.get("noidung").toString();
                     Map<String,Object> done1=new HashMap<>();
                     done1.put("idtruyen",idtruyen);
                     done1.put("songaythue",song);
                     done1.put("namestory",name);
                     done1.put("img",img);
+                    done1.put("noidung",noidung);
                     db.collection("TaiKhoan").document(getProviderData()).collection("damua").add(done1).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -206,7 +213,8 @@ public class DBcontrol {
                         String nameStory= queryDocumentSnapshot.get("namestory").toString();
                         String songaythe= queryDocumentSnapshot.get("songaythue").toString();
                         String giatien=queryDocumentSnapshot.get("giatien").toString();
-                        ControlCart controlCart = new ControlCart(id,buyer,idTruyen,img,nameStory,songaythe,giatien);
+                        String noidung=queryDocumentSnapshot.get("noidung").toString();
+                        ControlCart controlCart = new ControlCart(id,buyer,idTruyen,img,nameStory,songaythe,giatien,noidung);
                         controlCarts.add(controlCart);
                     }
                     listener.onSucess(controlCarts);
@@ -225,6 +233,7 @@ public class DBcontrol {
                     .delete();
 
         }
+        //xóa khi thanh toan
         public void DeleteCart(FirebaseFirestore db,String buyer){
             CollectionReference collectionRef = db.collection("GioHang");
 
@@ -251,7 +260,8 @@ public class DBcontrol {
                            String name = queryDocumentSnapshot.get("namestory").toString();
                            String img = queryDocumentSnapshot.get("img").toString();
                            String song = queryDocumentSnapshot.get("songaythue").toString();
-                           ControlProfile controlProfile = new ControlProfile(name,id,img,song);
+                           String noidung=queryDocumentSnapshot.get("noidung").toString();
+                           ControlProfile controlProfile = new ControlProfile(name,id,img,song,noidung);
                            controlProfiles.add(controlProfile);
 
                        }
@@ -271,18 +281,18 @@ public class DBcontrol {
 
             }
         });
-        String ngaythue;
-
         for (ControlCart v:controlCarts) {
             String namestrory = v.getNameStory();
             String image=v.getImg();
             String songaythue=v.getSongaythue();
             String idtruyen=v.getIdTruyen();
+            String noidung=v.getNoidung();
             Map<String, Object> Profiles = new HashMap<>();
             Profiles.put("idtruyen",idtruyen);
             Profiles.put("songaythue",songaythue);
             Profiles.put("image",image);
             Profiles.put("namestory",namestrory);
+            Profiles.put("noidung",noidung);
             db.collection("DonHang").document(autoIDid).collection("book").document().set(Profiles).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
@@ -294,8 +304,9 @@ public class DBcontrol {
                     Toast("giỏ hàng trống hoặc lỗi");
                 }
             });
-            LoadProfle(db,autoIDid);
+
         }
+        LoadProfle(db,autoIDid);
 
 
     }

@@ -36,7 +36,7 @@ public class DetailStory extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     AppCompatRatingBar Rate;
-    String email;
+
 
     Story story;
     @SuppressLint("MissingInflatedId")
@@ -47,7 +47,7 @@ public class DetailStory extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         story=(Story) intent.getSerializableExtra("A");
-        email=intent.getStringExtra("email");
+        //email=intent.getStringExtra("email");
         getSupportActionBar().setTitle(story.getNamestory());
         ivANH=findViewById(R.id.ivmanga_art);
         ivBACKGR=findViewById(R.id.background_art);

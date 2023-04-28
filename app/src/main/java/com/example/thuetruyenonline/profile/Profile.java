@@ -1,5 +1,6 @@
 package com.example.thuetruyenonline.profile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +21,7 @@ import com.example.thuetruyenonline.R;
 import com.example.thuetruyenonline.ShowStory.ReadActivity;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.pagehome.Story;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -29,7 +32,7 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
     ProfileAdapter profileAdapter;
     ArrayList<ControlProfile> controlProfiles;
     FirebaseFirestore db;
-
+    BottomNavigationView bottomNavigationView;
     DBcontrol dBcontrol = new DBcontrol(Profile.this);
     TextView tvName,tvEmail;
     Button btdoc;
@@ -44,8 +47,6 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
             mRecyclerView=findViewById(R.id.rvProfile);
             tvEmail=findViewById(R.id.tvEmail);
             tvEmail.setText(dBcontrol.getProviderData());
-
-            Menu();
             dBcontrol.GetProfile(db, new DBcontrol.onGetProfileListener() {
                 @Override
                 public void onSuccess(ArrayList<ControlProfile> controlProfiles1) {
@@ -61,43 +62,38 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
                 public void onFailure(String errorMessage) {
                 }
             });
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        Intent home = new Intent(Profile.this, MainActivity.class);
+                        startActivity(home);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
+                        return true;
+                    case R.id.profile:
+                        return true;
+                    case R.id.cart:
+                        Intent cart = new Intent(Profile.this, Cart.class);
+                        startActivity(cart);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
         }
 
-        void Menu(){
-            ImageView ivHome,ivProfile,ivCart;
-            ivHome=findViewById(R.id.ivHome);
-            ivHome.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Profile.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-            ivProfile=findViewById(R.id.ivProfile);
-            ivProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Profile.this,Profile.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-            ivCart=findViewById(R.id.ivCart);
-            ivCart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Profile.this, Cart.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
 
-        }
 
     @Override
-    public void onGetStory() {
+    public void onGetStory(ControlProfile controlProfile) {
         Intent intent=new Intent(Profile.this,ReadActivity.class);
+        intent.putExtra("tentr",controlProfile.getNamestory());
+        intent.putExtra("nd",controlProfile.getNoidung());
         startActivity(intent);
     }
 }

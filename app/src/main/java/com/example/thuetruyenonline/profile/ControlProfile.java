@@ -7,11 +7,22 @@ public class  ControlProfile implements Serializable {
     String namestory;
     String idtruyen;
 
-    public ControlProfile( String namestory, String idtruyen, String img, String songaythue) {
+    public String getNoidung() {
+        return noidung;
+    }
+
+    public void setNoidung(String noidung) {
+        this.noidung = noidung;
+    }
+
+    String noidung;
+
+    public ControlProfile( String namestory, String idtruyen, String img, String songaythue,String noidung) {
         this.namestory = namestory;
         this.idtruyen = idtruyen;
         this.img = img;
         this.songaythue = songaythue;
+        this.noidung=noidung;
     }
 
     String img;
