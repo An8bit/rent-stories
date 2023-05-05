@@ -95,8 +95,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         GiaTien=3000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
-                       Update(controlCart,"3 ngày");
-                        controlCart.setSongaythue("3 ngày");
+                       Update(controlCart,"3");
+                        controlCart.setSongaythue("3");
                         listener.onEditCart(controlCart);
                         listener.onChecked(true);
                         break;
@@ -105,8 +105,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         GiaTien=7000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
-                       Update(controlCart,"1 tuần");
-                        controlCart.setSongaythue("1 tuần");
+                       Update(controlCart,"7");
+                        controlCart.setSongaythue("7");
                         listener.onEditCart(controlCart);
                         listener.onChecked(true);
                         break;
@@ -115,8 +115,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         GiaTien=30000;
                         controlCart.setGiatien(String.valueOf(GiaTien));
                         holder.tvGiaTien.setText(String.valueOf(GiaTien));
-                        controlCart.setSongaythue("1 tháng");
-                        Update(controlCart,"1 tháng");
+                        controlCart.setSongaythue("30");
+                        Update(controlCart,"30");
                         listener.onEditCart(controlCart);
                         listener.onChecked(true);
                         break;

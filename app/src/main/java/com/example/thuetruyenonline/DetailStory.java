@@ -23,6 +23,7 @@ import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.Cart.RentStory;
 import com.example.thuetruyenonline.Fragments.HomeFragments;
 import com.example.thuetruyenonline.Fragments.ProfileFragments;
+import com.example.thuetruyenonline.ShowStory.ReadActivity;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,7 +37,7 @@ public class DetailStory extends AppCompatActivity {
     ImageView ivANH,ivBACKGR;
     TextView textCartItemCount;
     int mCartItemCount = 10;
-    TextView tvGioiThieu,tvName,tvTacGia,tvTaglist,tvaddcart,tvXemThem;
+    TextView tvGioiThieu,tvName,tvTacGia,tvTaglist,tvaddcart,tvXemThem,tvRead;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     AppCompatRatingBar Rate;
@@ -53,6 +54,7 @@ public class DetailStory extends AppCompatActivity {
         getSupportActionBar().setTitle(story.getNamestory());
         ivANH=findViewById(R.id.ivmanga_art);
         ivBACKGR=findViewById(R.id.background_art);
+        tvRead=findViewById(R.id.tvreadtest);
         tvTacGia=findViewById(R.id.tvTacGia);
         tvName=findViewById(R.id.tvtitle);
         tvXemThem=findViewById(R.id.tvXemThem);
@@ -95,7 +97,15 @@ public class DetailStory extends AppCompatActivity {
             }
 
         });
-
+      tvRead.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              Intent intent1 = new Intent(DetailStory.this, ReadActivity.class);
+              intent1.putExtra("tentr",story.getNamestory());
+              intent1.putExtra("nd","truyện bản quyền mua đi rồi đọc hehe");
+              startActivity(intent1);
+          }
+      });
 
 
     }

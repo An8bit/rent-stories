@@ -84,6 +84,15 @@ public class ProfileFragments extends Fragment implements ProfileAdapter.Litenne
         intent.putExtra("nd",controlProfile.getNoidung());
         startActivity(intent);
     }
+
+    @Override
+    public void DeleteItem(ControlProfile controlProfile) {
+        dBcontrol.DeletePro(db,controlProfile.getId());
+        Log.e("tt",controlProfile.getId());
+        controlProfiles.remove(controlProfile);
+        profileAdapter.notifyDataSetChanged();
+    }
+
     private void loadDataFromFirestore() {
         dBcontrol.GetProfile(db, new DBcontrol.onGetProfileListener() {
             @Override

@@ -73,4 +73,9 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
         intent.putExtra("nd",controlProfile.getNoidung());
         startActivity(intent);
     }
+
+    @Override
+    public void DeleteItem(ControlProfile controlProfile) {
+
+    }
 }
