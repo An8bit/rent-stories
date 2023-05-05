@@ -17,9 +17,6 @@
             android:name=".Cart.MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".QRcore"
-            android:exported="false" />
-        <activity
             android:name=".ShowStory.ReadActivity"
             android:exported="false" />
         <activity

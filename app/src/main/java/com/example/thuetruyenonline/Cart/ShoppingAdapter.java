@@ -81,12 +81,14 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
 
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (holder.spinner.getSelectedItem().toString()){
                     case "Chỉnh sửa ngày":
                             holder.tvngaythue.setText(controlCart.getSongaythue());
-                            holder.tvGiaTien.setText(controlCart.getSongaythue());
+                            holder.tvGiaTien.setText(controlCart.getGiatien());
+                            listener.onChecked(false);
                         break;
                     case "3 ngày":
                         holder.tvngaythue.setText("3 ngày");
@@ -96,6 +98,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                        Update(controlCart,"3 ngày");
                         controlCart.setSongaythue("3 ngày");
                         listener.onEditCart(controlCart);
+                        listener.onChecked(true);
                         break;
                     case "1 tuần":
                         holder.tvngaythue.setText("1 tuần");
@@ -105,6 +108,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                        Update(controlCart,"1 tuần");
                         controlCart.setSongaythue("1 tuần");
                         listener.onEditCart(controlCart);
+                        listener.onChecked(true);
                         break;
                     case "1 tháng":
                         holder.tvngaythue.setText("1 tháng");
@@ -114,6 +118,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
                         controlCart.setSongaythue("1 tháng");
                         Update(controlCart,"1 tháng");
                         listener.onEditCart(controlCart);
+                        listener.onChecked(true);
                         break;
                 }
             }
@@ -123,11 +128,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
             }
         });
-        if (holder.tvngaythue.getText()=="null"&&holder.tvGiaTien.getText()=="null") {
-            listener.onDataChecked(false);
-        }else {
-            listener.onDataChecked(true);
-        }
+
         }
 
     @Override
@@ -138,7 +139,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
     public interface Listener {
         void onDeleteCart(ControlCart controlCart);
         void onEditCart(ControlCart controlCart);
-        void onDataChecked(boolean hasData);
+        void onChecked(boolean hasdata);
 
 
     }
@@ -156,7 +157,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             imgEdit=itemView.findViewById(R.id.imgEdit);
             imgDelete=itemView.findViewById(R.id.imgDelete);
            tvngaythue=itemView.findViewById(R.id.tvngaythue);
-           //checkBox=itemView.findViewById(R.id.cbCheckItem);
+           checkBox=itemView.findViewById(R.id.cbcheckitem);
            spinner=itemView.findViewById(R.id.spngaythue);
            tvGiaTien=itemView.findViewById(R.id.tvGiaTien);
 

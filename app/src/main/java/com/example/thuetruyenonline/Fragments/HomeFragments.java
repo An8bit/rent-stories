@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,8 +46,6 @@ import java.util.ArrayList;
 public class HomeFragments extends Fragment implements StoryAdapter.Listener{
 
     RecyclerView rvStory;
-
-
     FirebaseFirestore db;
     FloatingActionButton btsort;
     DBcontrol dBcontrol;
@@ -54,6 +53,7 @@ public class HomeFragments extends Fragment implements StoryAdapter.Listener{
     ArrayList<Story> stories=new ArrayList<>();
     StoryAdapter storyAdapter;
     ViewPager viewPager;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -3,6 +3,8 @@ package com.example.thuetruyenonline;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 
 import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.Cart.RentStory;
+import com.example.thuetruyenonline.Fragments.HomeFragments;
+import com.example.thuetruyenonline.Fragments.ProfileFragments;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,8 +40,6 @@ public class DetailStory extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     AppCompatRatingBar Rate;
-
-
     Story story;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,8 +77,7 @@ public class DetailStory extends AppCompatActivity {
         tvXemThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailStory.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
         tvName.setText(story.getNamestory());
@@ -90,7 +91,7 @@ public class DetailStory extends AppCompatActivity {
         tvaddcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddGioHang("null","0");
+                AddGioHang("3 ngày","3000");
             }
 
         });
@@ -103,40 +104,40 @@ public class DetailStory extends AppCompatActivity {
         dBcontrol.InsertCart(db,story,day,giatien);
 
     }
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.cart, menu);
-        MenuItem menuItem = menu.findItem(R.id.menu_Cart);
-        View actionView = menuItem.getActionView();
-        setupBadge();
-
-        actionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onOptionsItemSelected(menuItem);
-                Intent intent = new Intent (DetailStory.this,Cart.class);
-                startActivity(intent);
-            }
-        });
-
-        return true;
-    }
-
-    private void setupBadge() {
-        if (textCartItemCount != null) {
-            if (mCartItemCount == 0) {
-                if (textCartItemCount.getVisibility() != View.GONE) {
-                    textCartItemCount.setVisibility(View.GONE);
-                }
-            } else {
-                textCartItemCount.setText(String.valueOf(Math.min(10, 99)));
-                if (textCartItemCount.getVisibility() != View.VISIBLE) {
-                    textCartItemCount.setVisibility(View.VISIBLE);
-                }
-            }
-        }
-    }
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.cart, menu);
+//        MenuItem menuItem = menu.findItem(R.id.menu_Cart);
+//        View actionView = menuItem.getActionView();
+//        setupBadge();
+//
+//        actionView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onOptionsItemSelected(menuItem);
+//                Intent intent = new Intent (DetailStory.this,Cart.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        return true;
+//    }
+//
+//    private void setupBadge() {
+//        if (textCartItemCount != null) {
+//            if (mCartItemCount == 0) {
+//                if (textCartItemCount.getVisibility() != View.GONE) {
+//                    textCartItemCount.setVisibility(View.GONE);
+//                }
+//            } else {
+//                textCartItemCount.setText(String.valueOf(Math.min(10, 99)));
+//                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+//                    textCartItemCount.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        }
+//    }
 
     public boolean onSupportNavigateUp() {
         onBackPressed();

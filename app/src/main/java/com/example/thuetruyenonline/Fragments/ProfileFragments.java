@@ -1,7 +1,9 @@
 package com.example.thuetruyenonline.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,11 +42,19 @@ public class ProfileFragments extends Fragment implements ProfileAdapter.Litenne
     DBcontrol dBcontrol;
     TextView tvName,tvEmail;
     Button btdoc;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadDataFromFirestore();
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.activity_profile,container,false);
-      dBcontrol=new DBcontrol(requireContext());
+        dBcontrol=new DBcontrol(requireContext());
         db=FirebaseFirestore.getInstance();
         mRecyclerView=view.findViewById(R.id.rvProfile);
         tvEmail=view.findViewById(R.id.tvEmail);
@@ -72,4 +84,21 @@ public class ProfileFragments extends Fragment implements ProfileAdapter.Litenne
         intent.putExtra("nd",controlProfile.getNoidung());
         startActivity(intent);
     }
+    private void loadDataFromFirestore() {
+        dBcontrol.GetProfile(db, new DBcontrol.onGetProfileListener() {
+            @Override
+            public void onSuccess(ArrayList<ControlProfile> controlProfiles1) {
+                controlProfiles=controlProfiles1;
+                profileAdapter = new ProfileAdapter(controlProfiles,ProfileFragments.this);
+                mRecyclerView.setAdapter(profileAdapter);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+                mRecyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL));
+            }
+            @Override
+            public void onFailure(String errorMessage) {
+                // Handle failure case
+            }
+        });
+    }
+
 }

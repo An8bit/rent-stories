@@ -40,6 +40,7 @@ public class ReadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read);
         tvNoidung=findViewById(R.id.tvnoidung);
         tvName=findViewById(R.id.tvName);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupBadge();
        Intent intent = getIntent();
        String id = intent.getStringExtra("tentr");
@@ -64,6 +65,9 @@ public class ReadActivity extends AppCompatActivity {
 
     }
 
-
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
 
 }

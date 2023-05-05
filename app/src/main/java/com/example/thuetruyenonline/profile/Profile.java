@@ -62,29 +62,6 @@ public class Profile extends AppCompatActivity implements ProfileAdapter.Litenne
                 public void onFailure(String errorMessage) {
                 }
             });
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        Intent home = new Intent(Profile.this, MainActivity.class);
-                        startActivity(home);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        finish();
-                        return true;
-                    case R.id.profile:
-                        return true;
-                    case R.id.cart:
-                        Intent cart = new Intent(Profile.this, Cart.class);
-                        startActivity(cart);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        finish();
-                        return true;
-                }
-                return false;
-            }
-        });
         }
 
 

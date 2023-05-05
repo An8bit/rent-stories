@@ -1,6 +1,5 @@
 package com.example.thuetruyenonline.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,11 +18,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.thuetruyenonline.Cart.Cart;
 import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.Cart.ShoppingAdapter;
 import com.example.thuetruyenonline.DBcontrol;
-import com.example.thuetruyenonline.QRcore;
 import com.example.thuetruyenonline.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,8 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 public class CartFragments extends Fragment implements ShoppingAdapter.Listener {
-    ArrayList<ControlCart> controlCarts = new ArrayList<>();
     boolean hasData1;
+    int count=0;
+    ArrayList<ControlCart> controlCarts = new ArrayList<>();
     RecyclerView rvCart;
     TextView tvTongTien;
     Button btThuetruyen;
@@ -41,6 +40,7 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
     ImageView iviconTT;
     BottomNavigationView bottomNavigationView;
     DBcontrol dBcontrol;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -93,20 +93,16 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
             @Override
             public void onClick(View v) {
                 if(controlCarts.size()<=0){
-                    return;
+                    Toast("hàng rỗng");
                 }
-                if (hasData1){
+                else if(hasData1==true) {
                     dBcontrol.InsertProfile(db,controlCarts,tvTongTien.getText().toString());
                     controlCarts.clear();
                     shoppingAdapter.notifyDataSetChanged();
                     dBcontrol.DeleteCart(db, dBcontrol.getProviderData());
-                    Intent intent = new Intent(requireContext(), QRcore.class);
-                    startActivity(intent);
+                    Toast("thuê thành công vào mục tài khoản để đọc");
                 }
-                else
-                {
-                    return;
-                }}
+            }
         });
       return view;
     }
@@ -127,10 +123,12 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
     }
 
     @Override
-    public void onDataChecked(boolean hasData) {
+    public void onChecked(boolean hasdata) {
+        hasData1=hasdata;
 
 
     }
+
     //hàm tính tiền
     public double getTotalPrice(ArrayList<ControlCart> controlCarts) {
         double total = 0;
@@ -138,5 +136,9 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
             total += controlCarts.get(i).getTotalPrice();
         }
         return total;
+    }
+    void  Toast(String a){
+        Toast toast= Toast.makeText(requireContext(),a,Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

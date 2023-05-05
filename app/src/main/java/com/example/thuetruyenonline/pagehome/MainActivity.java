@@ -76,29 +76,7 @@ public class MainActivity extends AppCompatActivity implements StoryAdapter.List
 
             }
         });
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        return true;
-                    case R.id.profile:
-//                        Intent profile = new Intent(MainActivity2.this, Profile.class);
-//                        startActivity(profile);
-//                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                        finish();
-                        return true;
-                    case R.id.cart:
-//                        Intent cart = new Intent(MainActivity2.this, Cart.class);
-//                        startActivity(cart);
-//                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                        finish();
-                        return true;
-                }
-                return false;
-            }
-        });
+
     }
 
 

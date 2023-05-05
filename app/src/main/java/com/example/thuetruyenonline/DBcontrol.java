@@ -1,6 +1,7 @@
 package com.example.thuetruyenonline;
 
 import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -130,6 +131,7 @@ public class DBcontrol {
             cart.put("buyer",getProviderData());
             cart.put("giatien",giatien);
             cart.put("noidung",noidung);
+            cart.put("userID",getProviderData());
             db.collection("GioHang").add(cart).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
@@ -248,6 +250,28 @@ public class DBcontrol {
             });
 
         }
+        public void  Getprofile1(FirebaseFirestore db,onGetProfileListener listener){
+         ArrayList<ControlProfile> controlProfiles = new ArrayList<>();
+         db.collection("TaiKhoan").whereEqualTo("userID",getProviderData()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+             @Override
+             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                 if (task.isSuccessful()){
+                     for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
+                         String id = queryDocumentSnapshot.get("idtruyen").toString();
+                         String name = queryDocumentSnapshot.get("namestory").toString();
+                         String img = queryDocumentSnapshot.get("img").toString();
+                         String song = queryDocumentSnapshot.get("songaythue").toString();
+                         String noidung=queryDocumentSnapshot.get("noidung").toString();
+                         ControlProfile controlProfile = new ControlProfile(name,id,img,song,noidung);
+                         controlProfiles.add(controlProfile);
+
+                     }
+                     listener.onSuccess(controlProfiles);
+
+                 }
+             }
+         });
+        }
 
         public void GetProfile(FirebaseFirestore db,onGetProfileListener listener){
         ArrayList<ControlProfile> controlProfiles = new ArrayList<>();
@@ -275,6 +299,7 @@ public class DBcontrol {
         String autoIDid=AutoID(db,"DonHang");
         Map<String,Object> id=new HashMap<>();
         id.put("thanhtien",thanhtien);
+
         db.collection("DonHang").document(autoIDid).set(id).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -340,6 +365,8 @@ public class DBcontrol {
         }
         return providerId;
     }
+
+
 
     void  Toast(String a){
         Toast toast= Toast.makeText(context,a,Toast.LENGTH_SHORT);
