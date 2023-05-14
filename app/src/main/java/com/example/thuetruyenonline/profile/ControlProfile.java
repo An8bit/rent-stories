@@ -7,6 +7,26 @@ public class  ControlProfile implements Serializable {
     String namestory;
     String idtruyen;
 
+    public String getNgayhethan() {
+        return ngayhethan;
+    }
+
+    public void setNgayhethan(String ngayhethan) {
+        this.ngayhethan = ngayhethan;
+    }
+
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
+
+    String gmail;
+
+    String ngayhethan;
+
     public String getId() {
         return id;
     }
@@ -27,13 +47,15 @@ public class  ControlProfile implements Serializable {
 
     String noidung;
 
-    public ControlProfile(String id, String namestory, String idtruyen, String img, String songaythue,String noidung) {
+    public ControlProfile(String gmail,String id, String namestory, String idtruyen, String img, String songaythue,String noidung,String ngayhethan) {
         this.id=id;
         this.namestory = namestory;
         this.idtruyen = idtruyen;
         this.img = img;
         this.songaythue = songaythue;
         this.noidung=noidung;
+        this.ngayhethan=ngayhethan;
+        this.gmail=gmail;
     }
 
     String img;

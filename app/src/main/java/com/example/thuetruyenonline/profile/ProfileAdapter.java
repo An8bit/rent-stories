@@ -25,8 +25,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -91,7 +100,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
 
             }
         });
-        countDownTimer = new CountDownTimer(diffInMillis(Integer.parseInt(controlProfile.getSongaythue())), 1000) {
+        countDownTimer = new CountDownTimer(diffInMillis(diffInDays(controlProfile.getNgayhethan())), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // Hiển thị đếm ngược
@@ -106,7 +115,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.sachthue
             @Override
             public void onFinish() {
                 // Xử lý khi đếm ngược kết thúc
-                holder.tvNgaySd.setText("Expired");
+                holder.tvNgaySd.setText("Hết hạn");
                 dBcontrol.DeletePro(db,controlProfile.getId());
 
             }
@@ -149,5 +158,39 @@ private  Long diffInMillis(int day){
     expirationDate.add(Calendar.DAY_OF_MONTH, day);
     return expirationDate.getTimeInMillis() - currentDate.getTimeInMillis();
 
-}}
+}
+    private int diffInDays(String targetDateStr) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        Date targetDate;
+        try {
+            targetDate = dateFormat.parse(targetDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return -1; // Trả về giá trị mặc định nếu không thể phân tích chuỗi ngày
+        }
+
+        // Lấy ngày hiện tại
+        Calendar currentDate = Calendar.getInstance();
+
+        // Thiết lập giờ, phút, giây của ngày hiện tại là 0 để so sánh chỉ ngày
+        currentDate.set(Calendar.HOUR_OF_DAY, 0);
+        currentDate.set(Calendar.MINUTE, 0);
+        currentDate.set(Calendar.SECOND, 0);
+        currentDate.set(Calendar.MILLISECOND, 0);
+
+        // Thiết lập giờ, phút, giây của ngày đích là 0 để so sánh chỉ ngày
+        Calendar targetCalendar = Calendar.getInstance();
+        targetCalendar.setTime(targetDate);
+        targetCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        targetCalendar.set(Calendar.MINUTE, 0);
+        targetCalendar.set(Calendar.SECOND, 0);
+        targetCalendar.set(Calendar.MILLISECOND, 0);
+
+        // Tính toán số ngày còn lại
+        long diffInMillis = targetCalendar.getTimeInMillis() - currentDate.getTimeInMillis();
+        int diffInDays = (int) (diffInMillis / (24 * 60 * 60 * 1000));
+
+        return diffInDays;
+    }
+}
 

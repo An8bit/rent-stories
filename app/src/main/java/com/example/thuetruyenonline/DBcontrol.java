@@ -175,10 +175,11 @@ public class DBcontrol {
                 });
     }
     public void LoadProfle(FirebaseFirestore db){
-        db.collection("DonHang").whereEqualTo("iddonhang",getProviderData()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("DonHang").whereEqualTo("chudonhang",getProviderData()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                    String chu = queryDocumentSnapshot.get("chudonhang").toString();
                     String idtruyen = queryDocumentSnapshot.get("idtruyen").toString();
                     String name = queryDocumentSnapshot.get("namestory").toString();
                     String song = queryDocumentSnapshot.get("songaythue").toString();
@@ -186,6 +187,7 @@ public class DBcontrol {
                     String noidung =queryDocumentSnapshot.get("noidung").toString();
                     String ngayhethan=queryDocumentSnapshot.get("ngayhethan").toString();
                     Map<String,Object> done1=new HashMap<>();
+                    done1.put("chudonhang",chu);
                     done1.put("iddoc",queryDocumentSnapshot.getId());
                     done1.put("idtruyen",idtruyen);
                     done1.put("songaythue",song);
@@ -239,12 +241,25 @@ public class DBcontrol {
     }
 
         public  void Deleteitemcart(FirebaseFirestore db,String iddoc){
-            db.collection("GioHang").document(iddoc)
-                    .delete();
+            db.collection("GioHang").document(iddoc).delete();
+
 
         }
         public void DeletePro(FirebaseFirestore db,String iddoc){
         db.collection("DonHang").document(iddoc).delete();
+        db.collection("TaiKhoan").whereEqualTo("iddoc",iddoc).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                    queryDocumentSnapshot.getReference().delete();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("Lỗi xóa",getProviderData());
+            }
+        });
         }
         //xóa khi thanh toan
         public void DeleteCart(FirebaseFirestore db,String buyer){
@@ -263,17 +278,20 @@ public class DBcontrol {
         }
         public void  GetProfile(FirebaseFirestore db,onGetProfileListener listener){
          ArrayList<ControlProfile> controlProfiles = new ArrayList<>();
-         db.collection("DonHang").whereEqualTo("iddonhang",getProviderData()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+         db.collection("TaiKhoan").whereEqualTo("chudonhang",getProviderData()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
              @Override
              public void onComplete(@NonNull Task<QuerySnapshot> task) {
                  if (task.isSuccessful()){
                      for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
+                         String chudonhang=queryDocumentSnapshot.get("chudonhang").toString();
                          String id = queryDocumentSnapshot.get("idtruyen").toString();
                          String name = queryDocumentSnapshot.get("namestory").toString();
-                         String img = queryDocumentSnapshot.get("image").toString();
+                         String img = queryDocumentSnapshot.get("img").toString();
                          String song = queryDocumentSnapshot.get("songaythue").toString();
                          String noidung=queryDocumentSnapshot.get("noidung").toString();
-                         ControlProfile controlProfile = new ControlProfile(queryDocumentSnapshot.getId(),name,id,img,song,noidung);
+                         String ngayhethan=queryDocumentSnapshot.get("ngayhethan").toString();
+                         String iddoc=queryDocumentSnapshot.get("iddoc").toString();
+                         ControlProfile controlProfile = new ControlProfile(chudonhang,iddoc,name,id,img,song,noidung,ngayhethan);
                          controlProfiles.add(controlProfile);
 
                      }
@@ -282,32 +300,6 @@ public class DBcontrol {
                  }
              }
          });
-        }
-
-        public void GetProfile1(FirebaseFirestore db,onGetProfileListener listener){
-        ArrayList<ControlProfile> controlProfiles = new ArrayList<>();
-           db.collection("TaiKhoan").document(getProviderData()).collection("damua").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-               @Override
-               public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                   if (task.isSuccessful()){
-                       for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
-                           String id = queryDocumentSnapshot.get("idtruyen").toString();
-                           String name = queryDocumentSnapshot.get("namestory").toString();
-                           String img = queryDocumentSnapshot.get("image").toString();
-                           String song = queryDocumentSnapshot.get("songaythue").toString();
-                           String noidung=queryDocumentSnapshot.get("noidung").toString();
-                           ControlProfile controlProfile = new ControlProfile(queryDocumentSnapshot.getId(),name,id,img,song,noidung);
-                           controlProfiles.add(controlProfile);
-
-                       }
-                       listener.onSuccess(controlProfiles);
-
-                   }
-                   }
-           });
-        }
-        public  void  InsertProfile1(FirebaseFirestore db,ArrayList<ControlCart>controlCarts,String thanhtien){
-
         }
     public void InsertProfile(FirebaseFirestore db,ArrayList<ControlCart>controlCarts,String thanhtien){
 
@@ -320,7 +312,7 @@ public class DBcontrol {
             String idtruyen=v.getIdTruyen();
             String noidung=v.getNoidung();
             Map<String, Object> Profiles = new HashMap<>();
-            Profiles.put("iddonhang",getProviderData());
+            Profiles.put("chudonhang",getProviderData());
             Profiles.put("tongtien",thanhtien);
             Profiles.put("idtruyen",idtruyen);
             Profiles.put("songaythue",songaythue);
@@ -342,8 +334,6 @@ public class DBcontrol {
 
         }
         LoadProfle(db);
-
-
     }
     public void getChapter(FirebaseFirestore db, OnGetChapterListener listener){
         ArrayList<String> arrayList = new ArrayList<>();
@@ -389,11 +379,12 @@ public class DBcontrol {
 
         return newDocRef.getId();
     }
+    //định dạng ngày
     private String NgayHetHan(int i){
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, i); // Thêm 14 ngày vào ngày hiện tại
+        calendar.add(Calendar.DATE, i); // Thêm i ngày vào ngày hiện tại
         Date ngayHetHan = calendar.getTime(); // Lấy ngày hết hạn
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+       SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         return dateFormat.format(ngayHetHan);
     }
 
