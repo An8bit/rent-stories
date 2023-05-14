@@ -40,7 +40,6 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
     ShoppingAdapter shoppingAdapter;
     Spinner spTT;
     ImageView iviconTT;
-    BottomNavigationView bottomNavigationView;
     DBcontrol dBcontrol;
 
     @Nullable
@@ -147,7 +146,7 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
 
     @Override
     public void onEditCart(ControlCart controlCart) {
-       // tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
+        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
         shoppingAdapter.notifyDataSetChanged();
     }
 

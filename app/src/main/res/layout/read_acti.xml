@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="15dp">
         <TextView
-            android:id="@+id/tvNamet"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tiêu Đề Chuyện"
@@ -19,20 +20,14 @@
         </TextView>
     </LinearLayout>
     <LinearLayout
-
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="15dp">
-        <ScrollView
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ivchapter"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/tvnoidungt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Nội dung chuyện "
-                android:textStyle="italic">
-            </TextView>
-        </ScrollView>
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>

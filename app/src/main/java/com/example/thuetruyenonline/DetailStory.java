@@ -24,6 +24,7 @@ import com.example.thuetruyenonline.Cart.RentStory;
 import com.example.thuetruyenonline.Fragments.HomeFragments;
 import com.example.thuetruyenonline.Fragments.ProfileFragments;
 import com.example.thuetruyenonline.ShowStory.ReadActivity;
+import com.example.thuetruyenonline.ShowStory.ReadTest;
 import com.example.thuetruyenonline.pagehome.MainActivity;
 import com.example.thuetruyenonline.pagehome.Story;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -100,7 +101,7 @@ public class DetailStory extends AppCompatActivity {
       tvRead.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              Intent intent1 = new Intent(DetailStory.this, ReadActivity.class);
+              Intent intent1 = new Intent(DetailStory.this, ReadTest.class);
               intent1.putExtra("tentr",story.getNamestory());
               intent1.putExtra("nd",story.getNoidung());
               startActivity(intent1);

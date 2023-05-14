@@ -38,10 +38,9 @@ public class ProfileFragments extends Fragment implements ProfileAdapter.Litenne
     ProfileAdapter profileAdapter;
     ArrayList<ControlProfile> controlProfiles;
     FirebaseFirestore db;
-    BottomNavigationView bottomNavigationView;
     DBcontrol dBcontrol;
     TextView tvName,tvEmail;
-    Button btdoc;
+
 
     @Override
     public void onResume() {
@@ -82,6 +81,7 @@ public class ProfileFragments extends Fragment implements ProfileAdapter.Litenne
         Intent intent=new Intent(requireContext(), ReadActivity.class);
         intent.putExtra("tentr",controlProfile.getNamestory());
         intent.putExtra("nd",controlProfile.getNoidung());
+        intent.putExtra("idtruyen",controlProfile.getIdtruyen());
         startActivity(intent);
     }
 
