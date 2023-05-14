@@ -2,7 +2,6 @@ package com.example.thuetruyenonline.Fragments;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.thuetruyenonline.Accounts;
-import com.example.thuetruyenonline.Cart.CartCountry;
 import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.Cart.ShoppingAdapter;
 import com.example.thuetruyenonline.DBcontrol;
@@ -30,11 +27,7 @@ import com.example.thuetruyenonline.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class CartFragments extends Fragment implements ShoppingAdapter.Listener {
     boolean hasData1;
