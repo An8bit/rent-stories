@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import java.io.Serializable;
 
 public class Story implements Serializable {
-    public Story(String id, String image, String tacgia, String gioithieu, String namestory,String theloai,String noidung) {
+    public Story(String id, String image, String tacgia, String gioithieu, String namestory,String theloai,String noidung,String gia) {
         this.id = id;
         this.image = image;
         this.tacgia = tacgia;
@@ -13,7 +13,18 @@ public class Story implements Serializable {
         this.namestory = namestory;
         this.theloai=theloai;
         this.noidung=noidung;
+        this.gia=gia;
 
+
+    }
+    String gia;
+
+    public String getGia() {
+        return gia;
+    }
+
+    public void setGia(String gia) {
+        this.gia = gia;
     }
 
     public String getNoidung() {

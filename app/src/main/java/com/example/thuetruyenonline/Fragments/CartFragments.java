@@ -1,6 +1,8 @@
 package com.example.thuetruyenonline.Fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +15,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.thuetruyenonline.Accounts;
+import com.example.thuetruyenonline.Cart.CartCountry;
 import com.example.thuetruyenonline.Cart.ControlCart;
 import com.example.thuetruyenonline.Cart.ShoppingAdapter;
 import com.example.thuetruyenonline.DBcontrol;
 import com.example.thuetruyenonline.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -103,6 +110,18 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
                     shoppingAdapter.notifyDataSetChanged();
                     dBcontrol.DeleteCart(db, dBcontrol.getProviderData());
                     Toast("thuê thành công vào mục tài khoản để đọc");
+                }else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                    builder.setTitle("Bạn đã chưa chọn ngày hãy chọn ngày lại");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
                 }
             }
         });
@@ -111,24 +130,43 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
 
     @Override
     public void onDeleteCart(ControlCart controlCart) {
-        dBcontrol.Deleteitemcart(db,controlCart.getId());
-        controlCarts.remove(controlCart);
-        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
-        shoppingAdapter.notifyDataSetChanged();
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Bạn có muốn xóa hàng ra khỏi giỏ");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dBcontrol.Deleteitemcart(db,controlCart.getId());
+                controlCarts.remove(controlCart);
+                shoppingAdapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
     }
 
     @Override
     public void onEditCart(ControlCart controlCart) {
-        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
-        controlCart.setGiatien(String.valueOf(shoppingAdapter.GiaTien));
+       // tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
         shoppingAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onChecked(boolean hasdata) {
         hasData1=hasdata;
+    }
 
-
+    @Override
+    public void checkbox(ControlCart controlCart) {
+        tvTongTien.setText(String.valueOf(getTotalPrice(controlCarts)));
+        shoppingAdapter.notifyDataSetChanged();
     }
 
     //hàm tính tiền
@@ -143,5 +181,6 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
         Toast toast= Toast.makeText(requireContext(),a,Toast.LENGTH_SHORT);
         toast.show();
     }
+
 
 }

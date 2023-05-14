@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DBcontrol {
@@ -63,6 +64,10 @@ public class DBcontrol {
         void onSuccess(ArrayList<String> S);
         void onFailure(String errorMessage);
     }
+    public interface Ongetgia{
+        void onSuccess(String s);
+        void onFailure(String errorMessage);
+    }
 
     //hàm sữ lý đọc dữ liệu trên database trả về một ArrayList<Story> Việc lấy dữ liệu từ Cloud
     // Firestore là một hoạt động bất đồng bộ nên không thể trả về kết quả trực tiếp từ hàm  nên tạo
@@ -81,7 +86,8 @@ public class DBcontrol {
                         String theloai = queryDocumentSnapshot.get("TheLoai").toString();
                         String image = queryDocumentSnapshot.get("AnhLoad").toString();
                         String noidung=queryDocumentSnapshot.get("noidung").toString();
-                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai,noidung);
+                        String gia=queryDocumentSnapshot.get("gia").toString();
+                        Story story = new Story(id, image, tacgia, gioithieu, name, theloai,noidung,gia);
                         stories.add(story);
                     }
                     listener.onSuccess(stories);
@@ -109,7 +115,8 @@ public class DBcontrol {
                                 String theloai=document.get("TheLoai").toString();
                                 String image=document.get("AnhLoad").toString();
                                 String noidung=document.get("noidung").toString();
-                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai,noidung) ;
+                                String gia = document.get("gia").toString();
+                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai,noidung,gia) ;
                                 stories.add(story);
                             }
                             listener.onSuccess(stories);
@@ -162,7 +169,8 @@ public class DBcontrol {
                                 String theloai=document.get("TheLoai").toString();
                                 String image=document.get("AnhLoad").toString();
                                 String noidung=document.get("noidung").toString();
-                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai,noidung) ;
+                                String gia = document.get("gia").toString();
+                                Story story = new Story(id,image,tacgia,gioithieu,name,theloai,noidung,gia);
                                 stories.add(story);
                             }
                             listener.onSuccess(stories);
@@ -242,8 +250,6 @@ public class DBcontrol {
 
         public  void Deleteitemcart(FirebaseFirestore db,String iddoc){
             db.collection("GioHang").document(iddoc).delete();
-
-
         }
         public void DeletePro(FirebaseFirestore db,String iddoc){
         db.collection("DonHang").document(iddoc).delete();
@@ -253,6 +259,7 @@ public class DBcontrol {
                 for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
                     queryDocumentSnapshot.getReference().delete();
                 }
+                Toast("xóa thành công");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -348,6 +355,21 @@ public class DBcontrol {
                 } else {
                     listener.onFailure("");
                 }
+            }
+        });
+    }
+    public void getGia (FirebaseFirestore db,String key,Ongetgia listener){
+       String [] a = new String[1];
+        db.collection("Truyen").whereEqualTo("idtruyen",key).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
+                   String g =queryDocumentSnapshot.get("gia").toString();
+                   Log.e("Gia",g);
+                   a[0]=g;
+                }
+
+                listener.onSuccess(a[0]);
             }
         });
     }

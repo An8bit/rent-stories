@@ -93,7 +93,7 @@ public class DetailStory extends AppCompatActivity {
         tvaddcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddGioHang("3 ngày","3000");
+                AddGioHang("3 ngày",story.getGia());
             }
 
         });
@@ -102,7 +102,7 @@ public class DetailStory extends AppCompatActivity {
           public void onClick(View view) {
               Intent intent1 = new Intent(DetailStory.this, ReadActivity.class);
               intent1.putExtra("tentr",story.getNamestory());
-              intent1.putExtra("nd","truyện bản quyền mua đi rồi đọc hehe");
+              intent1.putExtra("nd",story.getNoidung());
               startActivity(intent1);
           }
       });

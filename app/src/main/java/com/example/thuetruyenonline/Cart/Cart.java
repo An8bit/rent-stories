@@ -135,6 +135,10 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
 
     }
 
+    @Override
+    public void checkbox(ControlCart controlCart) {
+
+    }
 
 
     void  Toast(String a){
