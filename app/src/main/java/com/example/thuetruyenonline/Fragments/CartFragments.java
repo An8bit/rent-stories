@@ -41,6 +41,7 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
     Spinner spTT;
     ImageView iviconTT;
     DBcontrol dBcontrol;
+    String thanhtoan;
 
     @Nullable
     @Override
@@ -68,18 +69,22 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
         //chưa chỉnh phương thức thanh toán vào database
         iviconTT=view.findViewById(R.id.iviconTT);
         spTT=view.findViewById(R.id.spTT);
+
         spTT.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (spTT.getSelectedItem().toString()){
                     case "Momo":
                         iviconTT.setImageResource(R.drawable.momo);
+                        thanhtoan="MoMo";
                         break;
                     case "ZaloPay":
                         iviconTT.setImageResource(R.drawable.zalo);
+                        thanhtoan="ZaloPay";
                         break;
                     case "Banking":
                         iviconTT.setImageResource(R.drawable.banking);
+                        thanhtoan="Banking";
                         break;
 
                 }
@@ -93,18 +98,34 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
         btThuetruyen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(controlCarts.size()<=0){
-                    Toast("hàng rỗng");
+                try {
+                    if(controlCarts.size()<=0){
+                        Toast("hàng rỗng");
+                    }
+                    else if(hasData1==true) {
+                        dBcontrol.InsertProfile(db,controlCarts,tvTongTien.getText().toString(),thanhtoan);
+                        controlCarts.clear();
+                        shoppingAdapter.notifyDataSetChanged();
+                        dBcontrol.DeleteCart(db, dBcontrol.getProviderData());
+                        Toast("thuê thành công vào mục tài khoản để đọc");
+                    }else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                        builder.setTitle("Bạn đã chưa chọn ngày hãy chọn ngày lại");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                 }
-                else if(hasData1==true) {
-                    dBcontrol.InsertProfile(db,controlCarts,tvTongTien.getText().toString());
-                    controlCarts.clear();
-                    shoppingAdapter.notifyDataSetChanged();
-                    dBcontrol.DeleteCart(db, dBcontrol.getProviderData());
-                    Toast("thuê thành công vào mục tài khoản để đọc");
-                }else {
+
+
+                }catch (Exception e) {
+                    // Xử lý ngoại lệ
                     AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                    builder.setTitle("Bạn đã chưa chọn ngày hãy chọn ngày lại");
+                    builder.setTitle("Bạn đã chưa chọn  ngày hết các sản phẩm hãy chọn ngày lại");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -113,7 +134,6 @@ public class CartFragments extends Fragment implements ShoppingAdapter.Listener 
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();
-
                 }
             }
         });

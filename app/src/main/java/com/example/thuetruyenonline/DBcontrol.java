@@ -277,7 +277,7 @@ public class DBcontrol {
         db.collection("DonHang").document(iddoc).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-
+                Toast("xóa thành công");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -343,7 +343,7 @@ public class DBcontrol {
         });
     }
 
-    public void InsertProfile(FirebaseFirestore db, ArrayList<ControlCart> controlCarts, String thanhtien) {
+    public void InsertProfile(FirebaseFirestore db, ArrayList<ControlCart> controlCarts, String thanhtien,String thanhtoan) {
 
 
         for (ControlCart v : controlCarts) {
@@ -362,10 +362,11 @@ public class DBcontrol {
             Profiles.put("namestory", namestrory);
             Profiles.put("noidung", noidung);
             Profiles.put("ngayhethan", NgayHetHan(Integer.parseInt(v.getSongaythue())));
+            Profiles.put("thanhtoan",thanhtoan);
             db.collection("DonHang").document().set(Profiles).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    Toast("thanh toán thành công");
+                    Log.e("thanhtoan","thành công");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

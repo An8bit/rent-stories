@@ -94,7 +94,7 @@ public class Cart extends AppCompatActivity implements ShoppingAdapter.Listener{
                     Toast("hàng rỗng");
                 }
                else if(hasData1) {
-                    dBcontrol.InsertProfile(db,controlCarts,tvTongTien.getText().toString());
+                    dBcontrol.InsertProfile(db,controlCarts,tvTongTien.getText().toString(),"");
                     controlCarts.clear();
                     shoppingAdapter.notifyDataSetChanged();
                     dBcontrol.DeleteCart(db, dBcontrol.getProviderData());

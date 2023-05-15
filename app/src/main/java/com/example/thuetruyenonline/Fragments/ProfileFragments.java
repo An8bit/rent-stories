@@ -1,6 +1,7 @@
 package com.example.thuetruyenonline.Fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -87,10 +89,26 @@ public class ProfileFragments extends Fragment implements ProfileAdapter.Litenne
 
     @Override
     public void DeleteItem(ControlProfile controlProfile) {
-        dBcontrol.DeletePro(db,controlProfile.getId());
-        Log.e("tt",controlProfile.getId());
-        controlProfiles.remove(controlProfile);
-        profileAdapter.notifyDataSetChanged();
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Bạn có muốn xóa hàng ra khỏi giỏ");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dBcontrol.DeletePro(db,controlProfile.getId());
+                Log.e("tt",controlProfile.getId());
+                controlProfiles.remove(controlProfile);
+                profileAdapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
     private void loadDataFromFirestore() {

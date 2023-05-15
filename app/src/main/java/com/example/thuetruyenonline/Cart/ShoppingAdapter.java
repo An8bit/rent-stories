@@ -138,14 +138,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
 
             }
         });
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (compoundButton.isChecked()) {
-                    controlCart.setGiatien(String.valueOf(GiaTien));
-                }
-            }
-        });
+
 
     }
 
@@ -179,7 +172,6 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Pay> {
             imgEdit = itemView.findViewById(R.id.imgEdit);
             imgDelete = itemView.findViewById(R.id.imgDelete);
             tvngaythue = itemView.findViewById(R.id.tvngaythue);
-            checkBox = itemView.findViewById(R.id.cbcheckitem);
             spinner = itemView.findViewById(R.id.spngaythue);
             tvGiaTien = itemView.findViewById(R.id.tvGiaTien);
 
