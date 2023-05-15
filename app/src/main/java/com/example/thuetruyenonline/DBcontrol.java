@@ -277,7 +277,11 @@ public class DBcontrol {
         db.collection("DonHang").document(iddoc).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast("xóa thành công");
+               try{
+                   Toast("xóa thành công");
+               }catch (Exception e){
+                   Log.e("xóa tự động","lỗi");
+               }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
